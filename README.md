@@ -32,15 +32,18 @@ It will start logging to the console and inform when connected. Updates will be 
 
 # Usage
 
-This is a **very** simple Discord app. It does not currently differentiate between very much; all it is doing is looking for the "++" or "--" at the end of *any* keyword. So, one can simply type:
+This is a **very** simple Discord karma app. It does not currently differentiate between very much; all it is doing is looking for the "++" or "--" at the end of *any* keyword. So, one can simply type:
 
 user123++ and the bot will display *user123 has X karma!* where X can be positive or negative.
 
-As it is a very simple bot, you can type in **any** string:
+As it is a very simple bot, you can type in **any** string and it is **not** case sensitive - everything is displayed/recorded in lowercase, despite any string entered:
 
-string++ or string-- 
+string++ or string-- (STRING++ or STRING-- are stored as string++ or string--)
 
-**NOTE** Because of this, if you add a user's karma with @username vs. username, it will be two different keywords to the karma counter.
+These values are stored in the specified folder (default "cache") as binary files containing the current int karma count (positive or negative).
+
+
+**NOTE:** Because of this, if you add a user's karma with @username vs. username, it will be two different keywords to the karma counter.
 
 Also, as it is very simple right now, it is only removing the "++" or "--", so if one types in:
 
@@ -48,7 +51,7 @@ string+++ or string---, it will output the karma for the string+ or string- : th
 
 *string+ has X karma!* or *string- has X karma!* 
 
-If you had a longer string with a lot of "+" or "-", the string saved in the storage will be that string with the last two "++" or "--" removed. 
+If you had a longer string with a lot of "+" or "-", the string saved in the storage will be that string with the last two "++" or "--" removed.
 
 # TODO
 
