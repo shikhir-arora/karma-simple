@@ -42,8 +42,11 @@ string++ or string-- (STRING++ or STRING-- are stored as string++ or string--)
 
 These values are stored in the specified folder (default "cache") as binary files containing the current int karma count (positive or negative).
 
+*You can also add karma for an emoticon, :emoticonname: ++/-- if you wish; this will work as well and is stored correctly. Can be useful for specific emoticons (such as custom ones in your server)*
 
 **NOTE:** Because of this, if you add a user's karma with @username vs. username, it will be two different keywords to the karma counter.
+
+
 
 Also, as it is very simple right now, it is only removing the "++" or "--", so if one types in:
 
