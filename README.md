@@ -6,7 +6,8 @@ Simple Karma system for Discord in NodeJS
 
 NodeJS/npm.
 
-The pacakage uses Discord's JS wrappers and erlang-node library, as well as the node-localstorage for simple storage. 
+The pacakage uses Discord's JS wrappers and Discord's Erlang fast pack library, as well as the node-localstorage for simple storage. 
+
 # Install
 
 Create an OAuth2 bot using Discord's API. For this application, you will need the token. Visit https://discordapp.com/developers/applications/me/create to create an application. Name the application and save it - choose "Bot" afterwords and generate the token, client ID, etc. You will need to paste the client ID generated into the following URL: https://discordapp.com/oauth2/authorize?client_id=CLIENT_ID&scope=bot&permissions=0 
