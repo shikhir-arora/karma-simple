@@ -1,0 +1,13 @@
+{
+  "name": "karma-simple",
+  "version": "1.0.0",
+  "description": "Simple NodeJS Karma Discord System",
+  "main": "index.js",
+  "author": "vlexar",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "github:hydrabolt/discord.js#indev",
+    "erlpack": "github:hammerandchisel/erlpack",
+    "node-localstorage": "^1.3.0"
+  }
+}
