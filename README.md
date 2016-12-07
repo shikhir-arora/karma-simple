@@ -44,7 +44,7 @@ These values are stored in the specified folder (default "cache") as binary file
 
 *You can also add karma for an emoticon, :emoticonname: ++/-- if you wish; this will work as well and is stored correctly. Can be useful for specific emoticons (such as custom ones in your server)*
 
-**NOTE:** Because of this, if you add a user's karma with @username vs. username, it will be two different keywords to the karma counter.
+**NOTE: Because of this, if you add a user's karma with @username vs. username, it will be two different keywords to the karma counter.**
 
 
 
