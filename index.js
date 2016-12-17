@@ -1,9 +1,9 @@
 const TOKEN = '';
-const PREFIX = '^';
+const PREFIX = '*';
 
 const Discord = require('discord.js');
 const localStorage = new require('node-localstorage').LocalStorage('cache');
- 
+
 const client = new Discord.Client();
 
 
@@ -12,8 +12,18 @@ client.on('ready', () => {
 });
 
 
- 
+
 client.on('message', (message) => {
+
+   string contentmain = message.cleanContent;
+   const texts = localStorage.getItem(contentmain);
+
+  if (message.content.startsWith(texts)) {
+     console.log(`Testing ${texts}`);
+     message.channel.sendMessage(`Testing ${texts}`);
+  }
+
+
   if (message.author.bot) return;
   let type;
   if (message.cleanContent.endsWith('--')) {
@@ -30,13 +40,8 @@ client.on('message', (message) => {
   console.log(`[KARMA] ${item} ${type}`);
   localStorage.setItem(item, count);
   message.channel.sendMessage(`${item} has ${count} karma!`);
- 
-  if (text.content.startsWith('PREFIX' + '${item}')) {
-     text.channel.sendMessage(`The last I checked ${item} has ${count} karma..`);
-  }
- 
-});
- 
-client.login(TOKEN);
 
- 
+
+});
+
+client.login(TOKEN);
