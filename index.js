@@ -5,7 +5,7 @@ const PREFIX = '';   // SET PREFIX FOR KARMA LOOKUPS
 const EXPLAIN = false;
 
 const Discord = require('discord.js');
-const localStorage = new require('node-localstorage').LocalStorage('cache');
+const localStorage = new require('node-localstorage').LocalStorage('cache');  // CAN CHANGE 'cache' TO ANY FOLDER FOR KARMAFILES
 const Ratelimiter = require('./Ratelimiter.js');
 const rl = new Ratelimiter();
 
