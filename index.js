@@ -1,7 +1,7 @@
 // CONFIG //
 
-const TOKEN = '';
-const PREFIX = '';
+const TOKEN = '';    // SET OAUTH2 TOKEN FOR BOT TO CONNECT TO SERVER
+const PREFIX = '';   // SET PREFIX FOR KARMA LOOKUPS
 const EXPLAIN = false;
 
 const Discord = require('discord.js');
