@@ -58,9 +58,7 @@ If you had a longer string with a lot of "+" or "-", the string saved in the sto
 
 # TODO
 
-- Add Ratefilter pending Dec 7, 2016 commit (prevents spam of karma commands)
+Ratelimiter added Dec 20, 2016
 
-- Karma Lookup pending Dec 7, 2016 commit (simple lookup for karma, currently have to do karma++ or -- to see updated karma)
-
-
+Karma lookup added Dec 20, 2016
 
