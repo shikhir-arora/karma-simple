@@ -30,7 +30,7 @@ It will start logging to the console and inform when connected. Updates will be 
 
 [KARMA] user2 minus ...)
 
-# Usage
+# Usage - Add/Subtract Karma
 
 This is a **very** simple Discord karma app. It does not currently differentiate between very much; all it is doing is looking for the "++" or "--" at the end of *any* keyword. So, one can simply type:
 
@@ -47,6 +47,17 @@ These values are stored in the specified folder (default "cache") as binary file
 **NOTE: Because of this, if you add a user's karma with @username vs. username, it will be two different keywords to the karma counter.**
 
 
+# Usage - Lookup Karma
+
+You can lookup karma by simply typing the following:
+
+**{PREFIX}{KEYWORD}** where *PREFIX* is setup in const PREFIX=''; in index.js -- for example, const PREFIX='~'; will set the prefix to **~** and keyword is simply the lookup term.
+
+*Example: ~string* in the above example would return:
+
+**@user, string has X karma!**
+
+# Cavetas
 
 Also, as it is very simple right now, it is only removing the "++" or "--", so if one types in:
 
