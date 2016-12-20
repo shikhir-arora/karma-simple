@@ -57,7 +57,7 @@ You can lookup karma by simply typing the following:
 
 **@user, string has X karma!**
 
-# Cavetas
+# Notes
 
 Also, as it is very simple right now, it is only removing the "++" or "--", so if one types in:
 
