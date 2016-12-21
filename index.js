@@ -2,7 +2,7 @@
 
 const TOKEN = '';    // SET OAUTH2 TOKEN FOR BOT TO CONNECT TO SERVER
 const PREFIX = '';   // SET PREFIX FOR KARMA LOOKUPS
-const EXPLAIN = false;
+const EXPLAIN = true; //SET FALSE TO NOT DISPLAY RATELIMIT MESSAGE
 
 const Discord = require('discord.js');
 const localStorage = new require('node-localstorage').LocalStorage('cache');  // CAN CHANGE 'cache' TO ANY FOLDER FOR KARMAFILES
