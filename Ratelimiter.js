@@ -6,7 +6,7 @@ class Ratelimiter {
       for (const x in this.tracked) {
         if (this.tracked[x] > 0) this.tracked[x]--;
       }
-    }, 1e3);
+    }, 2000);
   }
 
   check (message) {
@@ -14,7 +14,7 @@ class Ratelimiter {
       this.tracked[message.author.id] = 0;
     }
     this.tracked[message.author.id]++;
-    if (this.tracked[message.author.id] > 5) return this.tracked[message.author.id];
+    if (this.tracked[message.author.id] > 1) return this.tracked[message.author.id];
     return true;
   }
 }
