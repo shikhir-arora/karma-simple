@@ -2,7 +2,7 @@
   "name": "karma-simple",
   "version": "1.0.0",
   "description": "Simple NodeJS Karma Discord System",
-  "main": "index.js",
+  "main": "karma.js",
   "author": "vlexar",
   "license": "MIT",
   "dependencies": {
