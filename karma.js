@@ -1,12 +1,12 @@
 // CONFIG //
 
-const TOKEN = ''; // SET OAUTH2 TOKEN FOR BOT TO CONNECT TO SERVER
+const TOKEN = ''; // SET OAUTH2 TOKEN FOR BOT TO CONNECT TO SERVER 
 const PREFIX = '>k';   // SET PREFIX FOR KARMA LOOKUPS
-const EXPLAIN = true;  //SET FALSE TO NOT DISPLAY RATELIMIT MESSAGE
+const EXPLAIN = true;  // SET FALSE TO NOT DISPLAY RATELIMIT MESSAGE
 
 
 const Discord = require('discord.js');
-const localStorage = new require('node-localstorage').LocalStorage('karmafiles');
+const localStorage = new require('node-localstorage').LocalStorage('karmafiles'); // change karmafiles to edit the directory name for node-localstorage karma file stores
 const Ratelimiter = require('./Ratelimiter.js');
 const rl = new Ratelimiter();
 
@@ -38,7 +38,7 @@ client.on('message', (message) => {
       message.channel.sendMessage(`[KARMA] **${item}** has **${count}** Karma. To lookup later use  **${PREFIX}**  and type **${PREFIX} ${item}**`);
     }
   } else {
-    if (EXPLAIN) message.reply(`Sorry, you have to wait ${check} seconds!`);
+    if (EXPLAIN) message.reply(`Sorry, you have to wait ${check} seconds!`); // Universal Ratelimiter message displayed if spamming, change const EXPLAIN = true; line at top to false to not display this in your server - but it will still be running 
   }
 });
 
