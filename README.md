@@ -48,9 +48,11 @@ The bot will come online if everything was done correctly.
 
 This is a **very** simple Discord karma app. It does not currently differentiate between very much; all it is doing is looking for the "++" or "--" at the end of *any* keyword. 
 
+**Adding a single Karma point is done with a "++" and removing a single Karma point is done with "--"**
+
 So, *assuming the prefix is >k here*, one can simply type:
 
-`user123++` and the bot will display:
+`user123++` (will add (+1) Karma to user123) or `user123--` (will subtract (-1) Karma to user123) and the bot will display:
 
 > [KARMA] **user123** has **X** Karma! To lookup later use **>k** and type **>k user123**  
 
