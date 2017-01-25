@@ -16,11 +16,15 @@ Replace **CLIENT_ID with the generated client ID.**
 
 Visit this link to add the bot to your server.
 
-Next, **edit the karma.js file to reflect the proper token at the top.** The default folder for the localstorage that will store the karma as individial files as the string name with the integer karma (negative/positive) stored is "karmafiles", which can be changed in karma.js. 
+Next, **edit the karma.js file to reflect the proper token at the top. Please ensure to keep the token private. The token is NOT the same as the CLIENT_ID, which is used in the URL in the prior step to invite/add the bot to your server. Edit the line at the top with the token from the prior step:**
+
+`const TOKEN=''; // edit with proper token`
+
+The default folder for the localstorage that will store the karma as individual files as the string name with the simple integer karma (negative/positive int) stored is "karmafiles" (which can be changed in karma.js if needed).
 
 **Add the prefix (some character) for Karma lookups (see Usage - Karma Lookups below) under:** 
 
-`const PREFIX='';`
+`const PREFIX=''; // edit with desired prefix, such as >k`
 
 Once done adding the token & prefix, save karma.js.
 
