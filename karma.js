@@ -1,11 +1,12 @@
 // CONFIG //
 
-const TOKEN = '';    // SET OAUTH2 TOKEN FOR BOT TO CONNECT TO SERVER
-const PREFIX = '';   // SET PREFIX FOR KARMA LOOKUPS
-const EXPLAIN = true; //SET FALSE TO NOT DISPLAY RATELIMIT MESSAGE
+const TOKEN = ''; // SET OAUTH2 TOKEN FOR BOT TO CONNECT TO SERVER
+const PREFIX = '>k';   // SET PREFIX FOR KARMA LOOKUPS
+const EXPLAIN = true;  //SET FALSE TO NOT DISPLAY RATELIMIT MESSAGE
+
 
 const Discord = require('discord.js');
-const localStorage = new require('node-localstorage').LocalStorage('cache');  // CAN CHANGE 'cache' TO ANY FOLDER FOR KARMAFILES
+const localStorage = new require('node-localstorage').LocalStorage('karmafiles');
 const Ratelimiter = require('./Ratelimiter.js');
 const rl = new Ratelimiter();
 
@@ -18,7 +19,7 @@ client.on('message', (message) => {
     if (message.cleanContent.startsWith(PREFIX)) {
       const item = message.cleanContent.replace(PREFIX, '').trim();
       const count = localStorage.getItem(item) || 0;
-      message.reply(`${item} has ${count} karma!`);
+      message.reply(`${item} has **${count}** Karma!`);
     } else {
       let type;
       if (message.cleanContent.endsWith('--')) {
@@ -28,13 +29,13 @@ client.on('message', (message) => {
       } else {
         return;
       }
-      const item = message.cleanContent.replace(/(\+\+|--)$/, '').trim().toLowerCase();
+      const item = message.cleanContent.replace(/(\+\+|--)$/, '').trim();
       let count = localStorage.getItem(item) || 0;
       if (type === 'minus') count--;
       else if (type === 'plus') count++;
       console.log(`[KARMA] ${item} ${type}`);
       localStorage.setItem(item, count);
-      message.channel.sendMessage(`${item} has ${count} karma!`);
+      message.channel.sendMessage(`[KARMA] **${item}** has **${count}** Karma. To lookup later use  **${PREFIX}**  and type **${PREFIX} ${item}**`);
     }
   } else {
     if (EXPLAIN) message.reply(`Sorry, you have to wait ${check} seconds!`);
