@@ -40,9 +40,8 @@ This is a **very** simple Discord karma app. It does not currently differentiate
 
 user123++ and the bot will display *user123 has X karma!* where X can be positive or negative.
 
-As it is a very simple bot, you can type in **any** string and it is **not** case sensitive - everything is displayed/recorded in lowercase, despite any string entered:
+**Searches ARE case sensitive, so giving karma to a keyword "test" is different from "Test"**
 
-string++ or string-- (STRING++ or STRING-- are stored as string++ or string--)
 
 These values are stored in the specified folder (default "cache") as binary files containing the current int karma count (positive or negative).
 
