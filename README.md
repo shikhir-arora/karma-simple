@@ -34,6 +34,8 @@ It will start logging to the console and inform when connected. Updates will be 
 
 [KARMA] user2 minus ...)
 
+**NOTE: To keep this running in the console as a background task, use a process manager such as [pm2](https://github.com/Unitech/pm2)(recommended) or a terminal multiplexer like [tmux](https://tmux.github.io) **
+
 # Usage - Add/Subtract Karma
 
 This is a **very** simple Discord karma app. It does not currently differentiate between very much; all it is doing is looking for the "++" or "--" at the end of *any* keyword. So, one can simply type:
