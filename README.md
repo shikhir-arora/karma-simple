@@ -16,17 +16,17 @@ Replace **CLIENT_ID with the generated client ID.**
 
 Visit this link to add the bot to your server.
 
-Next, **edit the index.js file to reflect the proper token at the top.** The default folder for the localstorage that will store the karma as individial files as the string name with the integer karma (negative/positive) stored is "cache", which can be changed in index.js. 
+Next, **edit the karma.js file to reflect the proper token at the top.** The default folder for the localstorage that will store the karma as individial files as the string name with the integer karma (negative/positive) stored is "cache", which can be changed in karma.js. 
 
 **Add the prefix (some character) for karma lookups (see Usage - Karma Lookups below) under const PREFIX='';**
 
-Once done adding the token & prefix, save index.js.
+Once done adding the token & prefix, save karma.js.
 
 # Run
 
 To run, simply **npm install** in the directory to install the node dependencies and wrappers.
 
-To start: **node index.js** 
+To start: **node karma.js** 
 
 It will start logging to the console and inform when connected. Updates will be shown as [KARMA] string {sign} where {sign} is plus or negative.
 
@@ -55,11 +55,11 @@ These values are stored in the specified folder (default "cache") as binary file
 
 You can lookup karma by simply typing the following:
 
-**{PREFIX}{KEYWORD}** where *PREFIX* is setup in const PREFIX=''; in index.js -- for example, const PREFIX='~'; will set the prefix to **~** and keyword is simply the lookup term.
+**{PREFIX}{KEYWORD}** where *PREFIX* is setup in const PREFIX=''; in karma.js -- for example, const PREFIX='>k'; will set the prefix to **>k** and keyword is simply the lookup term.
 
-*Example: ~string* in the above example would return:
+*Example: >k string* in the above example would return:
 
-**@user, string has X karma!**
+**@user, string has X Karma!**
 
 # Notes
 
@@ -73,7 +73,7 @@ If you had a longer string with a lot of "+" or "-", the string saved in the sto
 
 # TODO
 
-Ratelimiter added Dec 20, 2016
+Universal Ratelimiter added Dec 20, 2016
 
 Karma lookup added Dec 20, 2016
 
