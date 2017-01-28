@@ -29,7 +29,7 @@ client.on('message', (message) => {
       } else {
         return;
       }
-      const item = message.cleanContent.replace(/([+-]{1,})$/m, '').trim(); // inputs ARE case sensitive; i.e. "test" and "Test" are different entries. to change, replace .trim(); to .trim().toLowerCase();
+      const item = message.cleanContent.replace(/([+-]{2,})$/m, '').trim(); // inputs ARE case sensitive; i.e. "test" and "Test" are different entries. to change, replace .trim(); to .trim().toLowerCase();
       let count = localStorage.getItem(item) || 0;
       if (type === 'minus') count--;
       else if (type === 'plus') count++;
