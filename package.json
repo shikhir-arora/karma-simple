@@ -1,13 +1,21 @@
 {
   "name": "karma-simple",
-  "version": "1.0.1",
-  "description": "Simple Node Karma Discord Bot - built on discordjs",
+  "version": "1.0.0",
+  "description": "Simple Karma tracking bot for Discord - built on discord.js",
   "main": "karma.js",
-  "author": "vlexar#4782",
+  "author": "vlexar#5320 <shikhir@sarora.io>",
   "license": "Unlicense",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shikhir-arora/karma-simple.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shikhir-arora/karma-simple/issues"
+  },
   "dependencies": {
-    "discord.js": "github:hydrabolt/discord.js#master",
+    "discord.js": "github:hydrabolt/discord.js",
     "erlpack": "github:hammerandchisel/erlpack",
-    "node-localstorage": "^1.3.0"
+    "node-localstorage": "^1.3.0",
+    "uws": "^0.14.1"
   }
 }
