@@ -1,145 +1,158 @@
-## Please visit GitBooks: https://shikhirarora.gitbooks.io/karma-simple/content/
-
-----
 
 # karma-simple
 
-Simple Karma system for Discord in NodeJS. Allows for a simple, IRC-esque way of keeping track of a users *complete* life worth. That's right, you heard it here first, folks. 
+> A simple, lightweight and functional [Discord](https://discordapp.com/) Karma tracking bot for guild members.
 
-# Requirements
+## Screenshot In Action 
+![karma-simple](https://i.imgur.com/b7aDUOK.jpg)
 
-NodeJS/npm. This is a very lightweight package that only uses localstorage and discordjs Library wrappers as mentioned: 
+GIF: https://i.imgur.com/hqehZjR.gif
 
-The pacakage uses Discord's JS wrappers and Discord's Erlang fast pack library, as well as the node-localstorage for simple storage. It is quite simple and doesn't take a lot of time to setup (5 minutes) :-)
+## Installation 
 
-- Node and npm
-- discord-js wrappers for the API
+The bot is built for Discord using [discord.js](https://github.com/hydrabolt/discord.js) - for ease of access, we are including an install script for macOS/Linux users.
+
+
+## Requirements:
+
+> Node.js version v8.0.0+ (to check your node version, you can type  `node --version` - to update Node, you can use [nvm](http://nvm.sh) and `nvm install latest` or your package manager (like `apt-get` or `yum`) to update.
+
+> Node manages the packages we need, which are found in `package.json` and include:
+
+- discord-js 
 - erlpack 
-- node localstorage
+- node-localstorage
+- uws for faster websockets
 
-which are handled by `npm install` described below :-)
 
-# Install
+which are handled by `npm` through the installer script.
 
-Using Git for ease:
+---
 
-    git clone https://github.com/shikhir-arora/karma-simple.git 
-    cd karma-simple 
-    
-This is a tiny project, so you can just:
+## Install
 
-   https://github.com/shikhir-arora/karma-simple/archive/master.zip // download this file, extract as normal.
- 
- ----
- 
+### macOS/Linux: Installer Script
 
-First, create an OAuth2 bot using Discord's API. For this application, you will need the token. This will work in many servers, but it is not designed with guild tracking, so the Karma is stored for all the guilds. This works fine for the case its meant to be used for.
+ ```wget -qO- https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/installer.sh | bash```
 
-If you have done this before, then this should be pretty straightforward. If not, go visit https://discordapp.com/developers/applications/me/create to create an application. Name the application with something you want to name it and save it - then choose "generate a Bot user" afterwords and generate the token, client ID, etc. 
+*You may need to run this with sudo depending on your permissions!*
+
+### Windows
+
+Windows instructions and a script coming shortly.
+
+For most, it can be installed via. npm: `npm install karma-simple` which manages everything.
+
+---
+
+- Manual instruction:
+
+- Clone the repo -
+
+```
+git clone --recursive --depth 1 https://github.com/shikhir-arora/karma-simple.git 
+
+```
+
+- Change directories to `karma-simple` and once there, run `npm install -g` to install the packages needed.
+
+- Continue below as normal to edit `config.json` 
+
+
+## Configuration (for all users!)
+
+You **must** edit the `config.json.example` file. Insert your bot token and change the prefix and game if you wish to do so. The game is what the bot will show as "Playing _"
+
+**Save the file as `config.json` when complete. This can be before or after the installer script.**
+
+
+## Getting a Bot Token and Invite Link
+		
+If you have done this before, then this should be pretty straightforward. If not, go visit https://discordapp.com/developers/applications/me/create to create an application. Name the application with something you want to name it and save it - then choose "generate a Bot user" afterwords and generate the token, client ID, etc.
 
 If you plan to give your bot to other servers, check the "Public Bot" when generating it, so others can use your invite link. Otherwise, it will only work if (you) - the person who created the bot token - invites the bot.
 
-You will need to paste the **client ID** generated into the following URL: https://discordapp.com/oauth2/authorize?client_id=[CLIENT_ID]&scope=bot&permissions=0  and remove the [], so the link looks something like: `https://discordapp.com/oauth2/authorize?client_id=159148610754314241&scope=bot&permissions=0` (this is just a random link here)
+	**Save your client ID and token. They are different things :-) **
 
-Replace **CLIENT_ID with the generated client ID.** ***THIS IS NOT THE TOKEN!*** The client ID is the 18 digit number that everything in Discord is built om (all users, bots, messages, etc. have one of these in the backend). The long string that you will get is the token, which acts (is) like the password for your bot. Never give that out!
+There are better guides out there, but most who would use this kind of tool likely are fine with getting this part finished. But, [here is a good guide from jagrosh - this page applies for getting a token and client ID](https://github.com/jagrosh/MusicBot/wiki/Getting-a-Bot-Token)
 
-Visit that above link to add the bot to your server, putting the client ID in it above. You must have have Manage Server permissions.
-
-#### Give the Karmabot basic send message rights like any member* That is all it needs, so do so however you wish, no need for me to explain that. Nothing fancy needed.
-
-Next, **edit the karma.js file to reflect the proper token at the top (that long string). Please ensure to keep the token private. The token is NOT the same as the CLIENT_ID, which is used in the URL in the prior step to invite/add the bot to your server. Edit the line at the top with the token from the prior step:**
-
-`const TOKEN=''; // edit with proper token inside the '', like const TOKEN='1230120310m1129312ab30aor01293';` (random again)
+Once you do get the client ID and token, for the invite link, if you wish I have populated a pre-made form: https://discordapi.com/permissions.html#201673792 in which you can enter your bot client ID in and it will generate the proper invite link with permissions and the bot will be assigned a role that is the name of your Bot application upon joining the server (so if you call the bot KarmaBot, it will get a role called KarmaBot with the right permissions - if that link is used)
 
 
-The default folder for the localstorage that will store the karma as individual files as the string name with the simple integer karma (negative/positive int) stored is "karmafiles" (which can be changed in karma.js if needed). This is not a heavy app, so we don't need anything more than this to easily store an integer for members!
+## Run
 
-**Add the prefix (some character you will use) for Karma lookups (see Usage - Karma Lookups below) under:** 
+**Ensure you are in the `karma-simple` directory!**
 
-`const PREFIX=''; // edit with desired prefix, such as >k, example const PREFIX='>k'; ` 
+- To run, simply type ```node karma.js``` (may need elevated permissions)
 
-(This will mean you do `>k <message>` in my example) with `>k` prefix to reach the bot. 
+- Please see the section below though!
 
-Once done adding the token & prefix, save karma.js. 
-
-# Run
-
-If you have not moved the files to where you wish to run and install, do:
-
-    git clone https://github.com/shikhir-arora/karma-simple.git
-    cd karma-simple 
-    
-Use your program of choice to then edit `karma.js` and the above.
-
-Cloning is the easiest way to get the files, but you can just copy them to your computer, server, etc. however you want. It's not much. Just ensure you did all the above (if you clone, you should do that first, then `cd karma-simple` and edit the `karma.js` file with the token, generate your ID and invite the bot as mentioned above. 
-
-## To run, simply type ```npm install``` in the directory to install the node dependencies and wrappers. If you are new to Node, you must remember to run ```npm install``` in the directory where karma-simple is, inside, just once to install the node dependencies. Otherwise, `node karma.js` will not work below.
-
-### To start once done the above: ```node karma.js```
+- To keep this bot running in the console as a background task so it does not stop when the console process terminates/times out, use a process manager such as** [pm2](https://github.com/Unitech/pm2) **(recommended) or a terminal multiplexer like** [tmux](https://tmux.github.io)
 
 
-#### IMPORTANT NOTE: To keep this bot running in the console as a background task so it does not stop when the console process terminates/times out, use a process manager such as** [pm2](https://github.com/Unitech/pm2) **(recommended) or a terminal multiplexer like** [tmux](https://tmux.github.io)
+### pm2 - Strongly Recommended 
+
+> pm2 can be found here: https://github.com/Unitech/pm2
+
+You can read their quick install instructions, it takes just a minute. Please make sure you run `pm2 update` if you have pm2 but haven't updated in a while. It is seamless.
+
+Once installed, instead of using `node karma.js` we go/`cd` into our same `karma-simple` directory and can run:
+
+`pm2 start karma.js --name "somename"` where you can edit somename to call your application.
+
+> **RUNNING AS SYSTEMD** Once we did all this with pm2, we can have it so it will restart on things like server reboots. For Linux, `systemd` manages the startup tasks. Once we started the bot, we can simply run `pm2 startup systemd` which will take your pm2 projects and run them in the systemd for autostartup on harder reboots.
+
+  ```bash
+  
+  pm2 unstartup [platform]                    disable and clear auto startup    
+  pm2 startup [platform]                      setup script for pm2 at boot   
+  
+  where [platform]=systemd,upstart,launchd,rcd   # one of these, with Linux it is just systemd
+ 
+ ```
+ (this step was optional re: systemd, but it is a good step to take and only is a few seconds to enable as pm2 will automate the config)
+ 
+ ---
+ 
+## Usage
 
 
-----
+### Add/Subtract Karma
 
-#### It will start logging to the console and inform when connected. Updates will be shown as [KARMA] string {sign} where {sign} is plus or negative.
+This is a simple Discord karma app. Simply put, to *add* karma, append any keyword (user ID, name, or anything, even emotes) with a `++` 
 
-(Example: [KARMA] user1 plus
+To *subtract*, append the keyword with `--` 
 
-[KARMA] user2 minus ...)
-
-### And bot will come online if everything was done correctly. (That is invited it to your server!)
-
-----
-
-# Usage - Add/Subtract Karma
-
-This is a simple Discord karma app. It does not currently differentiate between very much; all it is doing is looking for the "++" or "--" at the end of *any* keyword. It does *only* look for that, and to avoid spam it removes any trailing `++` or `--` and only looks for two. So `karma++` and `karma+++++++++++----+++++++-+++++--++` still stores it as `karma++` every time, AKA one more karma.
-
-**Adding a single Karma point is done with a "++" and removing a single Karma point is done with "--"**
+Only the last two `++` or `--` count, so doing `keyword+++++++++` or `@user--------+++----` will result in `keyword` gaining one regular karma and `@user` losing one in this example. That is, the messages are cleaned before counting.
 
 So, *assuming the prefix is >k here*, one can simply type:
 
-`user123++` (will add (+1) Karma to user123) or `user123--` (will subtract (-1) Karma to user123) and the bot will display:
+`user123++` (will add (+1) Karma to user123) or `user123--` (will subtract (-1) Karma to user123) and the bot will display the following in a random color embed:
 
 > [KARMA] **user123** has **X** Karma! To lookup later use **>k** and type **>k user123**  
 
 (where X can be positive or negative Karma count)
 
-#### *Searches ARE case sensitive, so giving karma to a keyword "test" is different from "Test"** (to change this, see comment in `karma.js` and change `.trim();` to `.trim().toLowerCase();`)
+- Searches ARE case sensitive, so giving karma to a keyword "test" is different from "Test"** (to change this, see comment in `karma.js` and change `.trim();` to `.trim().toLowerCase();`)
 
-
-These values are stored in the specified folder (default "karmafiles") as binary files containing the current int karma count (positive or negative).
+- These values are stored in the specified folder (default "karmafiles") as binary files containing the current int karma count (positive or negative).
 
 *You can also add karma for an emoticon, :emoticonname: ++/-- if you wish; this will work as well and is stored correctly. Can be useful for specific emoticons (such as custom ones in your server)*
 
 **NOTE: Because of this, if you add a user's karma with @username vs. username, it will be two different keywords to the karma counter.** That is intended. It is not limited for users. Karma can be awarded to anyone, or any keyword, or even an emoji :-)
 
-----
-
-### Usage - Lookup Karma
+### Lookup Karma
 
 You can lookup karma by simply typing the following:
 
-**{PREFIX} {KEYWORD}** where *PREFIX* is setup in `const PREFIX='';` in karma.js -- for example, `const PREFIX='>k';` will set the prefix to **>k** and keyword is simply the lookup term.
+**{PREFIX} {KEYWORD}** where *PREFIX* is setup in `config.json` for example, `>k` will set the prefix to **>k** and keyword is simply the lookup term.
 
 *Example: >k string* in the above example would return:
 
 > **@user, string has X Karma!**
 
-#### Ratelimiting is enabled to prevent spam. This is done with the `Ratelimiter.js` we have. It will just prevent spamming Karma. We allow users to give Karma to themselves, we are agnostic here! If you did something and think you should reward yourself for it, well...who are we to judge, I guess? Anyway, nothing exciting about 'abusing' it and the Ratelimiter just works to prevent spam by making it longer and longer before a user can add new Karma. (i.e. similar to the ratelimits on Discord's servers by design)
+- Ratelimiting is enabled to prevent spam. This is done with the `Ratelimiter.js` we have. It will just prevent spamming Karma. We allow users to give Karma to themselves, we are agnostic here! If you did something and think you should reward yourself for it, well...who are we to judge, I guess? Anyway, nothing exciting about 'abusing' it and the Ratelimiter just works to prevent spam by making it longer and longer before a user can add new Karma. (i.e. similar to the ratelimits on Discord's servers by design)
 
-### Lastly - most of my comments are in `//` like that in the `karma.js` file, so that should clear anything up. 
+## Support
 
-----
-
-# TODO
-
-I may work on this more as time permits, adding some features. If you need anything, contact me by joining my server: https://discord.io/joinec 
-
-My username is `.vlexar#4782` (ID: 243902693666455553)
-
-## If you have any suggestions, always happy to take them! Measage me or post a GitHub issue.
-
-### Remember to run something like pm2 for package management, it will make life very simple, and is a breeze to do so! Thanks for looking :-) 
+You can reach me `vlexar#5320` on my Discord server: https://discord.io/joinec or open a GitHub issue: https://github.com/shikhir-arora/karma-simple/issues
