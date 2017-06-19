@@ -1,4 +1,15 @@
 
+[![Discord](https://discordapp.com/api/guilds/249664293656592384/embed.png)](https://discord.io/joinec)
+[![Build Status](https://travis-ci.org/shikhir-arora/karma-simple.svg?branch=master)](https://travis-ci.org/shikhir-arora/karma-simple) 
+[![npm-build](http://img.shields.io/npm/v/karma-simple.svg)](https://npmjs.org/package/karma-simple)
+[![Dependencies](https://david-dm.org/shikhir-arora/karma-simple.svg)](https://rawgit.com/shikhir-arora/karma-simple/master/package.json)
+[![GitHub issues](https://img.shields.io/github/issues/shikhir-arora/karma-simple.svg?style=flat-square)](https://github.com/shikhir-arora/karma-simple/issues)
+[![GitHub license](https://img.shields.io/badge/license-Unlicense-blue.svg?style=flat-square)](https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/shikhir-arora/karma-simple.svg?style=flat-square)](https://github.com/shikhir-arora/karma-simple/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/shikhir-arora/karma-simple.svg?style=flat-square)](https://github.com/shikhir-arora/karma-simple/network)
+[![Twitter](https://img.shields.io/twitter/url/https/github.com/shikhir-arora/karma-simple.svg?style=social&style=flat-square)](https://twitter.com/intent/tweet?text=Interesting!:&url=%5Bobject%20Object%5D)
+
+
 # karma-simple
 
 > A simple, lightweight and functional [Discord](https://discordapp.com/) Karma tracking bot for guild members.
@@ -8,6 +19,8 @@
 
 GIF: https://i.imgur.com/hqehZjR.gif
 
+**We make sure to keep up-to-date. Although this is a small bot, we still run the same CI and build tests (as shown above). Our buildfile test includes our autoinstaller script(s). [The config we use for Travis is here](https://github.com/shikhir-arora/karma-simple/blob/master/.travis.yml) for anyone curious.**
+
 ## Installation 
 
 The bot is built for Discord using [discord.js](https://github.com/hydrabolt/discord.js) - for ease of access, we are including an install script for macOS/Linux users.
@@ -15,7 +28,8 @@ The bot is built for Discord using [discord.js](https://github.com/hydrabolt/dis
 
 ## Requirements:
 
-> Node.js version v8.0.0+ (to check your node version, you can type  `node --version` - to update Node, you can use [nvm](http://nvm.sh) and `nvm install latest` or your package manager (like `apt-get` or `yum`) to update.
+> Node.js version v8.0.0+ (to check your node version, you can type  `node --version` - to update Node, you can use [nvm](http://nvm.sh) and `nvm install latest` or your package manager (like `apt-get` or `yum`) to update. [we do test it on v7.x.x at some higher builds but we *strongly recommend* v8+ for node]
+
 
 > Node manages the packages we need, which are found in `package.json` and include:
 
@@ -35,13 +49,19 @@ which are handled by `npm` through the installer script.
 
  ```wget -qO- https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/installer.sh | bash```
 
-*You may need to run this with sudo depending on your permissions!*
+> **You may need to run this with sudo depending on your permissions!** (it is likely depending on how your configuration and setups are) In that case, you should add `sudo` in front of the `wget` **and** before the `bash` otherwise the sudo action will only be applied to the download of the installer.sh file itself.
+
+> We will have *super seamless* update scripts - in-fact if you use the installer all one needs to do to update is `git pull` and we will have a way for the Botowner to do that in Discord shortly! 
 
 ### Windows
 
-Windows instructions and a script coming shortly.
+Windows instructions and a script coming very soon (will release in **v1.0.2** - continue reading below for information)
 
-For most, it can be installed via. npm: `npm install karma-simple` which manages everything.
+While we are on the [npm](https://npmjs.org/package/karma-simple) directory and the bot can indeed can be installed via. npm in a single-pass: `npm install karma-simple` - which manages everything, you must be aware of where it installs, as *all* users need to configure `config.json` which links in the project. Our install-script makes sure this folder structure is kept intact by installing to a temporary directory and deleting it after.
+
+The manual instructions below are quite straightforward. I will release a Windows autoinstaller in **v1.0.2** along with a few small things shortly. Look at the [release page](https://github.com/shikhir-arora/karma-simple/releases/) as the new updates would pile there.
+
+Standard manual instructions below:
 
 ---
 
@@ -54,7 +74,7 @@ git clone --recursive --depth 1 https://github.com/shikhir-arora/karma-simple.gi
 
 ```
 
-- Change directories to `karma-simple` and once there, run `npm install -g` to install the packages needed.
+- Change directories to `karma-simple` and once there, run `npm install` to install the packages needed.
 
 - Continue below as normal to edit `config.json` 
 
@@ -155,4 +175,12 @@ You can lookup karma by simply typing the following:
 
 ## Support
 
-You can reach me `vlexar#5320` on my Discord server: https://discord.io/joinec or open a GitHub issue: https://github.com/shikhir-arora/karma-simple/issues
+You can reach me `vlexar#5320` (User ID: `243902693666455553`) pretty easily on my Discord server: https://discord.io/joinec or feel free to always open a GitHub issue: https://github.com/shikhir-arora/karma-simple/issues or pull-request a reason permits!
+
+---
+
+### License
+
+This project is under [The Unlicense](https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/LICENSE) and we give full freeodom to anyone who wishes to use this little bot! You are not obligated to link back to this repo in any way.
+
+
