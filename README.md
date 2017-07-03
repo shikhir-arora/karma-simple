@@ -85,6 +85,20 @@ You **must** edit the `config.json.example` file. Insert your bot token and chan
 
 **Save the file as `config.json` when complete. This can be before or after the installer script.**
 
+### Admin Configuration and Eval Command (for the owner of the bot!)
+
+**Administrators should pay attention to the following parameters in the `config.json` file:**
+
+- **ownerID**: The Discord ID of the owner. Not the user or username, but the full Snowflake ID. To get this, enable Developer Mode and right click your user. "Copy ID" will output your user ID. 
+
+- **adminprefix**: The prefix for administrators to use the Eval command. To disable this, ignore the 'ownerID' and leave it as is. This will disable the eval command.
+
+- **The eval command is for advanced users only. It allows one to run admin-tasks by evaluvating JavaScript from within Discord. I won't go into it here, because if one must ask about it, they shouldn't mess with the eval command. If you know what it is, then this should be self-sufficient. 
+
+- There is a seperate command prefix for Eval for the botowner. For example, the default prefix is `>k` and the default prefix for admin-eval is `>>k`. **To evaluvate code, you must type the prefix with the keyword 'eval' - so `>>k` as the adminprefix means `>>keval [stuff]` is how one would use the eval command.
+
+- Remember, the ownerID: field must be set correctly and you must use the proper adminprefix. The bot will only respond to the ownerID with the correct adminprefix.
+
 
 ## Getting a Bot Token and Invite Link
 		

@@ -24,6 +24,7 @@
       "discord.js": "^11.1.0",
       "erlpack": "github:hammerandchisel/erlpack",
       "node-localstorage": "^1.3.0",
-      "uws": "^0.14.1"
+      "uws": "^0.14.1",
+      "util": "^0.10.3"
    }
 }
