@@ -1,6 +1,6 @@
 {
    "name": "karma-simple",
-   "version": "1.0.1",
+   "version": "1.0.2",
    "description": "Simple Karma tracking bot for Discord - built on discord.js",
    "main": "karma.js",
    "author": "vlexar#5320 <shikhir@sarora.io>",
