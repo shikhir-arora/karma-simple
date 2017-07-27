@@ -1,30 +1,46 @@
 {
-   "name": "karma-simple",
-   "version": "1.0.2",
-   "description": "Simple Karma tracking bot for Discord - built on discord.js",
-   "main": "karma.js",
-   "author": "vlexar#5320 <shikhir@sarora.io>",
-   "license": "Unlicense",
-   "keywords": [
-      "discord",
-      "karma",
-      "bot",
-      "client",
-      "node",
-      "discordapp"
-   ],
-   "repository": {
-      "type": "git",
-      "url": "git+https://github.com/shikhir-arora/karma-simple.git"
-   },
-   "bugs": {
-      "url": "https://github.com/shikhir-arora/karma-simple/issues"
-   },
-   "dependencies": {
-      "discord.js": "^11.1.0",
-      "erlpack": "github:hammerandchisel/erlpack",
-      "node-localstorage": "^1.3.0",
-      "uws": "^0.14.1",
-      "util": "^0.10.3"
-   }
+	"name": "karma-simple",
+	"version": "1.0.3",
+	"description": "A simple, lightweight utility to award positive or negative Karma to any user/keyword. Adapted from IRC with a fresh approach.",
+	"main": "karma.js",
+	"author": "vlexar#5320 <shikhir@sarora.io>",
+	"license": "Unlicense",
+	"keywords": [
+		"discord",
+		"karma",
+		"bot",
+		"client",
+		"node",
+		"points",
+		"discordapp"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/shikhir-arora/karma-simple.git"
+	},
+	"bugs": {
+		"url": "https://github.com/shikhir-arora/karma-simple/issues"
+	},
+	"homepage": "https://shikhirarora.gitbooks.io/karma-simple/content/",
+	"engines": {
+		"node": ">=8.0.0"
+	},
+	"dependencies": {
+		"discord.js": "^11.1.0",
+		"eslint": "^3.19.0",
+		"express": "^4.15.3",
+		"moment": "^2.18.1",
+		"moment-duration-format": "^1.3.0",
+		"node-localstorage": "^1.3.0",
+		"os-utils": "0.0.14",
+		"snekfetch": "^3.2.4",
+		"snekgist": "^1.0.0",
+		"superagent": "^3.5.2",
+		"util": "^0.10.3"
+	},
+	"peerDependencies": {
+		"bufferutil": "^3.0.2",
+		"erlpack": "github:hammerandchisel/erlpack",
+		"uws": "^8.14.0"
+	}
 }

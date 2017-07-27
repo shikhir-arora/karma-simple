@@ -7,12 +7,17 @@
 [![GitHub license](https://img.shields.io/badge/license-Unlicense-blue.svg?style=flat-square)](https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/shikhir-arora/karma-simple.svg?style=flat-square)](https://github.com/shikhir-arora/karma-simple/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/shikhir-arora/karma-simple.svg?style=flat-square)](https://github.com/shikhir-arora/karma-simple/network)
-[![Twitter](https://img.shields.io/twitter/url/https/github.com/shikhir-arora/karma-simple.svg?style=social&style=flat-square)](https://twitter.com/intent/tweet?text=Interesting!:&url=%5Bobject%20Object%5D)
+[![Twitter](https://img.shields.io/twitter/url/https/github.com/shikhir-arora/karma-simple.svg?style=social&style=flat-square)](https://twitter.com/intent/tweet?text=KarmaBot.%20Cool%20stuff%20:P&url=https://discordbots.org/bot/255110583072980992)
 
 
 # karma-simple
 
-> A simple, lightweight and functional [Discord](https://discordapp.com/) Karma tracking bot for guild members.
+> A simple, lightweight and functional [Discord](https://discordapp.com/) utility/Bot used for awarding positive or negative "Karma" to any user/keyword. 
+
+> *(26 July 2017):* Now available to invite to your guild. Cross-guild Karma tracking, simple and to the point :)
+
+> Invite information here: https://discordbots.org/bot/255110583072980992 **[scroll to the bottom of this page for support!]**
+
 
 ## Screenshot In Action 
 ![karma-simple](https://i.imgur.com/b7aDUOK.jpg)
@@ -28,7 +33,7 @@ The bot is built for Discord using [discord.js](https://github.com/hydrabolt/dis
 
 ## Requirements:
 
-> Node.js version v8.0.0+ (to check your node version, you can type  `node --version` - to update Node, you can use [nvm](http://nvm.sh) and `nvm install latest` or your package manager (like `apt-get` or `yum`) to update. [we do test it on v7.x.x at some higher builds but we *strongly recommend* v8+ for node]
+> Node version v8.0.0+ (to check your node version, you can type  `node --version` - to update Node, you can use [nvm](http://nvm.sh) and `nvm install latest` or your package manager (like `apt-get` or `yum`) to update. [we do still test it on v7.x.x at some higher builds but v8 should be the goal, as soon v7.x.x will not be supported]. Git is also required.
 
 
 > Node manages the packages we need, which are found in `package.json` and include:
@@ -36,10 +41,15 @@ The bot is built for Discord using [discord.js](https://github.com/hydrabolt/dis
 - discord-js 
 - erlpack 
 - node-localstorage
+- moment/express/superagent for future updates (soon!)
+- os_util for exec command
+- util
+- [snekgist](https://www.npmjs.com/package/snekgist) and [snekfetch](https://www.npmjs.com/package/snekfetch) for Bot API posts & Gist uploads
 - uws for faster websockets
 
 
-which are handled by `npm` through the installer script.
+
+ - the above which are handled by `npm` and/or with our [installer script](https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/installer.sh).
 
 ---
 
@@ -55,11 +65,11 @@ which are handled by `npm` through the installer script.
 
 ### Windows
 
-Windows instructions and a script coming very soon (will release in **v1.0.2** - continue reading below for information)
+Working on a Windows installer, however the Bot can be easily installed on any OS.
 
 While we are on the [npm](https://npmjs.org/package/karma-simple) directory and the bot can indeed can be installed via. npm in a single-pass: `npm install karma-simple` - which manages everything, you must be aware of where it installs, as *all* users need to configure `config.json` which links in the project. Our install-script makes sure this folder structure is kept intact by installing to a temporary directory and deleting it after.
 
-The manual instructions below are quite straightforward. I will release a Windows autoinstaller in **v1.0.2** along with a few small things shortly. Look at the [release page](https://github.com/shikhir-arora/karma-simple/releases/) as the new updates would pile there.
+The manual instructions below are quite straightforward. I will release a Windows autoinstaller shortly. Look at the [release page](https://github.com/shikhir-arora/karma-simple/releases/) as the new updates would pile there.
 
 Standard manual instructions below:
 
@@ -93,11 +103,32 @@ You **must** edit the `config.json.example` file. Insert your bot token and chan
 
 - **adminprefix**: The prefix for administrators to use the Eval command. To disable this, ignore the 'ownerID' and leave it as is. This will disable the eval command.
 
-- **The eval command is for advanced users only. It allows one to run admin-tasks by evaluvating JavaScript from within Discord. I won't go into it here, because if one must ask about it, they shouldn't mess with the eval command. If you know what it is, then this should be self-sufficient. 
+- **The eval command is for advanced users only. It allows one to run admin-tasks by evaluating JavaScript from within Discord. I won't go into it here, because if one must ask about it, they shouldn't mess with the eval command. If you know what it is, then this should be self-sufficient.**
 
-- There is a seperate command prefix for Eval for the botowner. For example, the default prefix is `>k` and the default prefix for admin-eval is `>>k`. **To evaluvate code, you must type the prefix with the keyword 'eval' - so `>>k` as the adminprefix means `>>keval [stuff]` is how one would use the eval command.
+- There is a seperate command prefix for Eval for the botowner. For example, the default prefix is `>k` and the default prefix for admin-eval is `>>k`. **To evaluate code, you must type the prefix with the keyword** 'eval' - so `>>k` as the adminprefix means `>>keval [stuff]` is how one would use the eval command.
 
 - Remember, the ownerID: field must be set correctly and you must use the proper adminprefix. The bot will only respond to the ownerID with the correct adminprefix.
+
+- Will post to Gist for overflows (errors/outputs > 2000 characters) -- token is sanitized (redacted) from Eval outputs.
+
+### Admin Console (Exec) Command
+
+- Just like the Eval command, *this should be used with caution and care - you can expose your root library and more.*
+
+- It allows you to access your console from within Discord. It will post to Gist if it cannot fit the 2000 character limit. Eval will also do the same.
+
+- I won't say much about this as mentioned above; if you need to ask then it's probably better/safer to avoid using the Exec/Eval features! :-)
+
+- Accessed through the same means as Eval (above); with the adminprefix, ownerID together -- so you use the same logic as above to access the Exec command. The only difference is "exec" vs. "eval"; both use the same pre-checks.
+
+
+### Note To Selfhosters (API Tokens)
+
+- You'll notice some parts of the code which have to do with pushing the public bot stats [see here](https://discordbots.org/bot/255110583072980992) - Namely the 'guildCreate' and 'guildDelete' as well as the regular 'ready' state.
+
+- If you have a token or wish to get one, you can - the spots where the Auth token is needed is left blank here ('')
+
+- It can be safely ignored. Will just get a console notification that it couldn't update to DiscordBots/APIs. Does not affect the performance at all, I will handle it separately in the next release.
 
 
 ## Getting a Bot Token and Invite Link
@@ -121,7 +152,7 @@ Once you do get the client ID and token, for the invite link, if you wish I have
 
 - Please see the section below though!
 
-- To keep this bot running in the console as a background task so it does not stop when the console process terminates/times out, use a process manager such as** [pm2](https://github.com/Unitech/pm2) **(recommended) or a terminal multiplexer like** [tmux](https://tmux.github.io)
+- To keep this bot running in the console as a background task so it does not stop when the console process terminates/times out, use a process manager such as** [pm2](https://github.com/Unitech/pm2) **(recommended) or a terminal multiplexer like [tmux](https://tmux.github.io)
 
 
 ### pm2 - Strongly Recommended 
@@ -167,7 +198,7 @@ So, *assuming the prefix is >k here*, one can simply type:
 
 (where X can be positive or negative Karma count)
 
-- Searches ARE case sensitive, so giving karma to a keyword "test" is different from "Test"** (to change this, see comment in `karma.js` and change `.trim();` to `.trim().toLowerCase();`)
+- Searches ARE case sensitive, so giving karma to a keyword "test" is different from "Test" (to change this, see comment in `karma.js` and change `.trim();` to `.trim().toLowerCase();`)
 
 - These values are stored in the specified folder (default "karmafiles") as binary files containing the current int karma count (positive or negative).
 
@@ -187,7 +218,7 @@ You can lookup karma by simply typing the following:
 
 - Ratelimiting is enabled to prevent spam. This is done with the `Ratelimiter.js` we have. It will just prevent spamming Karma. We allow users to give Karma to themselves, we are agnostic here! If you did something and think you should reward yourself for it, well...who are we to judge, I guess? Anyway, nothing exciting about 'abusing' it and the Ratelimiter just works to prevent spam by making it longer and longer before a user can add new Karma. (i.e. similar to the ratelimits on Discord's servers by design)
 
-## Support
+# Support
 
 You can reach me `vlexar#5320` (User ID: `243902693666455553`) pretty easily on my Discord server: https://discord.io/joinec or feel free to always open a GitHub issue: https://github.com/shikhir-arora/karma-simple/issues or pull-request a reason permits!
 
