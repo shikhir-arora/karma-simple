@@ -1,46 +1,56 @@
 {
-	"name": "karma-simple",
-	"version": "1.0.3",
-	"description": "A simple, lightweight utility to award positive or negative Karma to any user/keyword. Adapted from IRC with a fresh approach.",
-	"main": "karma.js",
-	"author": "vlexar#5320 <shikhir@sarora.io>",
-	"license": "Unlicense",
-	"keywords": [
-		"discord",
-		"karma",
-		"bot",
-		"client",
-		"node",
-		"points",
-		"discordapp"
-	],
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/shikhir-arora/karma-simple.git"
-	},
-	"bugs": {
-		"url": "https://github.com/shikhir-arora/karma-simple/issues"
-	},
-	"homepage": "https://shikhirarora.gitbooks.io/karma-simple/content/",
-	"engines": {
-		"node": ">=8.0.0"
-	},
-	"dependencies": {
-		"discord.js": "^11.1.0",
-		"eslint": "^3.19.0",
-		"express": "^4.15.3",
-		"moment": "^2.18.1",
-		"moment-duration-format": "^1.3.0",
-		"node-localstorage": "^1.3.0",
-		"os-utils": "0.0.14",
-		"snekfetch": "^3.2.4",
-		"snekgist": "^1.0.0",
-		"superagent": "^3.5.2",
-		"util": "^0.10.3"
-	},
-	"peerDependencies": {
-		"bufferutil": "^3.0.2",
-		"erlpack": "github:hammerandchisel/erlpack",
-		"uws": "^8.14.0"
-	}
+  "name": "karma-simple",
+  "version": "1.0.3",
+  "description": "A simple, lightweight utility to award positive or negative Karma to any user/keyword. Adapted from IRC with a fresh approach.",
+  "main": "karma.js",
+  "author": "vlexar#5320 <shikhir@sarora.io>",
+  "license": "Unlicense",
+  "keywords": [
+    "discord",
+    "karma",
+    "bot",
+    "client",
+    "node",
+    "points",
+    "discordapp"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shikhir-arora/karma-simple.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shikhir-arora/karma-simple/issues"
+  },
+  "homepage": "https://shikhirarora.gitbooks.io/karma-simple/content/",
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "scripts": {
+    "test": "eslint karma.js Ratelimiter.js",
+    "start": "node karma.js"
+  },
+  "dependencies": {
+    "discord.js": "^11.1.0",
+    "express": "^4.15.3",
+    "lint": "^1.1.2",
+    "eslint": "^4.3.0",
+    "node-localstorage": "^1.3.0",
+    "os-utils": "0.0.14",
+    "snekfetch": "^3.2.4",
+    "snekgist": "^1.0.0",
+    "superagent": "^3.5.2",
+    "util": "^0.10.3"
+  },
+  "peerDependencies": {
+    "bufferutil": "^3.0.2",
+    "erlpack": "github:hammerandchisel/erlpack",
+    "uws": "^8.14.1"
+  },
+  "devDependencies": {
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1"
+  }
 }

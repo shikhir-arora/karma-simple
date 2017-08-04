@@ -1,14 +1,9 @@
 const Discord = require('discord.js')
-const util = require('util')
 const snekfetch = require('snekfetch')
 const gist = require('snekgist')
-
-const fs = require('fs')
-const os = require('os')
 const exec = require('child_process').exec
-const moment = require('moment')
 const config = require('./config.json') // use the provided 'config.json.example' and edit accordingly. Save as config.json before running.
-const localStorage = new require('node-localstorage').LocalStorage('karmafiles') 
+const localStorage = new require('node-localstorage').LocalStorage('karmafiles')
 const Ratelimiter = require('./Ratelimiter.js')
 const rl = new Ratelimiter()
 
@@ -68,25 +63,25 @@ client.on('message', (message) => {
   if (message.content.startsWith('<@255110583072980992>')) {
     message.reply({
       embed: new Discord.RichEmbed()
-            .setTitle('KarmaBot Help & Information')
-            .setURL('https://discordbots.org/bot/255110583072980992')
-            .setThumbnail(client.user.displayAvatarURL())
-            .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
-            .setDescription('**KarmaBot Help and Information (basic usage, invite URL, support)**')
-            .addField('**❯❯ Add Karma (++):**', 'To **add or increase** karma, type *any* keyword (can be a username, emoji, or any string of text) followed by two plus symbols **++** For example, typing **keyword++** will increase the karma of keyword by one.', false)
-            .addField('**❯❯ Subtract Karma (--):**', 'To **subtract or decrease** karma, type *any* keyword (can be a username, emoji, or any string of text) followed by two minus symbols **--** For example, typing **keyword--** will decrease the karma of keyword by one.', false)
-            .addField('**❯❯ Lookup Karma (>k):**', 'To **lookup** karma, type **>k** followed by the keyword to lookup. For example, typing **>k keyword** will return the karma of keyword. This is shared across all guilds using KarmaBot.', false)
-            .addBlankField()
-            .addField('**❯❯ Invite KarmaBot:**', `**To Invite KarmaBot**, [click here (requires Manage Server permissions)](https://discordapp.com/oauth2/authorize?client_id=255110583072980992&scope=bot&permissions=201673792).`, true)
-            .addField('**❯❯ Support:**', '**For support, visit:** https://discord.io/joinec', true)
-            .setTimestamp()
+        .setTitle('KarmaBot Help & Information')
+        .setURL('https://discordbots.org/bot/255110583072980992')
+        .setThumbnail('https://cdn.discordapp.com/avatars/255110583072980992/93a04a6cd5fffa75fb891f5b020f639e.png')
+        .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
+        .setDescription('**KarmaBot Help and Information (basic usage, invite URL, support)**')
+        .addField('**❯❯ Add Karma (++):**', 'To **add or increase** karma, type *any* keyword (can be a username, emoji, or any string of text) followed by two plus symbols **++** For example, typing **keyword++** will increase the karma of keyword by one.', false)
+        .addField('**❯❯ Subtract Karma (--):**', 'To **subtract or decrease** karma, type *any* keyword (can be a username, emoji, or any string of text) followed by two minus symbols **--** For example, typing **keyword--** will decrease the karma of keyword by one.', false)
+        .addField('**❯❯ Lookup Karma (>k):**', 'To **lookup** karma, type **>k** followed by the keyword to lookup. For example, typing **>k keyword** will return the karma of keyword. This is shared across all guilds using KarmaBot.', false)
+        .addBlankField()
+        .addField('**❯❯ Invite KarmaBot:**', `**To Invite KarmaBot**, [click here (requires Manage Server permissions)](https://discordapp.com/oauth2/authorize?client_id=255110583072980992&scope=bot&permissions=201673792).`, true)
+        .addField('**❯❯ Support:**', '**For support, visit:** https://discord.io/joinec', true)
+        .setTimestamp()
 
     })
   }
 })
 
 const clean = text => {
-  if (typeof (text) === 'string') { return text.replace(/`/g, '`' + String.fromCharCode(8203)).replace(/@/g, '@' + String.fromCharCode(8203)) } else		{ return text }
+  if (typeof (text) === 'string') { return text.replace(/`/g, '`' + String.fromCharCode(8203)).replace(/@/g, '@' + String.fromCharCode(8203)) } else { return text }
 }
 
 client.on('message', async (message) => {
@@ -98,7 +93,7 @@ client.on('message', async (message) => {
       const code = args.join(' ')
       let evaled = eval(code)
 
-      if (typeof evaled !== 'string') { evaled = require('util').inspect(evaled, { depth: 0}) }
+      if (typeof evaled !== 'string') { evaled = require('util').inspect(evaled, { depth: 0 }) }
 
       if (evaled.includes(client.token || config.token)) {
         evaled = evaled.replace(client.token, 'REDACTED!')
@@ -106,16 +101,16 @@ client.on('message', async (message) => {
 
       if (clean(evaled).length > 2000) {
         await gist(clean(evaled))
-                    .then(res => {
-                      message.channel.send({
-                        embed: new Discord.RichEmbed()
-                        .setTitle('Eval output exceeds 2000 characters. View Gist')
-                        .setURL(`${res.html_url}`)
-                        .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
-                        .setDescription(`Eval output exceeds 2000 characters. View Gist [here](${res.html_url}).`)
-                        .setTimestamp()
-                      }).catch((e) => message.channel.send(e.message))
-                    })
+          .then(res => {
+            message.channel.send({
+              embed: new Discord.RichEmbed()
+                .setTitle('Eval output exceeds 2000 characters. View Gist')
+                .setURL(`${res.html_url}`)
+                .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
+                .setDescription(`Eval output exceeds 2000 characters. View Gist [here](${res.html_url}).`)
+                .setTimestamp()
+            }).catch((e) => message.channel.send(e.message))
+          })
       } else {
         message.channel.send(clean(evaled), {
           code: 'js'
@@ -140,16 +135,16 @@ client.on('message', async (message) => {
     exec(args.join(' '), async (e, stdout, stderr) => {
       if (stdout.length > 2000 || stderr.length > 2000) {
         await gist(`${stdout}\n\n${stderr}`)
-                    .then(res => {
-                      message.channel.send({
-                        embed: new Discord.RichEmbed()
-                        .setTitle('Console output exceeds 2000 characters. View Gist')
-                        .setURL(`${res.html_url}`)
-                        .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
-                        .setDescription(`Console output exceeds 2000 characters. View Gist [here](${res.html_url}).`)
-                        .setTimestamp()
-                      }).catch((e) => message.channel.send(e.message))
-                    })
+          .then(res => {
+            message.channel.send({
+              embed: new Discord.RichEmbed()
+                .setTitle('Console output exceeds 2000 characters. View Gist')
+                .setURL(`${res.html_url}`)
+                .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
+                .setDescription(`Console output exceeds 2000 characters. View Gist [here](${res.html_url}).`)
+                .setTimestamp()
+            }).catch((e) => message.channel.send(e.message))
+          })
       } else {
         stdout && message.channel.send(`Info: \n\`\`\`${stdout}\`\`\``)
         stderr && message.channel.send(`Errors: \n\`\`\`${stderr}\`\`\``)
@@ -163,30 +158,30 @@ client.on('ready', () => {
   console.log(`[READY] Connected as ${client.user.username}#${client.user.discriminator} ${client.user.id}`)
   client.user.setGame(`@KarmaBot help`)
   snekfetch.post(`https://discordbots.org/api/bots/${client.user.id}/stats`)
-  .set('Authorization', '')
-  .send({ server_count: client.guilds.size })
-  .then(console.log('Updated KarmaBot status.'))
-  .catch(e => console.warn('Unable to connect/update DiscordBots.org'))
+    .set('Authorization', '')
+    .send({ server_count: client.guilds.size })
+    .then(console.log('Updated KarmaBot status.'))
+    .catch(e => console.warn('Unable to connect/update DiscordBots.org'))
 })
 
 client.on('guildCreate', (guild) => {
   console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`)
   client.user.setGame(`@KarmaBot help`)
   snekfetch.post(`https://discordbots.org/api/bots/${client.user.id}/stats`)
-  .set('Authorization', '')
-  .send({ server_count: client.guilds.size })
-  .then(console.log('Updated KarmaBot status.'))
-  .catch(e => console.warn('Unable to connect/update DiscordBots.org'))
+    .set('Authorization', '')
+    .send({ server_count: client.guilds.size })
+    .then(console.log('Updated KarmaBot status.'))
+    .catch(e => console.warn('Unable to connect/update DiscordBots.org'))
 })
 
 client.on('guildDelete', (guild) => {
   console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`)
   client.user.setGame(`@KarmaBot help`)
   snekfetch.post(`https://discordbots.org/api/bots/${client.user.id}/stats`)
-  .set('Authorization', '')
-  .send({ server_count: client.guilds.size })
-  .then(console.log('Updated KarmaBot status.'))
-  .catch(e => console.warn('Unable to connect/update DiscordBots.org'))
+    .set('Authorization', '')
+    .send({ server_count: client.guilds.size })
+    .then(console.log('Updated KarmaBot status.'))
+    .catch(e => console.warn('Unable to connect/update DiscordBots.org'))
 })
 
 client.on('disconnect', () => {
