@@ -34,23 +34,26 @@ The bot is built for Discord using [discord.js](https://github.com/hydrabolt/dis
 
 ## Requirements:
 
-> Node version v8.0.0+ (to check your node version, you can type  `node --version` - to update Node, you can use [nvm](http://nvm.sh) and `nvm install latest` or your package manager (like `apt-get` or `yum`) to update. [we do still test it on v7.x.x at some higher builds but v8 should be the goal, as soon v7.x.x will not be supported]. Git is also required.
+> Node version v8.0.0+ (to check your node version, you can type  `node --version` - to update Node, you can use [nvm](http://nvm.sh) and `nvm install latest` or your package manager (like `apt-get` or `yum`) to update. [we do still test it on v7.x.x at some higher builds but v8 should be the goal, as soon v7.x.x will not be supported]. 
+
+> Git is also required.
 
 
-> Node manages the packages we need, which are found in `package.json` and include:
+> Node manages the packages we need, which are found in `package.json` and include the following (among others):
 
 - discord-js 
-- erlpack 
-- node-localstorage
-- moment/express/superagent for future updates (soon!)
-- os_util for exec command
+- erlpack/bufferutil (peer dependencies)
+- eslint/lint for linting, StandardJS/ES8
+- node-localstorage for our lightweight Karma storage
+- os_util 
 - util
 - [snekgist](https://www.npmjs.com/package/snekgist) and [snekfetch](https://www.npmjs.com/package/snekfetch) for Bot API posts & Gist uploads
 - uws for faster websockets
+- eslint dev dependencies for StandardJS, .eslintrc.json config
 
 
 
- - the above which are handled by `npm` and/or with our [installer script](https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/installer.sh).
+ - the above which are handled by `npm` and/or with our [macOS/Linux installer script](https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/installer.sh) or [Windows installer script](https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/installer.bat).
 
 ---
 
@@ -64,13 +67,20 @@ The bot is built for Discord using [discord.js](https://github.com/hydrabolt/dis
 
 > We will have *super seamless* update scripts - in-fact if you use the installer all one needs to do to update is `git pull` and we will have a way for the Botowner to do that in Discord shortly! 
 
-### Windows
+### Windows: Installer
 
-Working on a Windows installer, however the Bot can be easily installed on any OS.
+- Download `installer.bat` [link here](https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/installer.bat) and **run/open with Administrator access** 
+
+- This should install the Node modules and KarmaBot files.
+
+- **Do not use this to update the bot, which can be done with a simple git pull** as it will delete your old Karma files! Only use it for the initial/fresh install.
+
+- Git and Node are required; the script will error but there will be a link provided if Node/Git are not detected.
+
 
 While we are on the [npm](https://npmjs.org/package/karma-simple) directory and the bot can indeed can be installed via. npm in a single-pass: `npm install karma-simple` - which manages everything, you must be aware of where it installs, as *all* users need to configure `config.json` which links in the project. Our install-script makes sure this folder structure is kept intact by installing to a temporary directory and deleting it after.
 
-The manual instructions below are quite straightforward. I will release a Windows autoinstaller shortly. Look at the [release page](https://github.com/shikhir-arora/karma-simple/releases/) as the new updates would pile there.
+The manual instructions below are quite straightforward. 
 
 Standard manual instructions below:
 
@@ -222,6 +232,8 @@ You can lookup karma by simply typing the following:
 # Support
 
 You can reach me `.vlexar#5320` (User ID: `243902693666455553`) pretty easily on my Discord server: https://discord.io/joinec or feel free to always open a GitHub issue: https://github.com/shikhir-arora/karma-simple/issues or pull-request a reason permits!
+
+- For users of the public KarmaBot - typing `@KarmaBot help` will bring up a quick and easy help menu with support/invite links and basic usage info.
 
 ---
 

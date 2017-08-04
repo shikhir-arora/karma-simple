@@ -21,7 +21,7 @@ client.on('message', (message) => {
           color: Math.floor(Math.random() * (0xFFFFFF + 1)),
           author: {
             name: client.user.username,
-            icon_url: client.user.displayAvatarURL()
+            icon_url: client.user.displayAvatarURL
           },
           description: `${keyword} has **${count}** Karma!`,
           timestamp: new Date()
@@ -47,7 +47,7 @@ client.on('message', (message) => {
           color: Math.floor(Math.random() * (0xFFFFFF + 1)),
           author: {
             name: client.user.username,
-            icon_url: client.user.displayAvatarURL()
+            icon_url: client.user.displayAvatarURL
           },
           description: `[KARMA] **${keyword}** has **${count}** Karma. To lookup later use  **${config.prefix}**  and type **${config.prefix} ${keyword}**`,
           timestamp: new Date()
