@@ -19,14 +19,14 @@ client.on('message', (message) => {
   const check = rl.check(message)
   if (check === true) {
     if (message.cleanContent.startsWith(config.prefix)) {
-      const keyword = message.cleanContent.replace(config.prefix, '').trim() // Inputs ARE case sensitive; i.e. "test" and "Test" are different entries. To change to case-insensitive, replace .trim(); to .trim().toLowerCase()
+      const keyword = message.cleanContent.replace(config.prefix, '').trim() // Inputs ARE case sensitive; i.e. "test" and "Test" are different entries. To change to case-insensitive, replace .trim() to .trim().toLowerCase()
       const count = localStorage.getItem(keyword) || 0
       message.reply({
         embed: {
           color: Math.floor(Math.random() * (0xFFFFFF + 1)),
           author: {
             name: client.user.username,
-            icon_url: client.user.avatarURL
+            icon_url: client.user.displayAvatarURL()
           },
           description: `${keyword} has **${count}** Karma!`,
           timestamp: new Date()
@@ -41,7 +41,7 @@ client.on('message', (message) => {
       } else {
         return
       }
-      const keyword = message.cleanContent.replace(/([+-]{2,})$/m, '').trim() // Inputs ARE case sensitive; i.e. "test" and "Test" are different entries. To change to case-insensitive, replace .trim(); to .trim().toLowerCase()
+      const keyword = message.cleanContent.replace(/([+-]{2,})$/m, '').trim() // Inputs ARE case sensitive; i.e. "test" and "Test" are different entries. To change to case-insensitive, replace .trim() to .trim().toLowerCase()
       let count = localStorage.getItem(keyword) || 0
       if (type === 'minus') count--
       else if (type === 'plus') count++
@@ -52,7 +52,7 @@ client.on('message', (message) => {
           color: Math.floor(Math.random() * (0xFFFFFF + 1)),
           author: {
             name: client.user.username,
-            icon_url: client.user.avatarURL
+            icon_url: client.user.displayAvatarURL()
           },
           description: `[KARMA] **${keyword}** has **${count}** Karma. To lookup later use  **${config.prefix}**  and type **${config.prefix} ${keyword}**`,
           timestamp: new Date()
@@ -60,7 +60,28 @@ client.on('message', (message) => {
       })
     }
   } else {
-    if (config.explain) message.reply(`Sorry, you have to wait ${check} seconds!`) 
+    if (config.explain) message.reply(`Sorry, you have to wait ${check} seconds!`)
+  }
+})
+
+client.on('message', (message) => {
+  if (message.content.startsWith('<@255110583072980992>')) {
+    message.reply({
+      embed: new Discord.RichEmbed()
+            .setTitle('KarmaBot Help & Information')
+            .setURL('https://discordbots.org/bot/255110583072980992')
+            .setThumbnail(client.user.displayAvatarURL())
+            .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
+            .setDescription('**KarmaBot Help and Information (basic usage, invite URL, support)**')
+            .addField('**❯❯ Add Karma (++):**', 'To **add or increase** karma, type *any* keyword (can be a username, emoji, or any string of text) followed by two plus symbols **++** For example, typing **keyword++** will increase the karma of keyword by one.', false)
+            .addField('**❯❯ Subtract Karma (--):**', 'To **subtract or decrease** karma, type *any* keyword (can be a username, emoji, or any string of text) followed by two minus symbols **--** For example, typing **keyword--** will decrease the karma of keyword by one.', false)
+            .addField('**❯❯ Lookup Karma (>k):**', 'To **lookup** karma, type **>k** followed by the keyword to lookup. For example, typing **>k keyword** will return the karma of keyword. This is shared across all guilds using KarmaBot.', false)
+            .addBlankField()
+            .addField('**❯❯ Invite KarmaBot:**', `**To Invite KarmaBot**, [click here (requires Manage Server permissions)](https://discordapp.com/oauth2/authorize?client_id=255110583072980992&scope=bot&permissions=201673792).`, true)
+            .addField('**❯❯ Support:**', '**For support, visit:** https://discord.io/joinec', true)
+            .setTimestamp()
+
+    })
   }
 })
 
@@ -88,13 +109,16 @@ client.on('message', async (message) => {
                     .then(res => {
                       message.channel.send({
                         embed: new Discord.RichEmbed()
+                        .setTitle('Eval output exceeds 2000 characters. View Gist')
+                        .setURL(`${res.html_url}`)
                         .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
                         .setDescription(`Eval output exceeds 2000 characters. View Gist [here](${res.html_url}).`)
+                        .setTimestamp()
                       }).catch((e) => message.channel.send(e.message))
                     })
       } else {
         message.channel.send(clean(evaled), {
-          code: 'xl'
+          code: 'js'
         })
       }
     } catch (err) {
@@ -103,7 +127,7 @@ client.on('message', async (message) => {
       if (err.includes(client.token || config.token)) {
         err = err.replace(client.token, 'REDACTED!')
       }
-      message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``)
+      message.channel.send(`\`ERROR\` \`\`\`js\n${clean(err)}\n\`\`\``)
     }
   }
 })
@@ -119,8 +143,11 @@ client.on('message', async (message) => {
                     .then(res => {
                       message.channel.send({
                         embed: new Discord.RichEmbed()
+                        .setTitle('Console output exceeds 2000 characters. View Gist')
+                        .setURL(`${res.html_url}`)
                         .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
                         .setDescription(`Console output exceeds 2000 characters. View Gist [here](${res.html_url}).`)
+                        .setTimestamp()
                       }).catch((e) => message.channel.send(e.message))
                     })
       } else {
@@ -134,7 +161,7 @@ client.on('message', async (message) => {
 
 client.on('ready', () => {
   console.log(`[READY] Connected as ${client.user.username}#${client.user.discriminator} ${client.user.id}`)
-  client.user.setGame(`>k | ${client.guilds.size} servers`)
+  client.user.setGame(`@KarmaBot help`)
   snekfetch.post(`https://discordbots.org/api/bots/${client.user.id}/stats`)
   .set('Authorization', '')
   .send({ server_count: client.guilds.size })
@@ -144,7 +171,7 @@ client.on('ready', () => {
 
 client.on('guildCreate', (guild) => {
   console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`)
-  client.user.setGame(`>k | ${client.guilds.size} servers`)
+  client.user.setGame(`@KarmaBot help`)
   snekfetch.post(`https://discordbots.org/api/bots/${client.user.id}/stats`)
   .set('Authorization', '')
   .send({ server_count: client.guilds.size })
@@ -154,7 +181,7 @@ client.on('guildCreate', (guild) => {
 
 client.on('guildDelete', (guild) => {
   console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`)
-  client.user.setGame(`>k | ${client.guilds.size} servers`)
+  client.user.setGame(`@KarmaBot help`)
   snekfetch.post(`https://discordbots.org/api/bots/${client.user.id}/stats`)
   .set('Authorization', '')
   .send({ server_count: client.guilds.size })
