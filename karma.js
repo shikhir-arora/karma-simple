@@ -14,6 +14,7 @@ client.on('message', async (message) => {
   const check = rl.check(message)
   if (check === true) {
     if (message.cleanContent.startsWith(config.prefix)) {
+      if (message.channel.type === 'dm') return
       if ((message.guild.roles.find('name', 'NoKarma')) && (message.member.roles.has(message.guild.roles.find('name', 'NoKarma').id))) {
         return message.reply(`You are not allowed to lookup Karma. Please contact a server mod/admin/staff member.`)
       }
@@ -35,6 +36,7 @@ client.on('message', async (message) => {
         console.log(e)
       }
     } else if ((message.cleanContent.endsWith('--')) || message.cleanContent.endsWith('++')) {
+      if (message.channel.type === 'dm') return
       if ((message.guild.roles.find('name', 'NoKarma')) && (message.member.roles.has(message.guild.roles.find('name', 'NoKarma').id))) {
         return message.reply(`You are not allowed to lookup Karma. Please contact a server mod/admin/staff member.`)
       }
@@ -71,7 +73,7 @@ client.on('message', async (message) => {
   }
 
   if (message.content.startsWith(`<@${client.user.id}>` + ` help`)) {
-    if (message.author.bot) return
+    if (message.channel.type === 'dm') return
     try {
       const embed = new Discord.RichEmbed()
         .setTitle(`KarmaBot Help & Information`)
