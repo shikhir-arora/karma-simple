@@ -2,7 +2,7 @@
 [![Discord](https://discordapp.com/api/guilds/249664293656592384/embed.png)](https://discord.io/joinec)
 [![Build Status](https://travis-ci.org/shikhir-arora/karma-simple.svg?branch=master)](https://travis-ci.org/shikhir-arora/karma-simple) 
 [![npm-build](http://img.shields.io/npm/v/karma-simple.svg)](https://npmjs.org/package/karma-simple)
-[![Dependencies](https://david-dm.org/shikhir-arora/karma-simple.svg)](https://rawgit.com/shikhir-arora/karma-simple/master/package.json)
+[![Dependencies](https://david-dm.org/shikhir-arora/karma-simple.svg)](https://david-dm.org/shikhir-arora/karma-simple)
 [![StandardJS](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com/)
 [![GitHub issues](https://img.shields.io/github/issues/shikhir-arora/karma-simple.svg?style=flat-square)](https://github.com/shikhir-arora/karma-simple/issues)
 [![GitHub license](https://img.shields.io/badge/license-Unlicense-blue.svg?style=flat-square)](https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/LICENSE)
@@ -34,23 +34,22 @@ The bot is built for Discord using [discord.js](https://github.com/hydrabolt/dis
 
 ## Requirements:
 
-> Node version v8.0.0+ (to check your node version, you can type  `node --version` - to update Node, you can use [nvm](http://nvm.sh) and `nvm install latest` or your package manager (like `apt-get` or `yum`) to update. [we do still test it on v7.x.x at some higher builds but v8 should be the goal, as soon v7.x.x will not be supported]. 
+> Node version v8.0.0+ (to check your node version, you can type  `node --version` - to update Node, you can use [nvm](http://nvm.sh) and `nvm install latest` or your package manager (like `apt-get` or `yum`) to update. As of v1.0.5, Node v8 is required.
 
 > Git is also required.
 
 
-> Node manages the packages we need, which are found in `package.json` and include the following (among others):
+> `npm` manages the packages we need, which are found in `package.json` and include the following (among others):
 
 - discord-js 
 - erlpack/bufferutil (peer dependencies)
 - eslint/lint for linting, StandardJS/ES8
 - node-localstorage for our lightweight Karma storage
-- os_util 
+- os_util/os 
 - util
+- moment/moment-duration-format
 - [snekgist](https://www.npmjs.com/package/snekgist) and [snekfetch](https://www.npmjs.com/package/snekfetch) for Bot API posts & Gist uploads
-- uws for faster websockets
 - eslint dev dependencies for StandardJS, .eslintrc.json config
-
 
 
  - the above which are handled by `npm` and/or with our [macOS/Linux installer script](https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/installer.sh) or [Windows installer script](https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/installer.bat).
@@ -69,7 +68,7 @@ The bot is built for Discord using [discord.js](https://github.com/hydrabolt/dis
 
 ### Windows: Installer
 
-- Download `installer.bat` [link here](https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/installer.bat) and **run/open with Administrator access** 
+- Download `installer.bat` [link here](https://github.com/shikhir-arora/karma-simple/releases/download/v1.0.4/installer.bat) and **run/open with Administrator access** 
 
 - This should install the Node modules and KarmaBot files.
 
@@ -102,7 +101,7 @@ git clone --recursive --depth 1 https://github.com/shikhir-arora/karma-simple.gi
 
 ## Configuration (for all users!)
 
-You **must** edit the `config.json.example` file. Insert your bot token and change the prefix and game if you wish to do so. The game is what the bot will show as "Playing _"
+You **must** edit the `config.json.example` file. Insert your bot token and change the prefix if you wish to.
 
 **Save the file as `config.json` when complete. This can be before or after the installer script.**
 
@@ -163,7 +162,7 @@ Once you do get the client ID and token, for the invite link, if you wish I have
 
 - Please see the section below though!
 
-- To keep this bot running in the console as a background task so it does not stop when the console process terminates/times out, use a process manager such as** [pm2](https://github.com/Unitech/pm2) **(recommended) or a terminal multiplexer like [tmux](https://tmux.github.io)
+- To keep this bot running in the console as a background task so it does not stop when the console process terminates/times out, use a process manager such as [pm2](https://github.com/Unitech/pm2) **(highly recommended)** or a terminal multiplexer like [tmux](https://tmux.github.io)
 
 
 ### pm2 - Strongly Recommended 
@@ -183,7 +182,7 @@ Once installed, instead of using `node karma.js` we go/`cd` into our same `karma
   pm2 unstartup [platform]                    disable and clear auto startup    
   pm2 startup [platform]                      setup script for pm2 at boot   
   
-  where [platform]=systemd,upstart,launchd,rcd   # one of these, with Linux it is just systemd
+  where [platform]=systemd,upstart,launchd,rcd   # one of these, with most Linux it is just systemd
  
  ```
  (this step was optional re: systemd, but it is a good step to take and only is a few seconds to enable as pm2 will automate the config)
@@ -227,13 +226,26 @@ You can lookup karma by simply typing the following:
 
 > **@user, string has X Karma!**
 
-- Ratelimiting is enabled to prevent spam. This is done with the `Ratelimiter.js` we have. It will just prevent spamming Karma. We allow users to give Karma to themselves, we are agnostic here! If you did something and think you should reward yourself for it, well...who are we to judge, I guess? Anyway, nothing exciting about 'abusing' it and the Ratelimiter just works to prevent spam by making it longer and longer before a user can add new Karma. (i.e. similar to the ratelimits on Discord's servers by design)
+- **Ratelimiting** is enabled to prevent spam. This is done with the `Ratelimiter.js` we have. It will just prevent spamming Karma. We allow users to give Karma to themselves, we are agnostic here! If you did something and think you should reward yourself for it, well...who are we to judge, I guess? Anyway, nothing exciting about 'abusing' it and the Ratelimiter just works to prevent spam by making it longer and longer before a user can add new Karma. (i.e. similar to the ratelimits on Discord's servers by design) -- this is not 'visible' to the user, but of course the simple code is in `Ratelimiter.js` - **tl;dr** -> if you spam a lot to KarmaBot, your user is added to a countdown which removes one entry every 3 seconds. If you accumulate more than two entries - which means ~6 seconds - the bot won't respond until the timer removes enough so you are below two [remember, it removes one entry every three seconds by default] This only affects KarmaBot, and it won't send any message or notification - rather just not respond.
+
+### Blacklist / Misc.
+
+- By default, *anyone* can use Karma. This is how the vast majority of users end up using it, and it is also out of simplicity. It was also the idea to enable cross-guild Karma with a seamless user experience. As of v1.0.5, however, there is a **blacklist** feature which is per-guild - this requires a user with `Manage Role` permissions (at the minimum) to create a role called **NoKarma** (case-sensitive) and assign it to any user(s) - this will block them from being able to lookup Karma as well as add/subtract Karma. They will get a message reply back and the bot will react with a red-circle icon to indiciate that they should talk to a mod in the server. 
+
+- I do have a mod of this for whitelists, but the blacklist is the default - it is seamless and doesn't need any configuration by default, so it is an optional feature. If, however, you prefer [a whitelist](https://github.com/shikhir-arora/karma-simple-mod), I do maintain that as well. However, it requires one to setup the whitelist role before having access to Karma. Contact `.vlexar#5320` and I'll help set it up if need be. 
+
+
+- **We do have a `stats` command**, which can be accessed by typing `@KarmaBot stats` - all of this is on the help menu as well (in-guild, `@KarmaBot help`) Note that the bot does **not** accept user-commands through DM, except for `stats` :-) This shows some real-time stats about the server/bot.
+
+
 
 # Support
 
-You can reach me `.vlexar#5320` (User ID: `243902693666455553`) pretty easily on my Discord server: https://discord.io/joinec or feel free to always open a GitHub issue: https://github.com/shikhir-arora/karma-simple/issues or pull-request a reason permits!
+You can reach me `.vlexar#5320` (User ID: `243902693666455553`) pretty easily on my Discord server: https://discord.io/joinec or feel free to always open a GitHub issue: https://github.com/shikhir-arora/karma-simple/issues or open an issue/pull-request if need be.
 
-- For users of the public KarmaBot - typing `@KarmaBot help` will bring up a quick and easy help menu with support/invite links and basic usage info.
+- For users of the public KarmaBot - typing `@KarmaBot help` will bring up a quick and easy help menu with support/invite links and basic usage info, commands, blacklist info, etc.
+
+- Direct invite link for the public bot: https://bot.discord.io/karmabot
 
 ---
 

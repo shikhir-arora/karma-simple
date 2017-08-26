@@ -1,6 +1,6 @@
 {
   "name": "karma-simple",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A simple, lightweight utility to award positive or negative Karma to any user/keyword. Adapted from IRC with a fresh approach.",
   "main": "karma.js",
   "author": ".vlexar#5320 <shikhir@sarora.io>",
@@ -30,15 +30,16 @@
     "start": "node karma.js"
   },
   "dependencies": {
-    "discord.js": "hydrabolt/discord.js#11.1-dev",
+    "discord.js": "hydrabolt/discord.js#data-store-refactor",
     "express": "^4.15.4",
-    "lint": "^1.1.2",
-    "eslint": "^4.4.1",
+    "eslint": "^4.5.0",
     "node-localstorage": "^1.3.0",
+    "os": "^0.1.1",
+    "moment": "^2.18.1",
+    "moment-duration-format": "^1.3.0",
     "os-utils": "0.0.14",
     "snekfetch": "^3.2.9",
     "snekgist": "^1.0.0",
-    "superagent": "^3.5.2",
     "util": "^0.10.3"
   },
   "peerDependencies": {

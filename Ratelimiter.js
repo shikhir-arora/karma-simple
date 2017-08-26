@@ -14,7 +14,7 @@ class Ratelimiter {
       this.tracked[message.author.id] = 0
     }
     this.tracked[message.author.id]++
-    if (this.tracked[message.author.id] > 1) return this.tracked[message.author.id]
+    if (this.tracked[message.author.id] > 2) return this.tracked[message.author.id]
     return true
   }
 }
