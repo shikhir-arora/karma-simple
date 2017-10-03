@@ -193,7 +193,7 @@ client.on('message', async (message) => {
 
 client.on('ready', () => {
   console.log(`[READY] Connected as ${client.user.username}#${client.user.discriminator} ${client.user.id}`)
-  client.user.setGame(`@KarmaBot help`)
+  client.user.setActivity(`@KarmaBot help`)
   dBots(client.guilds.size)
 })
 
