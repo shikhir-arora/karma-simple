@@ -93,6 +93,7 @@ client.on('message', async (message) => {
         .addBlankField()
         .addField(`**❯❯ Invite KarmaBot:**`, `**To Invite KarmaBot**, [click here (requires Manage Server permissions)](https://bot.discord.io/karmabot).`, true)
         .addField(`**❯❯ Support:**`, `**For support, visit:** [our Discord server](https://discord.io/joinec) or [GitHub](https://github.com/shikhir-arora/karma-simple/issues).`, true)
+        .setFooter(`Project by .vlexar#5320 | KarmaBot Help`)
         .setTimestamp()
       await message.reply({embed})
     } catch (e) {
@@ -194,17 +195,17 @@ client.on('message', async (message) => {
 client.on('ready', () => {
   console.log(`[READY] Connected as ${client.user.username}#${client.user.discriminator} ${client.user.id}`)
   client.user.setActivity(`@KarmaBot help`)
-  dBots(client.guilds.size)
+  //dBots(client.guilds.size)
 })
 
 client.on('guildCreate', (guild) => {
   console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`)
-  dBots(client.guilds.size)
+  //dBots(client.guilds.size)
 })
 
 client.on('guildDelete', (guild) => {
   console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`)
-  dBots(client.guilds.size)
+  //dBots(client.guilds.size)
 })
 
 function dBots (size) {
