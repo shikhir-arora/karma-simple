@@ -1,5 +1,4 @@
 const Discord = require('discord.js')
-const snekfetch = require('snekfetch')
 const gist = require('snekgist')
 const exec = require('child_process').exec
 const os = require('os')
@@ -7,6 +6,7 @@ const moment = require('moment')
 require('moment-duration-format')
 const config = require('./config.json') // use the provided 'config.json.example' and edit accordingly. Save as config.json before running.
 const localStorage = new require('node-localstorage').LocalStorage('karmafiles')
+const request = require('request-promise-native')
 const Ratelimiter = require('./Ratelimiter.js')
 const rl = new Ratelimiter()
 const client = new Discord.Client()
@@ -53,6 +53,7 @@ client.on('message', async (message) => {
         return
       }
       const keyword = message.cleanContent.replace(/([+-]{2,})$/m, '').trim() // Inputs ARE case sensitive; i.e. "test" and "Test" are different entries. To change to case-insensitive, replace .trim() to .trim().toLowerCase()
+      if (keyword === '') return
       let count = localStorage.getItem(keyword) || 0
       if (type === 'minus') count--
       else if (type === 'plus') count++
@@ -110,7 +111,7 @@ client.on('message', async (message) => {
         .setDescription(`**KarmaBot Stats/Info**`)
         .addField(`**❯❯ Guilds:**`, `${client.guilds.size.toLocaleString()}`, false)
         .addField(`**❯❯ Users:**`, `${client.users.size.toLocaleString()}`, false)
-        .addField(`**❯❯ Uptime:**`, moment.duration(os.uptime(), 'seconds').format('dd:hh:mm'), false)
+        .addField(`**❯❯ Uptime:**`, moment.duration(os.uptime(), 'seconds').format('dd:hh:mm:ss'), false)
         .addField(`**❯❯ Gateway Ping:**`, `${client.ping.toFixed()} ms`, false)
         .addField(`**❯❯ Load Average:**`, `${os.loadavg()[1].toFixed(3)}`, false)
         .addField(`**❯❯ Memory Usage:**`, `${(process.memoryUsage().rss / 1048576).toFixed(2)}MB / ${(os.totalmem() / 1073741824).toFixed(2)}GB`, false)
@@ -118,7 +119,7 @@ client.on('message', async (message) => {
         .addField(`**❯❯ Node Version:**`, process.version, false)
         .addField(`**❯❯ Discord.js:**`, `v${Discord.version}`, false)
         .addField(`**❯❯ GitHub:**`, `[GitHub Repo](https://github.com/shikhir-arora/karma-simple).`, true)
-        .setFooter(`Project by .vlexar#5320`)
+        .setFooter(`Project by .vlexar#5320 | KarmaBot Stats`)
         .setTimestamp()
       await message.reply({embed})
     } catch (e) {
@@ -192,33 +193,57 @@ client.on('message', async (message) => {
   }
 })
 
+function discordBotsOrg () {
+  return request.post({
+    uri: `https://discordbots.org/api/bots/${client.user.id}/stats`,
+    headers: {
+      Authorization: ''
+    },
+    json: true,
+    body: {
+      server_count: client.guilds.size
+    }
+  })
+}
+
+function discordBotsPw () {
+  return request.post({
+    uri: `https://bots.discord.pw/api/bots/${client.user.id}/stats`,
+    headers: {
+      Authorization: ''
+    },
+    json: true,
+    body: {
+      server_count: client.guilds.size
+    }
+  })
+}
+
 client.on('ready', () => {
   console.log(`[READY] Connected as ${client.user.username}#${client.user.discriminator} ${client.user.id}`)
   client.user.setActivity(`@KarmaBot help`)
-  // dBots(client.guilds.size)
+
+  discordBotsOrg()
+  discordBotsPw()
 })
 
 client.on('guildCreate', (guild) => {
   console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`)
-  // dBots(client.guilds.size)
+
+  discordBotsOrg()
+  discordBotsPw()
 })
 
 client.on('guildDelete', (guild) => {
   console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`)
-  // dBots(client.guilds.size)
+
+  discordBotsOrg()
+  discordBotsPw()
 })
 
-function dBots (size) {
-  snekfetch.post(`https://discordbots.org/api/bots/${client.user.id}/stats`)
-    .set('Authorization', '')
-    .send({ server_count: size })
-    .then(console.log('Updated KarmaBot status.'))
-    .catch(e => console.warn('Unable to connect/update DiscordBots.org'))
-}
-
-client.on('disconnect', () => {
+client.on('disconnect', (event) => {
   setTimeout(() => client.destroy().then(() => client.login(config.token)), 10000)
-  console.log(`[DISCONNECT] Notice: Disconnected from gateway. Attempting reconnect.`)
+  console.log(`[DISCONNECT] Notice: Disconnected from gateway with code ${event.code} - Attempting reconnect.`)
 })
 
 client.on('reconnecting', () => {
@@ -233,8 +258,8 @@ process.on('unhandledRejection', (error) => {
 })
 
 process.on('uncaughtException', (err) => {
-  const errorMsg = err.stack.replace(new RegExp(`${__dirname}/`, 'g'), './')
-  console.error('Uncaught Exception: ', errorMsg)
+  let errmsg = (err ? err.stack || err : '').toString().replace(new RegExp(`${__dirname}/`, 'g'), './')
+  console.error(errmsg)
 })
 
 client.login(config.token)
