@@ -1,5 +1,6 @@
 
 [![Discord](https://discordapp.com/api/guilds/249664293656592384/embed.png)](https://discord.io/joinec)
+[![Discord Bots](https://discordbots.org/api/widget/status/255110583072980992.png)](https://discordbots.org/bot/255110583072980992)
 [![Build Status](https://travis-ci.org/shikhir-arora/karma-simple.svg?branch=master)](https://travis-ci.org/shikhir-arora/karma-simple) 
 [![npm-build](http://img.shields.io/npm/v/karma-simple.svg)](https://npmjs.org/package/karma-simple)
 [![Dependencies](https://david-dm.org/shikhir-arora/karma-simple.svg)](https://david-dm.org/shikhir-arora/karma-simple)
@@ -254,3 +255,4 @@ You can reach me `.vlexar#5320` (User ID: `243902693666455553`) pretty easily on
 This project is under [The Unlicense](https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/LICENSE) and we give full freedom to anyone who wishes to use this little bot! You are not obligated to link back to this repo in any way.
 
 
+[![Discord Bots](https://discordbots.org/api/widget/255110583072980992.png)](https://discordbots.org/bot/255110583072980992)
