@@ -1,24 +1,24 @@
 
-[![Discord](https://discordapp.com/api/guilds/249664293656592384/embed.png)](https://discord.io/joinec)
-[![Discord Bots](https://discordbots.org/api/widget/status/255110583072980992.png)](https://discordbots.org/bot/255110583072980992)
+[![Discord](https://discordapp.com/api/guilds/249664293656592384/embed.png)](https://discord.io/ec)
+[![Discord Bots](https://discordbots.org/api/widget/servers/255110583072980992.svg?noavatar=true)](https://discordbots.org/bot/255110583072980992)
+[![Discord Bots](https://discordbots.org/api/widget/status/255110583072980992.svg)](https://discordbots.org/bot/255110583072980992)
+
 [![Build Status](https://travis-ci.org/shikhir-arora/karma-simple.svg?branch=master)](https://travis-ci.org/shikhir-arora/karma-simple) 
-[![npm-build](http://img.shields.io/npm/v/karma-simple.svg)](https://npmjs.org/package/karma-simple)
 [![Dependencies](https://david-dm.org/shikhir-arora/karma-simple.svg)](https://david-dm.org/shikhir-arora/karma-simple)
+[![npm-build](http://img.shields.io/npm/v/karma-simple.svg)](https://npmjs.org/package/karma-simple)
 [![StandardJS](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com/)
 [![GitHub issues](https://img.shields.io/github/issues/shikhir-arora/karma-simple.svg?style=flat-square)](https://github.com/shikhir-arora/karma-simple/issues)
 [![GitHub license](https://img.shields.io/badge/license-Unlicense-blue.svg?style=flat-square)](https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/shikhir-arora/karma-simple.svg?style=flat-square)](https://github.com/shikhir-arora/karma-simple/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/shikhir-arora/karma-simple.svg?style=flat-square)](https://github.com/shikhir-arora/karma-simple/network)
-[![Twitter](https://img.shields.io/twitter/url/https/github.com/shikhir-arora/karma-simple.svg?style=social&style=flat-square)](https://twitter.com/intent/tweet?text=KarmaBot.%20Cool%20stuff%20:P&url=https://discordbots.org/bot/255110583072980992)
+
+
 
 
 # karma-simple
 
 > A simple, lightweight and functional [Discord](https://discordapp.com/) utility/Bot used for awarding positive or negative "Karma" to any user/keyword. 
 
-> *(26 July 2017):* Now available to invite to your guild. Cross-guild Karma tracking, simple and to the point :)
-
-> Invite information here: https://discordbots.org/bot/255110583072980992 **[scroll to the bottom of this page for support!]**
+> Public Bot Direct Invite: https://bot.discord.io/karmabot  **[scroll to the bottom of this page for support!]**
 
 
 ## Screenshot In Action 
@@ -40,17 +40,7 @@ The bot is built for Discord using [discord.js](https://github.com/hydrabolt/dis
 > Git is also required.
 
 
-> `npm` manages the packages we need, which are found in `package.json` and include the following (among others):
-
-- discord-js 
-- erlpack/bufferutil (peer dependencies)
-- eslint/lint for linting, StandardJS/ES8
-- node-localstorage for our lightweight Karma storage
-- os_util/os 
-- util
-- moment/moment-duration-format
-- [snekgist](https://www.npmjs.com/package/snekgist) and [snekfetch](https://www.npmjs.com/package/snekfetch) for Bot API posts & Gist uploads
-- eslint dev dependencies for StandardJS, .eslintrc.json config
+> `npm` manages the packages we need, which are found in `package.json` and are always kept up-to-date. This project uses discord.js v12.0-dev and requires **>=Node v8.x** or **Node v9.x** -- built with `npm` version 5.6.0.
 
 
  - the above which are handled by `npm` and/or with our [macOS/Linux installer script](https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/installer.sh) or [Windows installer script](https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/installer.bat).
@@ -92,7 +82,6 @@ Standard manual instructions below:
 
 ```
 git clone --recursive --depth 1 https://github.com/shikhir-arora/karma-simple.git 
-
 ```
 
 - Change directories to `karma-simple` and once there, run `npm install` to install the packages needed.
@@ -135,11 +124,11 @@ You **must** edit the `config.json.example` file. Insert your bot token and chan
 
 ### Note To Selfhosters (API Tokens)
 
-- You'll notice some parts of the code which have to do with pushing the public bot stats [see here](https://discordbots.org/bot/255110583072980992) - Namely the 'guildCreate' and 'guildDelete' as well as the regular 'ready' state.
+- You'll notice some parts of the code which have to do with pushing the public bot stats [see here](https://discordbots.org/beta/bot/255110583072980992) [and here](https://bots.discord.pw/bots/255110583072980992) - Namely the 'guildCreate' and 'guildDelete' as well as the regular 'ready' state will post using the two functions `discordBotsOrg()` and ` discordBotsPw()`
 
-- If you have a token or wish to get one, you can - the spots where the Auth token is needed is left blank here ('')
+- If you have a token for these websites or wish to get one, you can - the spots where the Auth token is needed is left blank here ('') -- but please do not use the same username/avatar to avoid confusion!
 
-- It can be safely ignored. Will just get a console notification that it couldn't update to DiscordBots/APIs. Does not affect the performance at all, I will handle it separately in the next release.
+- The lack of a token in the code for the API portion can be safely ignored. It will simply fail to post the stats and catch that.
 
 
 ## Getting a Bot Token and Invite Link
@@ -148,7 +137,7 @@ If you have done this before, then this should be pretty straightforward. If not
 
 If you plan to give your bot to other servers, check the "Public Bot" when generating it, so others can use your invite link. Otherwise, it will only work if (you) - the person who created the bot token - invites the bot.
 
-	**Save your client ID and token. They are different things :-) **
+	Save your client ID and token. They are different things! :-)
 
 There are better guides out there, but most who would use this kind of tool likely are fine with getting this part finished. But, [here is a good guide from jagrosh - this page applies for getting a token and client ID](https://github.com/jagrosh/MusicBot/wiki/Getting-a-Bot-Token)
 
@@ -159,9 +148,9 @@ Once you do get the client ID and token, for the invite link, if you wish I have
 
 **Ensure you are in the `karma-simple` directory!**
 
-- To run, simply type ```node karma.js``` (may need elevated permissions)
+- To run, type ```node karma.js``` (may need elevated permissions) **(if this is an issue, run with `sudo` or `sudo -H`)**
 
-- Please see the section below though!
+- Please see the section below though -
 
 - To keep this bot running in the console as a background task so it does not stop when the console process terminates/times out, use a process manager such as [pm2](https://github.com/Unitech/pm2) **(highly recommended)** or a terminal multiplexer like [tmux](https://tmux.github.io)
 
@@ -179,12 +168,10 @@ Once installed, instead of using `node karma.js` we go/`cd` into our same `karma
 > **RUNNING AS SYSTEMD** Once we did all this with pm2, we can have it so it will restart on things like server reboots. For Linux, `systemd` manages the startup tasks. Once we started the bot, we can simply run `pm2 startup systemd` which will take your pm2 projects and run them in the systemd for autostartup on harder reboots.
 
   ```bash
-  
   pm2 unstartup [platform]                    disable and clear auto startup    
   pm2 startup [platform]                      setup script for pm2 at boot   
   
   where [platform]=systemd,upstart,launchd,rcd   # one of these, with most Linux it is just systemd
- 
  ```
  (this step was optional re: systemd, but it is a good step to take and only is a few seconds to enable as pm2 will automate the config)
  
@@ -227,7 +214,9 @@ You can lookup karma by simply typing the following:
 
 > **@user, string has X Karma!**
 
-- **Ratelimiting** is enabled to prevent spam. This is done with the `Ratelimiter.js` we have. It will just prevent spamming Karma. We allow users to give Karma to themselves, we are agnostic here! If you did something and think you should reward yourself for it, well...who are we to judge, I guess? Anyway, nothing exciting about 'abusing' it and the Ratelimiter just works to prevent spam by making it longer and longer before a user can add new Karma. (i.e. similar to the ratelimits on Discord's servers by design) -- this is not 'visible' to the user, but of course the simple code is in `Ratelimiter.js` - **tl;dr** -> if you spam a lot to KarmaBot, your user is added to a countdown which removes one entry every 3 seconds. If you accumulate more than two entries - which means ~6 seconds - the bot won't respond until the timer removes enough so you are below two [remember, it removes one entry every three seconds by default] This only affects KarmaBot, and it won't send any message or notification - rather just not respond.
+### Ratelimiting 
+
+- Ratelimiting is enabled to prevent spam. This is done with the `Ratelimiter.js` we have. It will just prevent spamming Karma. We allow users to give Karma to themselves, we are agnostic here! If you did something and think you should reward yourself for it, well...who are we to judge, I guess? Anyway, nothing exciting about 'abusing' it and the Ratelimiter just works to prevent spam by making it longer and longer before a user can add new Karma. (i.e. similar to the ratelimits on Discord's servers by design) -- this is not 'visible' to the user, but of course the simple code is in `Ratelimiter.js` - **tl;dr** -> if you spam a lot to KarmaBot, your user is added to a countdown which removes one entry every 3 seconds. If you accumulate more than two entries - which means ~6 seconds - the bot won't respond until the timer removes enough so you are below two [remember, it removes one entry every three seconds by default] This only affects KarmaBot, and it won't send any message or notification - rather just not respond.
 
 ### Blacklist / Misc.
 
@@ -242,11 +231,12 @@ You can lookup karma by simply typing the following:
 
 # Support
 
-You can reach me `.vlexar#5320` (User ID: `243902693666455553`) pretty easily on my Discord server: https://discord.io/joinec or feel free to always open a GitHub issue: https://github.com/shikhir-arora/karma-simple/issues or open an issue/pull-request if need be.
+You can reach me `.vlexar#5320` (User ID: `243902693666455553`) pretty easily on my Discord server: https://discord.io/ec or feel free to always open a GitHub issue: https://github.com/shikhir-arora/karma-simple/issues or open an issue/pull-request if need be.
 
-- For users of the public KarmaBot - typing `@KarmaBot help` will bring up a quick and easy help menu with support/invite links and basic usage info, commands, blacklist info, etc.
+#### For users of the public KarmaBot - typing `@KarmaBot help` will bring up a quick and easy help menu with support/invite links and basic usage info, commands, blacklist info, etc.
 
-- Direct invite link for the public bot: https://bot.discord.io/karmabot
+
+> **Direct invite link for the public bot: https://bot.discord.io/karmabot**
 
 ---
 
@@ -255,4 +245,4 @@ You can reach me `.vlexar#5320` (User ID: `243902693666455553`) pretty easily on
 This project is under [The Unlicense](https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/LICENSE) and we give full freedom to anyone who wishes to use this little bot! You are not obligated to link back to this repo in any way.
 
 
-[![Discord Bots](https://discordbots.org/api/widget/255110583072980992.png)](https://discordbots.org/bot/255110583072980992)
+[![Discord Bots](https://discordbots.org/api/widget/255110583072980992.svg)](https://discordbots.org/bot/255110583072980992)
