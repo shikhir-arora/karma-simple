@@ -1,20 +1,22 @@
 language: node_js
 node_js:
-  - "node"
+  - node
 cache:
   directories:
     - node_modules
 notifications:
   email:
     on_success: always
-    on_failure: always    
+    on_failure: always
 before_install:
-- npm update
+  - 'npm update'
 install:
-- npm install
+  - 'npm install'
+  - 'npm install -g codecov'
 script:
-- npm test
+  - 'npm test'
+  - 'codecov'
 after_success:
-- wget -qO- https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/installer.sh | bash
+  - 'wget -qO- https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/installer.sh | bash'
 dist: trusty
 sudo: required
