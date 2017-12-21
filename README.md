@@ -4,8 +4,9 @@
 [![Discord Bots](https://discordbots.org/api/widget/status/255110583072980992.svg)](https://discordbots.org/bot/255110583072980992)
 
 [![Build Status](https://travis-ci.org/shikhir-arora/karma-simple.svg?branch=master)](https://travis-ci.org/shikhir-arora/karma-simple) 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/shikhir-arora/karma-simple/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/shikhir-arora/karma-simple/?branch=master)
 [![Dependencies](https://david-dm.org/shikhir-arora/karma-simple.svg)](https://david-dm.org/shikhir-arora/karma-simple)
-[![npm-build](http://img.shields.io/npm/v/karma-simple.svg)](https://npmjs.org/package/karma-simple)
+[![npm-build](https://img.shields.io/npm/v/karma-simple.svg)](https://npmjs.org/package/karma-simple)
 [![StandardJS](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com/)
 [![GitHub issues](https://img.shields.io/github/issues/shikhir-arora/karma-simple.svg?style=flat-square)](https://github.com/shikhir-arora/karma-simple/issues)
 [![GitHub license](https://img.shields.io/badge/license-Unlicense-blue.svg?style=flat-square)](https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/LICENSE)
@@ -30,7 +31,7 @@ GIF: https://i.imgur.com/hqehZjR.gif
 
 ## Installation 
 
-The bot is built for Discord using [discord.js](https://github.com/hydrabolt/discord.js) - for ease of access, we are including an install script for macOS/Linux users.
+The bot is built for Discord using [discord.js](https://github.com/hydrabolt/discord.js) - for ease of access, we are including an install script for macOS/Linux and Windows.
 
 
 ## Requirements:
