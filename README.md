@@ -1,6 +1,7 @@
 
 [![Discord](https://discordapp.com/api/guilds/249664293656592384/embed.png)](https://discord.io/ec)
 [![Discord Bots](https://discordbots.org/api/widget/servers/255110583072980992.svg?noavatar=true)](https://discordbots.org/bot/255110583072980992)
+[![Downloads](https://img.shields.io/github/downloads/shikhir-arora/karma-simple/total.svg)](https://github.com/shikhir-arora/karma-simple/releases/tag/v1.0.6-pre)
 [![Discord Bots](https://discordbots.org/api/widget/status/255110583072980992.svg)](https://discordbots.org/bot/255110583072980992)
 
 [![Build Status](https://travis-ci.org/shikhir-arora/karma-simple.svg?branch=master)](https://travis-ci.org/shikhir-arora/karma-simple) 
