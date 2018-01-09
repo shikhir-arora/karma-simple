@@ -21,7 +21,7 @@
   "bugs": {
     "url": "https://github.com/shikhir-arora/karma-simple/issues"
   },
-  "homepage": "https://shikhirarora.gitbooks.io/karma-simple/content/",
+  "homepage": "https://karmabot.vlexar.pw",
   "engines": {
     "node": ">=8.0.0"
   },
