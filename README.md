@@ -224,7 +224,7 @@ You can lookup karma by simply typing the following:
 
 - By default, *anyone* can use Karma. This is how the vast majority of users end up using it, and it is also out of simplicity. It was also the idea to enable cross-guild Karma with a seamless user experience. As of v1.0.5, however, there is a **blacklist** feature which is per-guild - this requires a user with `Manage Role` permissions (at the minimum) to create a role called **NoKarma** (case-sensitive) and assign it to any user(s) - this will block them from being able to lookup Karma as well as add/subtract Karma. They will get a message reply back and the bot will react with a red-circle icon to indiciate that they should talk to a mod in the server. 
 
-- I do have a mod of this for whitelists, but the blacklist is the default - it is seamless and doesn't need any configuration by default, so it is an optional feature. If, however, you prefer [a whitelist](https://github.com/shikhir-arora/karma-simple-mod), I do maintain that as well. However, it requires one to setup the whitelist role before having access to Karma. Contact `.vlexar#5320` and I'll help set it up if need be. 
+- I do have a mod of this for whitelists, but the blacklist is the default - it is seamless and doesn't need any configuration by default, so it is an optional feature. If, however, you prefer [a whitelist](https://github.com/shikhir-arora/karma-simple-mod), I do maintain that as well. However, it requires one to setup the whitelist role before having access to Karma. Contact `.vlexar#0001` and I'll help set it up if need be. 
 
 
 - **We do have a `stats` command**, which can be accessed by typing `@KarmaBot stats` - all of this is on the help menu as well (in-guild, `@KarmaBot help`) Note that the bot does **not** accept user-commands through DM, except for `stats` :-) This shows some real-time stats about the server/bot.
@@ -233,7 +233,7 @@ You can lookup karma by simply typing the following:
 
 # Support
 
-You can reach me `.vlexar#5320` (User ID: `243902693666455553`) pretty easily on my Discord server: https://discord.io/ec or feel free to always open a GitHub issue: https://github.com/shikhir-arora/karma-simple/issues or open an issue/pull-request if need be.
+You can reach me `.vlexar#0001` (User ID: `243902693666455553`) pretty easily on my Discord server: https://discord.io/ec or feel free to always open a GitHub issue: https://github.com/shikhir-arora/karma-simple/issues or open an issue/pull-request if need be.
 
 #### For users of the public KarmaBot - typing `@KarmaBot help` will bring up a quick and easy help menu with support/invite links and basic usage info, commands, blacklist info, etc.
 
