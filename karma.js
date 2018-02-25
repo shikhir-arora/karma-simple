@@ -93,8 +93,8 @@ client.on('message', async (message) => {
         .addField(`**❯❯ Stats:**`, `For **KarmaBot Stats,** type \`@KarmaBot stats\` - fun stuff!`, true)
         .addBlankField()
         .addField(`**❯❯ Invite KarmaBot:**`, `**To Invite KarmaBot**, [click here (requires Manage Server permissions)](https://bot.discord.io/karmabot).`, true)
-        .addField(`**❯❯ Support:**`, `**For support, visit:** [our Discord server](https://discord.io/joinec) or [GitHub](https://github.com/shikhir-arora/karma-simple/issues).`, true)
-        .setFooter(`Project by .vlexar#5320 | KarmaBot Help`)
+        .addField(`**❯❯ Support:**`, `**For support, visit:** [our Discord server](https://discord.io/ec) or [GitHub](https://github.com/shikhir-arora/karma-simple/issues).`, true)
+        .setFooter(`Project by .vlexar#0001 | KarmaBot Help`)
         .setTimestamp()
       await message.reply({embed})
     } catch (e) {
@@ -106,7 +106,7 @@ client.on('message', async (message) => {
     try {
       const embed = new Discord.MessageEmbed()
         .setTitle(`KarmaBot Stats`)
-        .setURL(`https://execsrvr.xyz/serverstats`)
+        .setURL(`https://discordbots.org/bot/255110583072980992`)
         .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
         .setDescription(`**KarmaBot Stats/Info**`)
         .addField(`**❯❯ Guilds:**`, `${client.guilds.size.toLocaleString()}`, false)
@@ -119,7 +119,7 @@ client.on('message', async (message) => {
         .addField(`**❯❯ Node Version:**`, process.version, false)
         .addField(`**❯❯ Discord.js:**`, `v${Discord.version}`, false)
         .addField(`**❯❯ GitHub:**`, `[GitHub Repo](https://github.com/shikhir-arora/karma-simple).`, true)
-        .setFooter(`Project by .vlexar#5320 | KarmaBot Stats`)
+        .setFooter(`Project by .vlexar#0001 | KarmaBot Stats`)
         .setTimestamp()
       await message.reply({embed})
     } catch (e) {
@@ -157,7 +157,7 @@ client.on('message', async (message) => {
           })
       } else {
         message.channel.send(clean(evaled), {
-          code: 'js'
+          code: 'fix'
         })
       }
     } catch (err) {
@@ -166,7 +166,7 @@ client.on('message', async (message) => {
       if (err.includes(client.token || config.token)) {
         err = err.replace(client.token, 'REDACTED!')
       }
-      message.channel.send(`\`ERROR\` \`\`\`js\n${clean(err)}\n\`\`\``)
+      message.channel.send(`\`ERROR\` \`\`\`fix\n${clean(err)}\n\`\`\``)
     }
   }
 
@@ -185,8 +185,8 @@ client.on('message', async (message) => {
             message.channel.send({embed}).catch((e) => message.channel.send(e.message))
           })
       } else {
-        stdout && message.channel.send(`Info: \n\`\`\`${stdout}\`\`\``)
-        stderr && message.channel.send(`Errors: \n\`\`\`${stderr}\`\`\``)
+        stdout && message.channel.send(`INFO: \n\`\`\`fix\n${stdout}\n\`\`\``)
+        stderr && message.channel.send(`ERRORS: \n\`\`\`fix\n${stderr}\n\`\`\``)
         if (!stderr && !stdout) { message.react('\u2705') }
       }
     })
