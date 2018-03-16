@@ -1,3 +1,5 @@
+if (process.version.slice(1).split('.')[0] < 8) throw new Error(`Node must be v8+ - please upgrade to v8 or the latest v9.`)
+
 const Discord = require('discord.js')
 const gist = require('snekgist')
 const exec = require('child_process').exec
@@ -5,11 +7,18 @@ const os = require('os')
 const moment = require('moment')
 require('moment-duration-format')
 const config = require('./config.json') // use the provided 'config.json.example' and edit accordingly. Save as config.json before running.
-const localStorage = new require('node-localstorage').LocalStorage('karmafiles')
 const request = require('request-promise-native')
 const Ratelimiter = require('./Ratelimiter.js')
 const rl = new Ratelimiter()
 const client = new Discord.Client()
+const Enmap = require('enmap')
+const EnmapMongo = require('enmap-mongo')
+const karmaStore = new Enmap({ provider: new EnmapMongo({
+  name: `karma`,
+  dbName: `karmadb`,
+  url: ``
+})
+})
 
 client.on('message', async (message) => {
   if (message.author.bot) return
@@ -22,7 +31,7 @@ client.on('message', async (message) => {
         return message.react('\uD83D\uDD34')
       }
       const keyword = message.cleanContent.replace(config.prefix, '').trim() // Inputs ARE case sensitive; i.e. "test" and "Test" are different entries. To change to case-insensitive, replace .trim() to .trim().toLowerCase()
-      const count = localStorage.getItem(keyword) || 0
+      const count = client.karmaStore.get(keyword) || { numKarma: 0 }
       try {
         await message.reply({
           embed: {
@@ -31,7 +40,7 @@ client.on('message', async (message) => {
               name: client.user.username,
               icon_url: client.user.displayAvatarURL
             },
-            description: `${keyword} has **${count}** Karma!`,
+            description: `${keyword} has **${count.numKarma}** Karma!`,
             timestamp: new Date()
           }
         })
@@ -54,11 +63,11 @@ client.on('message', async (message) => {
       }
       const keyword = message.cleanContent.replace(/([+-]{2,})$/m, '').trim() // Inputs ARE case sensitive; i.e. "test" and "Test" are different entries. To change to case-insensitive, replace .trim() to .trim().toLowerCase()
       if (keyword === '') return
-      let count = localStorage.getItem(keyword) || 0
-      if (type === 'minus') count--
-      else if (type === 'plus') count++
+      let count = client.karmaStore.get(keyword) || { numKarma: 0 }
+      if (type === 'minus') count.numKarma--
+      else if (type === 'plus') count.numKarma++
       console.log(`[KARMA] ${keyword} ${type}`)
-      localStorage.setItem(keyword, count)
+      karmaStore.setAsync(keyword, count.numKarma)
       try {
         await message.channel.send({
           embed: {
@@ -67,7 +76,7 @@ client.on('message', async (message) => {
               name: client.user.username,
               icon_url: client.user.displayAvatarURL
             },
-            description: `[KARMA] **${keyword}** has **${count}** Karma. To lookup later use  **${config.prefix}**  and type **${config.prefix} ${keyword}**`,
+            description: `[KARMA] **${keyword}** has **${count.numKarma}** Karma. To lookup later use  **${config.prefix}**  and type **${config.prefix} ${keyword}**`,
             timestamp: new Date()
           }
         })
