@@ -1,7 +1,7 @@
 if (process.version.slice(1).split('.')[0] < 8) throw new Error(`Node must be v8+ - please upgrade to v8 or the latest v9.`)
 
 const Discord = require('discord.js')
-const gist = require('snekgist')
+const hastebin = require('hastebin-gen')
 const exec = require('child_process').exec
 const os = require('os')
 const moment = require('moment')
@@ -13,10 +13,10 @@ const rl = new Ratelimiter()
 const client = new Discord.Client()
 const Enmap = require('enmap')
 const EnmapMongo = require('enmap-mongo')
-const karmaStore = new Enmap({ provider: new EnmapMongo({
-  name: `karma`,
-  dbName: `karmadb`,
-  url: ``
+client.karmaStore = new Enmap({ provider: new EnmapMongo({
+  name: `karmaStore`,
+  dbName: `enmap`,
+  url: 'mongodb+srv://karma:lexmark1@cluster0-g085d.gcp.mongodb.net/enmap'
 })
 })
 
@@ -30,8 +30,13 @@ client.on('message', async (message) => {
         message.reply(`You are not allowed to lookup Karma. Please contact a server mod/admin/staff member. Type \`@KarmaBot help\` for more info.`)
         return message.react('\uD83D\uDD34')
       }
-      const keyword = message.cleanContent.replace(config.prefix, '').trim() // Inputs ARE case sensitive; i.e. "test" and "Test" are different entries. To change to case-insensitive, replace .trim() to .trim().toLowerCase()
-      const count = client.karmaStore.get(keyword) || { numKarma: 0 }
+      const keyword = message.cleanContent.replace(config.prefix, '').trim()
+
+      if (!client.karmaStore.has(keyword)) {
+        client.karmaStore.set(keyword, {
+          numKarma: 0
+        })
+      }
       try {
         await message.reply({
           embed: {
@@ -40,7 +45,10 @@ client.on('message', async (message) => {
               name: client.user.username,
               icon_url: client.user.displayAvatarURL
             },
-            description: `${keyword} has **${count.numKarma}** Karma!`,
+            description: `${keyword} has **${client.karmaStore.getProp(keyword, 'numKarma') || 0}** Karma!`,
+            footer: {
+              text: `KarmaBot by .vlexar#0001`
+            },
             timestamp: new Date()
           }
         })
@@ -61,13 +69,18 @@ client.on('message', async (message) => {
       } else {
         return
       }
-      const keyword = message.cleanContent.replace(/([+-]{2,})$/m, '').trim() // Inputs ARE case sensitive; i.e. "test" and "Test" are different entries. To change to case-insensitive, replace .trim() to .trim().toLowerCase()
+      const keyword = message.cleanContent.replace(/([+-]{2,})$/m, '').trim()
+
+      if (!client.karmaStore.has(keyword)) {
+        client.karmaStore.set(keyword, {
+          numKarma: 0
+        })
+      }
       if (keyword === '') return
-      let count = client.karmaStore.get(keyword) || { numKarma: 0 }
-      if (type === 'minus') count.numKarma--
-      else if (type === 'plus') count.numKarma++
+      let currentKarma = client.karmaStore.getProp(keyword, 'numKarma')
+      if (type === 'minus') client.karmaStore.setProp(keyword, 'numKarma', --currentKarma)
+      else if (type === 'plus') client.karmaStore.setProp(keyword, 'numKarma', ++currentKarma)
       console.log(`[KARMA] ${keyword} ${type}`)
-      karmaStore.setAsync(keyword, count.numKarma)
       try {
         await message.channel.send({
           embed: {
@@ -76,7 +89,10 @@ client.on('message', async (message) => {
               name: client.user.username,
               icon_url: client.user.displayAvatarURL
             },
-            description: `[KARMA] **${keyword}** has **${count.numKarma}** Karma. To lookup later use  **${config.prefix}**  and type **${config.prefix} ${keyword}**`,
+            description: `[KARMA] **${keyword}** has **${client.karmaStore.getProp(keyword, 'numKarma') || 0}** Karma. To lookup later use  **${config.prefix}**  and type **${config.prefix} ${keyword}**`,
+            footer: {
+              text: `KarmaBot by .vlexar#0001`
+            },
             timestamp: new Date()
           }
         })
@@ -154,13 +170,14 @@ client.on('message', async (message) => {
       }
 
       if (clean(evaled).length > 2000) {
-        await gist(clean(evaled))
-          .then(res => {
+        await hastebin(clean(evaled), 'hs')
+          .then(r => {
             const embed = new Discord.MessageEmbed()
-              .setTitle(`Eval output exceeds 2000 characters. View Gist.`)
-              .setURL(`${res.html_url}`)
+              .setTitle(`Eval output exceeds 2000 characters. View on Hastebin.`)
+              .setURL(r)
               .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
-              .setDescription(`Eval output exceeds 2000 characters. View Gist [here](${res.html_url}).`)
+              .setDescription(`Eval output exceeds 2000 characters. View Hastebin [here](${r}).`)
+              .setFooter(`Eval Output`)
               .setTimestamp()
             message.channel.send({embed}).catch((e) => message.channel.send(e.message))
           })
@@ -183,13 +200,14 @@ client.on('message', async (message) => {
     if (message.author.id !== config.ownerID) return
     exec(args.join(' '), async (e, stdout, stderr) => {
       if (stdout.length > 2000 || stderr.length > 2000) {
-        await gist(`${stdout}\n\n${stderr}`)
-          .then(res => {
+        await hastebin(`${stdout}\n\n${stderr}`, 'hs')
+          .then(r => {
             const embed = new Discord.MessageEmbed()
-              .setTitle(`Console output exceeds 2000 characters. View Gist.`)
-              .setURL(`${res.html_url}`)
+              .setTitle(`Console output exceeds 2000 characters. View on Hastebin.`)
+              .setURL(r)
               .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
-              .setDescription(`Console output exceeds 2000 characters. View Gist [here](${res.html_url}).`)
+              .setDescription(`Console output exceeds 2000 characters. View Hastebin [here](${r}).`)
+              .setFooter(`Exec Output`)
               .setTimestamp()
             message.channel.send({embed}).catch((e) => message.channel.send(e.message))
           })
