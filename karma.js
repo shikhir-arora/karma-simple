@@ -16,7 +16,7 @@ const EnmapMongo = require('enmap-mongo')
 client.karmaStore = new Enmap({ provider: new EnmapMongo({
   name: `karmaStore`,
   dbName: `enmap`,
-  url: 'mongodb+srv://karma:lexmark1@cluster0-g085d.gcp.mongodb.net/enmap'
+  url: ''
 })
 })
 
@@ -161,7 +161,7 @@ client.on('message', async (message) => {
     if (message.author.id !== config.ownerID) return
     try {
       const code = args.join(' ')
-      let evaled = eval(code)
+      let evaled = await eval(code)
 
       if (typeof evaled !== 'string') { evaled = require('util').inspect(evaled, { depth: 0 }) }
 
@@ -246,12 +246,26 @@ function discordBotsPw () {
   })
 }
 
+function botlistSpace () {
+  return request.post({
+    uri: `https://botlist.space/api/bots/${client.user.id}`,
+    headers: {
+      Authorization: ''
+    },
+    json: true,
+    body: {
+      server_count: client.guilds.size
+    }
+  })
+}
+
 client.on('ready', () => {
   console.log(`[READY] Connected as ${client.user.username}#${client.user.discriminator} ${client.user.id}`)
   client.user.setActivity(`@KarmaBot help`)
 
   discordBotsOrg()
   discordBotsPw()
+  botlistSpace()
 })
 
 client.on('guildCreate', (guild) => {
@@ -259,6 +273,7 @@ client.on('guildCreate', (guild) => {
 
   discordBotsOrg()
   discordBotsPw()
+  botlistSpace()
 })
 
 client.on('guildDelete', (guild) => {
@@ -266,6 +281,7 @@ client.on('guildDelete', (guild) => {
 
   discordBotsOrg()
   discordBotsPw()
+  botlistSpace()
 })
 
 client.on('disconnect', (event) => {
