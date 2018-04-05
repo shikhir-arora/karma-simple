@@ -2,6 +2,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/41ca5d457fcb42fe9a3d77e511a9acc0)](https://app.codacy.com/app/shikhir-arora/karma-simple?utm_source=github.com&utm_medium=referral&utm_content=shikhir-arora/karma-simple&utm_campaign=badger)
 [![Discord](https://discordapp.com/api/guilds/249664293656592384/embed.png)](https://discord.io/ec)
 [![Discord Bots](https://discordbots.org/api/widget/servers/255110583072980992.svg?noavatar=true)](https://discordbots.org/bot/255110583072980992)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/41ca5d457fcb42fe9a3d77e511a9acc0)](https://app.codacy.com/app/shikhir-arora/karma-simple?utm_source=github.com&utm_medium=referral&utm_content=shikhir-arora/karma-simple&utm_campaign=badger)
 [![Downloads](https://img.shields.io/github/downloads/shikhir-arora/karma-simple/total.svg)](https://github.com/shikhir-arora/karma-simple/releases/tag/v1.0.6-pre)
 [![Discord Bots](https://discordbots.org/api/widget/status/255110583072980992.svg)](https://discordbots.org/bot/255110583072980992)
 
@@ -21,7 +22,7 @@
 
 > A simple, lightweight and functional [Discord](https://discordapp.com/) utility/Bot used for awarding positive or negative "Karma" to any user/keyword. 
 
-> Public Bot Direct Invite: https://bot.discord.io/karmabot  **[scroll to the bottom of this page for support!]**
+> Public Bot Direct Invite: https://bot.discord.io/karmabot  **[scroll to the bottom of this page for support!]** We'd appreciate if you could also give us a vote on [DiscordBots](https://discordbots.org/bot/255110583072980992) :)
 
 
 ## Screenshot In Action 
@@ -33,14 +34,16 @@ GIF: https://i.imgur.com/hqehZjR.gif
 
 ## Installation 
 
-The bot is built for Discord using [discord.js](https://github.com/hydrabolt/discord.js) - for ease of access, we are including an install script for macOS/Linux and Windows.
+The bot is built for Discord using [discord.js v12.0.0-dev](https://github.com/hydrabolt/discord.js) and - for ease of access, we are including an basic install script for macOS/Linux and Windows.
 
 
 ## Requirements:
 
-> Node version v8.0.0+ (to check your node version, you can type  `node --version` - to update Node, you can use [nvm](http://nvm.sh) and `nvm install latest` or your package manager (like `apt-get` or `yum`) to update. As of v1.0.5, Node v8 is required.
+> Node version v8.0.0+ (to check your node version, you can type  `node --version` - to update Node, you can use [nvm](http://nvm.sh) and `nvm install latest` or your package manager (like `apt-get` or `yum`) to update. As of v1.0.5, Node v8 is strictly required. The project will throw an error if Node is below v8.
 
 > Git is also required.
+
+> MongoDB is required; more on this below. This is a requirement from v2.0.0 as we switched to Enmap with MongoDB as the provider.
 
 
 > `npm` manages the packages we need, which are found in `package.json` and are always kept up-to-date. This project uses discord.js v12.0-dev and requires **>=Node v8.x** or **Node v9.x** -- built with `npm` version 5.6.0.
@@ -60,6 +63,8 @@ The bot is built for Discord using [discord.js](https://github.com/hydrabolt/dis
 
 > We will have *super seamless* update scripts - in-fact if you use the installer all one needs to do to update is `git pull` and we will have a way for the Botowner to do that in Discord shortly! 
 
+> You will need a MongoDB URL setup. This in for Enmap. More on this below.
+
 ### Windows: Installer
 
 - Download `installer.bat` [link here](https://github.com/shikhir-arora/karma-simple/releases/download/v1.0.4/installer.bat) and **run/open with Administrator access** 
@@ -69,6 +74,8 @@ The bot is built for Discord using [discord.js](https://github.com/hydrabolt/dis
 - **Do not use this to update the bot, which can be done with a simple git pull** as it will delete your old Karma files! Only use it for the initial/fresh install.
 
 - Git and Node are required; the script will error but there will be a link provided if Node/Git are not detected.
+
+- You will need a MongoDB URL setup. This in for Enmap. More on this below.
 
 
 While we are on the [npm](https://npmjs.org/package/karma-simple) directory and the bot can indeed can be installed via. npm in a single-pass: `npm install karma-simple` - which manages everything, you must be aware of where it installs, as *all* users need to configure `config.json` which links in the project. Our install-script makes sure this folder structure is kept intact by installing to a temporary directory and deleting it after.
@@ -90,6 +97,32 @@ git clone --recursive --depth 1 https://github.com/shikhir-arora/karma-simple.gi
 - Change directories to `karma-simple` and once there, run `npm install` to install the packages needed.
 
 - Continue below as normal to edit `config.json` 
+
+
+## Enmap w/ MongoDB Configuration
+
+As of v2.0.0, KarmaBot no longer uses `node-localStorage` to store Karma. Instead, we switched to [Enmap](https://www.npmjs.com/package/enmap) with MongoDB as a provider [enmap-mongo](https://www.npmjs.com/package/enmap-mongo). This allows us to add much more capability when wanted/needed, is faster and cleaner and uses a persistent enhanced-map data structure. 
+
+You will need to either setup MongoDB or use a service like [Atlas](https://www.mongodb.com/cloud/atlas) which provides a basic, free plan. This doesn't need much resources at all, so almost any installation will work.
+
+I'm not going to post a detailed guide on MongoDB installation as they exist out there and getting it setup isn't too difficult. Once you have set up MongoDB, you'll simply need to edit the following in `karma.js`:
+
+
+```js
+
+client.karmaStore = new Enmap({ provider: new EnmapMongo({
+  name: `karmaStore`,
+  dbName: `enmap`,
+  url: 'mongodb+srv://karma:lexmark1@cluster0-g085d.gcp.mongodb.net/enmap'
+})
+})
+```
+
+This can be found at the top of the `karma.js` file. **Don't change anything but the URL!** MongoDB URL formats are usually in the form: `mongodb://user:password@IP:PORT/name` and we'll call ours `enmap` -- in our example (no, it's not a working database), we're using a Google Compute Cluster with Atlas, and that uses the newer drivers and supports DNS seedlisting. So, our URL looks a little different. In either case, you should simply edit the URL. Save this. 
+
+That's the only switch on the user end for Enmap/Mongo! Everything else is handled in the code.
+
+Please don't hesitate to contact me (`.vlexar#0001`) on Discord if you need assistance with Mongo.
 
 
 ## Configuration (for all users!)
@@ -224,8 +257,6 @@ You can lookup karma by simply typing the following:
 ### Blacklist / Misc.
 
 - By default, *anyone* can use Karma. This is how the vast majority of users end up using it, and it is also out of simplicity. It was also the idea to enable cross-guild Karma with a seamless user experience. As of v1.0.5, however, there is a **blacklist** feature which is per-guild - this requires a user with `Manage Role` permissions (at the minimum) to create a role called **NoKarma** (case-sensitive) and assign it to any user(s) - this will block them from being able to lookup Karma as well as add/subtract Karma. They will get a message reply back and the bot will react with a red-circle icon to indiciate that they should talk to a mod in the server. 
-
-- I do have a mod of this for whitelists, but the blacklist is the default - it is seamless and doesn't need any configuration by default, so it is an optional feature. If, however, you prefer [a whitelist](https://github.com/shikhir-arora/karma-simple-mod), I do maintain that as well. However, it requires one to setup the whitelist role before having access to Karma. Contact `.vlexar#0001` and I'll help set it up if need be. 
 
 
 - **We do have a `stats` command**, which can be accessed by typing `@KarmaBot stats` - all of this is on the help menu as well (in-guild, `@KarmaBot help`) Note that the bot does **not** accept user-commands through DM, except for `stats` :-) This shows some real-time stats about the server/bot.
