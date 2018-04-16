@@ -261,7 +261,7 @@ function botlistSpace () {
 
 client.on('ready', () => {
   console.log(`[READY] Connected as ${client.user.username}#${client.user.discriminator} ${client.user.id}`)
-  client.user.setActivity(`@KarmaBot help`)
+  setInterval(() => client.user.setActivity(`@KarmaBot help`, { type: `WATCHING` }), 90000)
 
   discordBotsOrg()
   discordBotsPw()
