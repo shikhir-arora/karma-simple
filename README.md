@@ -1,4 +1,5 @@
 
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/41ca5d457fcb42fe9a3d77e511a9acc0)](https://app.codacy.com/app/shikhir-arora/karma-simple?utm_source=github.com&utm_medium=referral&utm_content=shikhir-arora/karma-simple&utm_campaign=badger)
 [![Discord](https://discordapp.com/api/guilds/249664293656592384/embed.png)](https://discord.io/ec)
 [![Discord Bots](https://discordbots.org/api/widget/servers/255110583072980992.svg?noavatar=true)](https://discordbots.org/bot/255110583072980992)
