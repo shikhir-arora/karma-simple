@@ -1,9 +1,7 @@
 language: node_js
 node_js:
-  - node
-cache:
-  directories:
-    - node_modules
+  - "9"
+  - "node"
 notifications:
   email:
     on_success: always
