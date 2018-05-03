@@ -259,6 +259,19 @@ function botlistSpace () {
   })
 }
 
+function discordServices () {
+  return request.post({
+    uri: `https://discord.services/api/bots/${client.user.id}`,
+    headers: {
+      Authorization: ''
+    },
+    json: true,
+    body: {
+      server_count: client.guilds.size
+    }
+  })
+}
+
 client.on('ready', () => {
   console.log(`[READY] Connected as ${client.user.username}#${client.user.discriminator} ${client.user.id}`)
   setInterval(() => client.user.setActivity(`@KarmaBot help`, { type: `WATCHING` }), 90000)
@@ -266,6 +279,7 @@ client.on('ready', () => {
   discordBotsOrg()
   discordBotsPw()
   botlistSpace()
+  discordServices()
 })
 
 client.on('guildCreate', (guild) => {
@@ -274,6 +288,7 @@ client.on('guildCreate', (guild) => {
   discordBotsOrg()
   discordBotsPw()
   botlistSpace()
+  discordServices()
 })
 
 client.on('guildDelete', (guild) => {
@@ -282,6 +297,7 @@ client.on('guildDelete', (guild) => {
   discordBotsOrg()
   discordBotsPw()
   botlistSpace()
+  discordServices()
 })
 
 client.on('disconnect', (event) => {
