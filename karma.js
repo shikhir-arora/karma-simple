@@ -212,8 +212,8 @@ client.on('message', async (message) => {
             message.channel.send({embed}).catch((e) => message.channel.send(e.message))
           })
       } else {
-        stdout && message.channel.send(`\`INFO:\`\n\`\`\`fix\n${stdout}\`\`\``)
-        stderr && message.channel.send(`\`ERRORS:\`\n\`\`\`fix\n${stderr}\`\`\``)
+        stdout && message.channel.send(`\`INFO:\`\n\n\`\`\`fix\n${stdout}\`\`\``)
+        stderr && message.channel.send(`\`ERRORS:\`\n\n\`\`\`fix\n${stderr}\`\`\``)
         if (!stderr && !stdout) { message.react('\u2705') }
       }
     })
