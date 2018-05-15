@@ -1,4 +1,4 @@
-if (process.version.slice(1).split('.')[0] < 8) throw new Error(`Node must be v8+ - please upgrade to v8 or the latest v9.`)
+if (process.version.slice(1).split('.')[0] < 9) throw new Error(`Node must be v9+ - please upgrade to v9+ or the latest v10.`)
 
 const Discord = require('discord.js')
 const gist = require('snekgist')
@@ -26,7 +26,7 @@ client.on('message', async (message) => {
   if (check === true) {
     if (message.cleanContent.startsWith(config.prefix)) {
       if (message.channel.type === 'dm') return
-      if ((message.guild.roles.find('name', 'NoKarma')) && (message.member.roles.has(message.guild.roles.find('name', 'NoKarma').id))) {
+      if ((message.guild.roles.find(role => role.name === 'NoKarma')) && (message.member.roles.has(message.guild.roles.find(role => role.name === 'NoKarma').id))) {
         message.reply(`You are not allowed to lookup Karma. Please contact a server mod/admin/staff member. Type \`@KarmaBot help\` for more info.`)
         return message.react('\uD83D\uDD34')
       }
@@ -57,7 +57,7 @@ client.on('message', async (message) => {
       }
     } else if ((message.cleanContent.endsWith('--')) || message.cleanContent.endsWith('++')) {
       if (message.channel.type === 'dm') return
-      if ((message.guild.roles.find('name', 'NoKarma')) && (message.member.roles.has(message.guild.roles.find('name', 'NoKarma').id))) {
+      if ((message.guild.roles.find(role => role.name === 'NoKarma')) && (message.member.roles.has(message.guild.roles.find(role => role.name === 'NoKarma').id))) {
         message.reply(`You are not allowed to add or subtract Karma at this time. Please contact a server mod/admin/staff member. Type \`@KarmaBot help\` for more info.`)
         return message.react('\uD83D\uDD34')
       }
