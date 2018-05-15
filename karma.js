@@ -1,7 +1,7 @@
 if (process.version.slice(1).split('.')[0] < 8) throw new Error(`Node must be v8+ - please upgrade to v8 or the latest v9.`)
 
 const Discord = require('discord.js')
-const hastebin = require('hastebin-gen')
+const gist = require('snekgist')
 const exec = require('child_process').exec
 const os = require('os')
 const moment = require('moment')
@@ -169,14 +169,14 @@ client.on('message', async (message) => {
         evaled = evaled.replace(client.token, 'REDACTED!')
       }
 
-      if (clean(evaled).length > 2000) {
-        await hastebin(clean(evaled), 'hs')
-          .then(r => {
+      if (clean(evaled).length > 1800) {
+        await gist(clean(evaled))
+          .then(res => {
             const embed = new Discord.MessageEmbed()
-              .setTitle(`Eval output exceeds 2000 characters. View on Hastebin.`)
-              .setURL(r)
+              .setTitle(`Eval output exceeds 2000 characters. View on Gist.`)
+              .setURL(`${res.html.url}`)
               .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
-              .setDescription(`Eval output exceeds 2000 characters. View Hastebin [here](${r}).`)
+              .setDescription(`Eval output exceeds 2000 characters. View Gist [here](${res.html_url}).`)
               .setFooter(`Eval Output`)
               .setTimestamp()
             message.channel.send({embed}).catch((e) => message.channel.send(e.message))
@@ -199,14 +199,14 @@ client.on('message', async (message) => {
   if (message.content.startsWith(config.adminprefix + 'exec')) {
     if (message.author.id !== config.ownerID) return
     exec(args.join(' '), async (e, stdout, stderr) => {
-      if (stdout.length > 2000 || stderr.length > 2000) {
-        await hastebin(`${stdout}\n\n${stderr}`, 'hs')
-          .then(r => {
+      if (stdout.length > 1800 || stderr.length > 1800) {
+        await gist(`${stdout}\n\n${stderr}`)
+          .then(res => {
             const embed = new Discord.MessageEmbed()
-              .setTitle(`Console output exceeds 2000 characters. View on Hastebin.`)
-              .setURL(r)
+              .setTitle(`Console output exceeds 2000 characters. View on Gist.`)
+              .setURL(`${res.html_url}`)
               .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
-              .setDescription(`Console output exceeds 2000 characters. View Hastebin [here](${r}).`)
+              .setDescription(`Console output exceeds 2000 characters. View Gist [here](${res.html_url}).`)
               .setFooter(`Exec Output`)
               .setTimestamp()
             message.channel.send({embed}).catch((e) => message.channel.send(e.message))
