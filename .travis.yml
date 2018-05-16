@@ -6,13 +6,13 @@ notifications:
     on_success: always
     on_failure: always
 before_install:
-  - 'npm update'
+  - 'npm update' || travis_terminate 1
 install:
-  - 'npm install'
-  - 'npm install -g codecov'
+  - 'npm install' || travis_terminate 1
+  - 'npm install -g codecov' || travis_terminate 1
 script:
-  - 'npm test'
-  - 'codecov'
+  - 'npm test' || travis_terminate 1
+  - 'codecov' || travis_terminate 1
 after_success:
   - 'wget -qO- https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/installer.sh | bash'
   - wget https://raw.githubusercontent.com/k3rn31p4nic/travis-ci-discord-webhook/master/send.sh
