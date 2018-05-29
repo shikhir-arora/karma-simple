@@ -31,13 +31,13 @@
   },
   "dependencies": {
     "discord.js": "discordjs/discord.js",
-    "enmap": "^2.2.1",
+    "enmap": "^2.5.2",
     "enmap-mongo": "^2.0.1",
     "moment": "^2.22.1",
     "moment-duration-format": "^2.2.2",
     "os": "^0.1.1",
     "os-utils": "0.0.14",
-    "request": "^2.85.0",
+    "request": "^2.87.0",
     "request-promise-native": "^1.0.5",
     "snekgist": "shikhir-arora/node-gist",
     "util": "^0.10.3"
@@ -49,11 +49,11 @@
     "zlib-sync": "^0.1.0"
   },
   "devDependencies": {
-    "eslint": "^5.0.0-alpha.2",
+    "eslint": "^5.0.0-alpha.4",
     "eslint-config-standard": "^11.0.0",
-    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-node": "^6.0.1",
-    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0"
   }
 }
