@@ -31,9 +31,9 @@
   },
   "dependencies": {
     "discord.js": "discordjs/discord.js",
-    "enmap": "^2.5.2",
+    "enmap": "^2.6.0",
     "enmap-mongo": "^2.0.1",
-    "moment": "^2.22.1",
+    "moment": "^2.22.2",
     "moment-duration-format": "^2.2.2",
     "os": "^0.1.1",
     "os-utils": "0.0.14",
