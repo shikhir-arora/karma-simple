@@ -6,7 +6,7 @@ const exec = require('child_process').exec
 const os = require('os')
 const moment = require('moment')
 require('moment-duration-format')
-const config = require('./config.json') 
+const config = require('./config.json')
 const request = require('request-promise-native')
 const Ratelimiter = require('./Ratelimiter.js')
 const rl = new Ratelimiter()
