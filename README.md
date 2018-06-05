@@ -39,17 +39,19 @@ The bot is built for Discord using [discord.js v12.0.0-dev](https://github.com/h
 
 ## Requirements:
 
-> Node version v8.0.0+ (to check your node version, you can type  `node --version` - to update Node, you can use [nvm](http://nvm.sh) and `nvm install latest` or your package manager (like `apt-get` or `yum`) to update. As of v1.0.5, Node v8 is strictly required. The project will throw an error if Node is below v8.
+> Node version v9.0.0+ (to check your node version, you can type  `node --version` - to update Node, you can use [nvm](http://nvm.sh) and `nvm install latest` or your package manager (like `apt-get` or `yum`) to update. As of v2.0.0 (pre), Node v9 is strictly required with 10+ in ideal production. The project **will throw an error if Node is below v9.**
 
 > Git is also required.
 
 > MongoDB is required; more on this below. This is a requirement from v2.0.0 as we switched to Enmap with MongoDB as the provider.
 
 
-> `npm` manages the packages we need, which are found in `package.json` and are always kept up-to-date. This project uses discord.js v12.0-dev and requires **>=Node v8.x** or **Node v9.x** -- built with `npm` version 5.6.0.
+> `npm` manages the packages we need, which are found in `package.json` and are always kept up-to-date. This project uses discord.js v12.0-dev and requires **>=Node v9.x** or **Node v10.x** -- built with npm (currently at `6.1.0` at the time of this update)
 
 
- - the above which are handled by `npm` and/or with our [macOS/Linux installer script](https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/installer.sh) or [Windows installer script](https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/installer.bat).
+ - The above which are handled by `npm` and/or with our [macOS/Linux installer script](https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/installer.sh) or [Windows installer script](https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/installer.bat).
+
+ - The script **doesn't** install MongoDB for you; but I'll hopefully get to writing a documentation about that/doing it for free on Atlas shortly. There's some information below.
 
 ---
 

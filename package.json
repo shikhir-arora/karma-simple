@@ -23,7 +23,7 @@
   },
   "homepage": "https://karmabot.vlexar.pw",
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=9.0.0"
   },
   "scripts": {
     "test": "eslint karma.js Ratelimiter.js",
@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "discord.js": "discordjs/discord.js",
-    "enmap": "^2.6.0",
+    "enmap": "^2.6.1",
     "enmap-mongo": "^2.0.1",
     "moment": "^2.22.2",
     "moment-duration-format": "^2.2.2",
@@ -40,7 +40,7 @@
     "request": "^2.87.0",
     "request-promise-native": "^1.0.5",
     "snekgist": "shikhir-arora/node-gist",
-    "util": "^0.10.3"
+    "util": "^0.10.4"
   },
   "peerDependencies": {
     "bufferutil": "^3.0.2",
