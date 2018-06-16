@@ -137,7 +137,7 @@ client.on('message', async (message) => {
         .addField(`**❯❯ Guilds:**`, `${client.guilds.size.toLocaleString()}`, false)
         .addField(`**❯❯ Users:**`, `${client.users.size.toLocaleString()}`, false)
         .addField(`**❯❯ Uptime:**`, moment.duration(process.uptime(), 'seconds').format('dd:hh:mm:ss'), false)
-        .addField(`**❯❯ CPU:**`, `8-core ${os.cpus()[0].model}`, false)
+        .addField(`**❯❯ CPU:**`, `${os.cpus().length}x ${os.cpus()[0].model}`, false)
         .addField(`**❯❯ Gateway Ping:**`, `${client.ping.toFixed()} ms`, false)
         .addField(`**❯❯ Load Average:**`, `${os.loadavg()[1].toFixed(3)}`, false)
         .addField(`**❯❯ Memory Usage:**`, `${(process.memoryUsage().rss / 1048576).toFixed(2)}MB / ${(os.totalmem() / 1073741824).toFixed(2)}GB`, false)
