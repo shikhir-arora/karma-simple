@@ -1,6 +1,6 @@
 {
   "name": "karma-simple",
-  "version": "2.0.0-beta",
+  "version": "2.0.0",
   "description": "A simple, lightweight utility to award positive or negative Karma to any user/keyword. Adapted from IRC with a fresh approach.",
   "main": "karma.js",
   "author": ".vlexar#0001 <shikhir@sarora.io>",

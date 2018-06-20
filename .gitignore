@@ -1,3 +1,4 @@
 node_modules/**
 karmafiles/**
 config.json
+/.DS_Store
