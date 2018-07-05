@@ -1,13 +1,13 @@
 if (process.version.slice(1).split('.')[0] < 9) throw new Error(`Node must be v9+ - please upgrade to v9+ or the latest v10.`)
 
 const Discord = require('discord.js')
+const axios = require('axios')
 const gist = require('snekgist')
 const exec = require('child_process').exec
 const os = require('os')
 const moment = require('moment')
 require('moment-duration-format')
 const config = require('./config.json')
-const request = require('request-promise-native')
 const Ratelimiter = require('./Ratelimiter.js')
 const rl = new Ratelimiter()
 const client = new Discord.Client()
@@ -221,84 +221,72 @@ client.on('message', async (message) => {
   }
 })
 
-function discordBotsOrg () {
-  return request.post({
-    uri: `https://discordbots.org/api/bots/${client.user.id}/stats`,
+async function postDiscordStats () {
+  const discordBots = axios({
+    method: 'post',
+    url: `https://discordbots.org/api/bots/${client.user.id}/stats`,
     headers: {
       Authorization: ''
     },
-    json: true,
-    body: {
+    data: {
       server_count: client.guilds.size
     }
   })
-}
 
-function discordBotsPw () {
-  return request.post({
-    uri: `https://bots.discord.pw/api/bots/${client.user.id}/stats`,
+  const discordPw = axios({
+    method: 'post',
+    url: `https://bots.discord.pw/api/bots/${client.user.id}/stats`,
     headers: {
       Authorization: ''
     },
-    json: true,
-    body: {
+    data: {
       server_count: client.guilds.size
     }
   })
-}
 
-function botlistSpace () {
-  return request.post({
-    uri: `https://botlist.space/api/bots/${client.user.id}`,
+  const botlistSpace = axios({
+    method: 'post',
+    url: `https://botlist.space/api/bots/${client.user.id}`,
     headers: {
       Authorization: ''
     },
-    json: true,
-    body: {
+    data: {
       server_count: client.guilds.size
     }
   })
-}
 
-function discordServices () {
-  return request.post({
-    uri: `https://discord.services/api/bots/${client.user.id}`,
+  const discordServices = axios({
+    method: 'post',
+    url: `https://discord.services/api/bots/${client.user.id}`,
     headers: {
       Authorization: ''
     },
-    json: true,
-    body: {
+    data: {
       server_count: client.guilds.size
     }
   })
+
+  const [dbres, dpwres, bspaceres, dservres] = await Promise.all([discordBots, discordPw, botlistSpace, discordServices])
+  console.log(dbres.res, dpwres.res, bspaceres.res, dservres.res)
 }
 
 client.on('ready', () => {
   console.log(`[READY] Connected as ${client.user.username}#${client.user.discriminator} ${client.user.id}`)
   setInterval(() => client.user.setActivity(`@KarmaBot help`, { type: `WATCHING` }), 90000)
 
-  discordBotsOrg()
-  discordBotsPw()
-  botlistSpace()
-  discordServices()
+  postDiscordStats()
 })
 
 client.on('guildCreate', (guild) => {
   console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`)
 
-  discordBotsOrg()
-  discordBotsPw()
-  botlistSpace()
-  discordServices()
+  postDiscordStats()
 })
 
 client.on('guildDelete', (guild) => {
   console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`)
 
-  discordBotsOrg()
-  discordBotsPw()
-  botlistSpace()
-  discordServices()
+  postDiscordStats()
 })
 
 client.on('disconnect', (event) => {
