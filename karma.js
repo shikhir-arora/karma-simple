@@ -265,9 +265,20 @@ async function postDiscordStats () {
       server_count: client.guilds.size
     }
   })
+  
+  const listCord = axios({
+    method: 'post',
+    url: `https://listcord.com/api/bot/${client.user.id}/guilds`,
+    headers: {
+      Authorization: ''
+    },
+    data: {
+      guilds: client.guilds.size
+    }
+  })  
 
-  const [dbres, dpwres, bspaceres, dservres] = await Promise.all([discordBots, discordPw, botlistSpace, discordServices])
-  console.log(dbres.res, dpwres.res, bspaceres.res, dservres.res)
+  const [dbres, dpwres, bspaceres, dservres, listres] = await Promise.all([discordBots, discordPw, botlistSpace, discordServices, listCord])
+  console.log(dbres.res, dpwres.res, bspaceres.res, dservres.res, listres.res)
 }
 
 client.on('ready', () => {
