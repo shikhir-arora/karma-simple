@@ -309,6 +309,7 @@ client.on('reconnecting', () => {
   console.log(`[NOTICE] ReconnectAction: Reconnecting to Discord...`)
 })
 
+client.on('rateLimit', console.log)
 client.on('error', console.error)
 client.on('warn', console.warn)
 
