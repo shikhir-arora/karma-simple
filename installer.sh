@@ -25,7 +25,7 @@ then
     echo "Node.js is installed on this system."
 else
     echo ""    
-    echo "Node.js is not installed on this system. Please install Node.js."
+    echo "Node.js is not installed on this system. Please install Node v10 or above."
     exit 1
 fi
 
@@ -46,15 +46,17 @@ echo ""
 echo "KarmaBot downloaded!"
 
 echo ""
-echo "Downloading KarmaBot dependencies.."
+echo "Downloading KarmaBot dependencies with pnpm."
 cd $directory/$tempinstalldir/karma-simple || failed "Could not enter the karma-simple folder - please check permissions!"
-npm install 
+curl -L https://unpkg.com/@pnpm/self-installer | node
+pnpm install 
 
 cd "$directory"
 mv "$tempinstalldir"/karma-simple karma-simple
 rm -r "$tempinstalldir"
 
 echo ""
-echo "Installation Complete. Please edit config.json.example and save as config.json"
-echo "To start the bot, use node karma.js or set up pm2/tmux to simplify things later - please see the readme!"
+echo "Installation Complete. Please edit config.json with your variables!"
+# comment out as it's not fair to say this until the docs are actually updated someday™ 
+# echo "To start the bot, use node karma.js or set up pm2/tmux to simplify things later - please see the README!"
 exit 0
