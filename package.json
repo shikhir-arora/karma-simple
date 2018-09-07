@@ -32,7 +32,7 @@
   "dependencies": {
     "axios": "^0.19.0-beta.1",
     "discord.js": "discordjs/discord.js",
-    "enmap": "^4.0.9",
+    "enmap": "^4.0.12",
     "enmap-mongo": "^2.0.2",
     "moment": "^2.22.2",
     "moment-duration-format": "^2.2.2",
@@ -48,11 +48,11 @@
     "zlib-sync": "^0.1.0"
   },
   "devDependencies": {
-    "eslint": "^5.4.0",
+    "eslint": "^5.5.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-node": "^7.0.1",
-    "eslint-plugin-promise": "^4.0.0",
+    "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0"
   }
 }
