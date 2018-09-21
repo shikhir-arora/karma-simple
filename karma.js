@@ -1,4 +1,4 @@
-if (process.version.slice(1).split('.')[0] < 9) throw new Error(`Node must be v9+ - please upgrade to v9+ or the latest v10.`)
+if (process.version.slice(1).split('.')[0] < 10) throw new Error(`Node must be v10+ - please upgrade to the latest version of Node!`)
 
 const Discord = require('discord.js')
 const axios = require('axios')
@@ -7,12 +7,15 @@ const exec = require('child_process').exec
 const os = require('os')
 const moment = require('moment')
 require('moment-duration-format')
+const c = require('ansi-colors')
 const config = require('./config.json')
 const Ratelimiter = require('./Ratelimiter.js')
 const rl = new Ratelimiter()
 const client = new Discord.Client()
 const Enmap = require('enmap')
 const EnmapMongo = require('enmap-mongo')
+require('log-timestamp')(function () { return '[' + new Date() + '] %s' })
+
 client.karmaStore = new Enmap({ provider: new EnmapMongo({
   name: `karmaStore`,
   dbName: `enmap`,
@@ -26,10 +29,6 @@ client.on('message', async (message) => {
   if (check === true) {
     if (message.cleanContent.startsWith(config.prefix)) {
       if (message.channel.type === 'dm') return
-      if ((message.guild.roles.find(role => role.name === 'NoKarma')) && (message.member.roles.has(message.guild.roles.find(role => role.name === 'NoKarma').id))) {
-        message.reply(`You are not allowed to lookup Karma. Please contact a server mod/admin/staff member. Type \`@KarmaBot help\` for more info.`)
-        return message.react('\uD83D\uDD34')
-      }
       const keyword = message.cleanContent.replace(config.prefix, '').trim()
 
       if (!client.karmaStore.has(keyword)) {
@@ -80,7 +79,7 @@ client.on('message', async (message) => {
       let currentKarma = client.karmaStore.getProp(keyword, 'numKarma')
       if (type === 'minus') client.karmaStore.setProp(keyword, 'numKarma', --currentKarma)
       else if (type === 'plus') client.karmaStore.setProp(keyword, 'numKarma', ++currentKarma)
-      console.log(`[KARMA] ${keyword} ${type}`)
+      console.log(c.bgWhite(`[KARMA] ${c.cyan.bold(keyword)} ${c.red.bold.underline(type)}`))
       try {
         await message.channel.send({
           embed: {
@@ -102,6 +101,10 @@ client.on('message', async (message) => {
     }
   }
 
+  if (message.content.match(new RegExp(`^<@!?${client.user.id}>( |)$`))) {
+    message.reply(`Hi there! Please type \`@KarmaBot help\` for help using this bot or \`@KarmaBot stats\` to get bot statistics.`)
+    return message.react('\u2705')
+  }
   if (message.content.startsWith(`<@${client.user.id}>` + ` help`)) {
     if (message.channel.type === 'dm') return
     try {
@@ -114,14 +117,14 @@ client.on('message', async (message) => {
         .addField(`**❯❯ Add Karma (++):**`, `To **add or increase** karma, type *any* keyword (can be a username, emoji, or any string of text) followed by two plus symbols **++** For example, typing **keyword++** will increase the karma of keyword by one.`, true)
         .addField(`**❯❯ Subtract Karma (--):**`, `To **subtract or decrease** karma, type *any* keyword (can be a username, emoji, or any string of text) followed by two minus symbols **--** For example, typing **keyword--** will decrease the karma of keyword by one.`, true)
         .addField(`**❯❯ Lookup Karma (>k):**`, `To **lookup** karma, type **>k** followed by the keyword to lookup. For example, typing **>k keyword** will return the karma of keyword. This is shared across all guilds using KarmaBot.`, true)
-        .addField(`**❯❯ Blacklist (Per Guild):**`, `To **blacklist** a user from being able to lookup, add or subtract Karma in a guild, create the role **NoKarma** and assign it to the users you wish to blacklist. By default this bot will take commands from any user, but messages [are internally rate-limited for spam protection](https://cdn.rawgit.com/shikhir-arora/karma-simple/3848016d/Ratelimiter.js).`, true)
+        .addField(`**❯❯ Blacklist (Per Guild):**`, `To **blacklist** a user from being able to add or subtract Karma in a guild, create the role **NoKarma** and assign it to the users you wish to blacklist. Users can still lookup Karma, so this can act as a way for admins/mods to, for example, award points to users without the users all being able to add/remove Karma. By default this bot will take commands from any user, but messages [are internally rate-limited for spam protection](https://cdn.rawgit.com/shikhir-arora/karma-simple/3848016d/Ratelimiter.js).`, true)
         .addField(`**❯❯ Stats:**`, `For **KarmaBot Stats,** type \`@KarmaBot stats\` - fun stuff!`, true)
         .addBlankField()
         .addField(`**❯❯ Invite KarmaBot:**`, `**To Invite KarmaBot**, [click here (requires Manage Server permissions)](https://bot.discord.io/karmabot).`, true)
         .addField(`**❯❯ Support:**`, `**For support, visit:** [our Discord server](https://discord.io/ec) or [GitHub](https://github.com/shikhir-arora/karma-simple/issues).`, true)
         .setFooter(`Project by .vlexar#0001 | KarmaBot Help`)
         .setTimestamp()
-      await message.reply({embed})
+      await message.reply({ embed })
     } catch (e) {
       console.error(e)
     }
@@ -136,10 +139,12 @@ client.on('message', async (message) => {
         .setDescription(`**KarmaBot Stats/Info**`)
         .addField(`**❯❯ Guilds:**`, `${client.guilds.size.toLocaleString()}`, false)
         .addField(`**❯❯ Users:**`, `${client.users.size.toLocaleString()}`, false)
+        .addField(`**❯❯ Channels:**`, `${client.channels.size.toLocaleString()}`, false)
+        .addField(`**❯❯ WS Trace:**`, `${client.ws.connection._trace[0]}:${client.ws.connection._trace[1]}`, false)
         .addField(`**❯❯ Uptime:**`, moment.duration(process.uptime(), 'seconds').format('dd:hh:mm:ss'), false)
         .addField(`**❯❯ CPU:**`, `${os.cpus().length}x ${os.cpus()[0].model}`, false)
-        .addField(`**❯❯ Gateway Ping:**`, `${client.ping.toFixed()} ms`, false)
-        .addField(`**❯❯ Load Average:**`, `${os.loadavg()[1].toFixed(3)}`, false)
+        .addField(`**❯❯ Gateway Ping:**`, `${client.ping.toFixed(5)} ms`, false)
+        .addField(`**❯❯ Load Average:**`, `${os.loadavg()[1]}`, false)
         .addField(`**❯❯ Memory Usage:**`, `${(process.memoryUsage().rss / 1048576).toFixed(2)}MB / ${(os.totalmem() / 1073741824).toFixed(2)}GB`, false)
         .addField(`**❯❯ System:**`, `${os.type()} - ${os.arch()} ${os.release()}`, false)
         .addField(`**❯❯ Node Version:**`, process.version, false)
@@ -147,7 +152,7 @@ client.on('message', async (message) => {
         .addField(`**❯❯ GitHub:**`, `[GitHub Repo](https://github.com/shikhir-arora/karma-simple).`, true)
         .setFooter(`Project by .vlexar#0001 | KarmaBot Stats`)
         .setTimestamp()
-      await message.reply({embed})
+      await message.reply({ embed })
     } catch (e) {
       console.error(e)
     }
@@ -162,7 +167,7 @@ client.on('message', async (message) => {
     if (message.author.id !== config.ownerID) return
     try {
       const code = args.join(' ')
-      let evaled = await eval(code)
+      let evaled = await eval(code) // eslint-disable-line no-eval
 
       if (typeof evaled !== 'string') { evaled = require('util').inspect(evaled, { depth: 0 }) }
 
@@ -180,7 +185,7 @@ client.on('message', async (message) => {
               .setDescription(`Eval output exceeds 2000 characters. View Gist [here](${res.html_url}).`)
               .setFooter(`Eval Output`)
               .setTimestamp()
-            message.channel.send({embed}).catch((e) => message.channel.send(e.message))
+            message.channel.send({ embed }).catch((e) => message.channel.send(e.message))
           })
       } else {
         message.channel.send(clean(evaled), {
@@ -189,9 +194,9 @@ client.on('message', async (message) => {
       }
     } catch (err) {
       console.log(err)
-      err = err.toString()
+      err = err.toString() // eslint-disable-line no-ex-assign
       if (err.includes(client.token || config.token)) {
-        err = err.replace(client.token, 'REDACTED!')
+        err = err.replace(client.token, 'REDACTED!') // eslint-disable-line no-ex-assign
       }
       message.channel.send(`\`ERROR\` \`\`\`fix\n${clean(err)}\n\`\`\``)
     }
@@ -210,7 +215,7 @@ client.on('message', async (message) => {
               .setDescription(`Console output exceeds 2000 characters. View Gist [here](${res.html_url}).`)
               .setFooter(`Exec Output`)
               .setTimestamp()
-            message.channel.send({embed}).catch((e) => message.channel.send(e.message))
+            message.channel.send({ embed }).catch((e) => message.channel.send(e.message))
           })
       } else {
         stdout && message.channel.send(`\`INFO:\`\n\n\`\`\`fix\n${stdout}\`\`\``)
@@ -266,47 +271,36 @@ async function postDiscordStats () {
     }
   })
 
-  const listCord = axios({
-    method: 'post',
-    url: `https://listcord.com/api/bot/${client.user.id}/guilds`,
-    headers: {
-      Authorization: ''
-    },
-    data: {
-      guilds: client.guilds.size
-    }
-  })
-
-  const [dbres, dpwres, bspaceres, dservres, listres] = await Promise.all([discordBots, discordPw, botlistSpace, discordServices, listCord])
-  console.log(dbres.res, dpwres.res, bspaceres.res, dservres.res, listres.res)
+  const [dbres, dpwres, bspaceres, dservres] = await Promise.all([discordBots, discordPw, botlistSpace, discordServices]) // eslint-disable-line no-unused-vars
+  console.log(dbres.res, dpwres.res, bspaceres.res, dservres.res) // eslint-disable-line no-unused-vars
 }
 
 client.on('ready', () => {
-  console.log(`[READY] Connected as ${client.user.username}#${client.user.discriminator} ${client.user.id}`)
+  console.log(c.bgWhite(`[READY] Connected as ${c.red.bold.underline(client.user.username)}#${c.cyan.bold(client.user.discriminator)} ${c.green.bold(client.user.id)}`))
   setInterval(() => client.user.setActivity(`@KarmaBot help`, { type: `WATCHING` }), 90000)
 
   postDiscordStats()
 })
 
 client.on('guildCreate', (guild) => {
-  console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`)
+  console.log(c.bgGreen(`New guild joined: ${c.blue.bold.underline(guild.name)} (id: ${c.yellow.italic(guild.id)}). This guild has ${c.green.underline(guild.memberCount)} members!`))
 
   postDiscordStats()
 })
 
 client.on('guildDelete', (guild) => {
-  console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`)
+  console.log(c.bgWhite.underline(`I have been removed from: ${c.red.bold.underline(guild.name)} (id: ${c.yellow.bold(guild.id)})`))
 
   postDiscordStats()
 })
 
 client.on('disconnect', (event) => {
   setTimeout(() => client.destroy().then(() => client.login(config.token)), 10000)
-  console.log(`[DISCONNECT] Notice: Disconnected from gateway with code ${event.code} - Attempting reconnect.`)
+  console.log(c.bgRed.underline(`[DISCONNECT] Notice: Disconnected from gateway with code ${event.code} - Attempting reconnect.`))
 })
 
 client.on('reconnecting', () => {
-  console.log(`[NOTICE] ReconnectAction: Reconnecting to Discord...`)
+  console.log(c.bgYellow.italic(`[NOTICE] ReconnectAction: Reconnecting to Discord...`))
 })
 
 client.on('rateLimit', console.log)
@@ -314,12 +308,12 @@ client.on('error', console.error)
 client.on('warn', console.warn)
 
 process.on('unhandledRejection', (error) => {
-  console.error(`Uncaught Promise Error: \n${error.stack}`)
+  console.error(c.bgRed(`Uncaught Promise Error: \n${error.stack}`))
 })
 
 process.on('uncaughtException', (err) => {
   let errmsg = (err ? err.stack || err : '').toString().replace(new RegExp(`${__dirname}/`, 'g'), './')
-  console.error(errmsg)
+  console.error(c.red.bold(errmsg))
 })
 
 client.login(config.token)

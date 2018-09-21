@@ -11,7 +11,8 @@ install:
   - pnpm install || travis_terminate 1
   - pnpm install -g codecov || travis_terminate 1
 script:
-  - npm test || travis_terminate 1
+  - pnpm run eslint || travis_terminate 1
+  - pnpm run standard || travis_terminate 1
   - codecov || travis_terminate 1
 after_success:
   - 'wget -qO- https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/installer.sh | bash'
