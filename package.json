@@ -31,7 +31,7 @@
     "start": "node karma.js"
   },
   "dependencies": {
-    "ansi-colors": "^3.0.6",
+    "ansi-colors": "^3.1.0",
     "axios": "^0.19.0-beta.1",
     "discord.js": "discordjs/discord.js",
     "enmap": "^3.x.x",
@@ -48,7 +48,7 @@
     "zlib-sync": "^0.1.0"
   },
   "devDependencies": {
-    "eslint": "^5.6.0",
+    "eslint": "^5.6.1",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-promise": "^4.0.1",
