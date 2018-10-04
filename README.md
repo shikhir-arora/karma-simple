@@ -1,19 +1,22 @@
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/41ca5d457fcb42fe9a3d77e511a9acc0)](https://app.codacy.com/app/shikhir-arora/karma-simple?utm_source=github.com&utm_medium=referral&utm_content=shikhir-arora/karma-simple&utm_campaign=badger)
-[![Discord](https://discordapp.com/api/guilds/249664293656592384/embed.png)](https://discord.io/ec)
+[![Discord](https://discordapp.com/api/guilds/249664293656592384/embed.png)](https://invite.gg/ec)
 [![Discord Bots](https://discordbots.org/api/widget/servers/255110583072980992.svg?noavatar=true)](https://discordbots.org/bot/255110583072980992)
-[![Downloads](https://img.shields.io/github/downloads/shikhir-arora/karma-simple/total.svg)](https://github.com/shikhir-arora/karma-simple/releases/tag/v1.0.6-pre)
+[![Downloads](https://img.shields.io/github/downloads/shikhir-arora/karma-simple/total.svg)](https://github.com/shikhir-arora/karma-simple/releases/tag/2.0.1)
 [![Discord Bots](https://discordbots.org/api/widget/status/255110583072980992.svg)](https://discordbots.org/bot/255110583072980992)
 
+[![Known Vulnerabilities](https://snyk.io/test/github/shikhir-arora/karma-simple/badge.svg?targetFile=package.json)](https://snyk.io/test/github/shikhir-arora/karma-simple?targetFile=package.json)
 [![Build Status](https://travis-ci.com/shikhir-arora/karma-simple.svg?branch=master)](https://travis-ci.com/shikhir-arora/karma-simple)
+[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/1091/badge)](https://bestpractices.coreinfrastructure.org/projects/1091)
+
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/shikhir-arora/karma-simple/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/shikhir-arora/karma-simple/?branch=master)
-[![Dependencies](https://david-dm.org/shikhir-arora/karma-simple.svg)](https://david-dm.org/shikhir-arora/karma-simple)
 [![npm-build](https://img.shields.io/npm/v/karma-simple.svg)](https://npmjs.org/package/karma-simple)
 [![StandardJS](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com/)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/41ca5d457fcb42fe9a3d77e511a9acc0)](https://app.codacy.com/app/shikhir-arora/karma-simple?utm_source=github.com&utm_medium=referral&utm_content=shikhir-arora/karma-simple&utm_campaign=badger)
+
 [![GitHub issues](https://img.shields.io/github/issues/shikhir-arora/karma-simple.svg?style=flat-square)](https://github.com/shikhir-arora/karma-simple/issues)
 [![GitHub license](https://img.shields.io/badge/license-Unlicense-blue.svg?style=flat-square)](https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/LICENSE)
-[![GitHub stars](https://img.shields.io/github/stars/shikhir-arora/karma-simple.svg?style=flat-square)](https://github.com/shikhir-arora/karma-simple/stargazers)
+
 
 
 
@@ -39,19 +42,19 @@ The bot is built for Discord using [discord.js v12.0.0-dev](https://github.com/h
 
 ## Requirements:
 
-> Node version v9.0.0+ (to check your node version, you can type  `node --version` - to update Node, you can use [nvm](http://nvm.sh) and `nvm install latest` or your package manager (like `apt-get` or `yum`) to update. As of v2.0.0 (pre), Node v9 is strictly required with 10+ in ideal production. The project **will throw an error if Node is below v9.**
+> Node version v10+ (to check your node version, you can type  `node --version` - to update Node, you can use [nvm](http://nvm.sh) and `nvm install latest` or your package manager (like `apt-get` or `yum`) to update. As of v2.0.0 (pre), Node v10 is strictly required with the latest always being ideal in production. The project **will throw an error if Node is below v10**
 
 > Git is also required.
 
-> MongoDB is required; more on this below. This is a requirement from v2.0.0 as we switched to Enmap with MongoDB as the provider.
+> MongoDB or any Enmap-capable v3.x.x database is required; more on this below. This is a requirement from v2.0.1 as we switched to Enmap with MongoDB as the provider. **Feel free to bug me about this if you need help:** `.vlexar#0001` on Discord.
 
 
-> `npm` manages the packages we need, which are found in `package.json` and are always kept up-to-date. This project uses discord.js v12.0-dev and requires **>=Node v9.x** or **Node v10.x** -- built with npm (currently at `6.1.0` at the time of this update)
+> `npm` manages the packages we need, which are found in `package.json` and are always kept up-to-date. This project uses discord.js v12.0-dev and requires **>=Node v10.x** or **Node v10.x** -- built with npm (currently at `6.x.x` at the time of this update)
 
 
  - The above which are handled by `npm` and/or with our [macOS/Linux installer script](https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/installer.sh) or [Windows installer script](https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/installer.bat).
 
- - The script **doesn't** install MongoDB for you; but I'll hopefully get to writing a documentation about that/doing it for free on Atlas shortly. There's some information below.
+ - The script **doesn't** install MongoDB or any other database for you; but I'll hopefully get to writing a documentation about that/doing it for free on Atlas shortly. There's some information below.
 
 ---
 
@@ -103,11 +106,11 @@ git clone --recursive --depth 1 https://github.com/shikhir-arora/karma-simple.gi
 
 ## Enmap w/ MongoDB Configuration
 
-As of v2.0.0, KarmaBot no longer uses `node-localStorage` to store Karma. Instead, we switched to [Enmap](https://www.npmjs.com/package/enmap) with MongoDB as a provider [enmap-mongo](https://www.npmjs.com/package/enmap-mongo). This allows us to add much more capability when wanted/needed, is faster and cleaner and uses a persistent enhanced-map data structure. 
+As of v2.0.0, KarmaBot no longer uses `node-localStorage` to store Karma. Instead, we switched to [Enmap](https://www.npmjs.com/package/enmap) with MongoDB as a provider [enmap-mongo](https://www.npmjs.com/package/enmap-mongo). You can use Mongo or any of the Enmap-capable 3.x providers. It's just a few lines of switching code; please contact me if you need help with this. The change allows us to add much more capability when wanted/needed, is faster and cleaner and uses a persistent enhanced-map data structure. 
 
-You will need to either setup MongoDB or use a service like [Atlas](https://www.mongodb.com/cloud/atlas) which provides a basic, free plan. This doesn't need much resources at all, so almost any installation will work.
+You will need to either setup MongoDB (or use another database supported by Enmap 3.x persistence) or simply use a service like [Atlas](https://www.mongodb.com/cloud/atlas) which provides a basic, free tier that works fine for this project if you're not hosting thousands of servers. This doesn't need much resources at all, so almost any installation will work.
 
-I'm not going to post a detailed guide on MongoDB installation as they exist out there and getting it setup isn't too difficult. Once you have set up MongoDB, you'll simply need to edit the following in `karma.js`:
+I'm not going to post a detailed guide on databases or MongoDB installation as they exist out there and getting it setup isn't too difficult. Once you have set up MongoDB, you'll simply need to edit the following in `karma.js`:
 
 
 ```js
@@ -124,7 +127,7 @@ This can be found at the top of the `karma.js` file. **Don't change anything but
 
 That's the only switch on the user end for Enmap/Mongo! Everything else is handled in the code.
 
-Please don't hesitate to contact me (`.vlexar#0001`) on Discord if you need assistance with Mongo.
+**Please don't hesitate to contact me (`.vlexar#0001`) on Discord if you need assistance with Mongo.**
 
 
 ## Configuration (for all users!)
@@ -147,13 +150,15 @@ You **must** edit the `config.json.example` file. Insert your bot token and chan
 
 - Remember, the ownerID: field must be set correctly and you must use the proper adminprefix. The bot will only respond to the ownerID with the correct adminprefix.
 
-- Will post to Gist for overflows (errors/outputs > 2000 characters) -- token is sanitized (redacted) from Eval outputs.
+- Will post to Gist for overflows (errors/outputs > 2000 characters) -- token is sanitized (redacted) from Eval outputs. You'll need to setup `node-gist` as described here to allow GitHub to post Gists as they aren't open anymore and need a token or OAuth2 grant. See - https://gitlab.com/shikhir-arora/node-gist/blob/master/README.md 
+
+Again, contact me on Discord if you need help with this!
 
 ### Admin Console (Exec) Command
 
 - Just like the Eval command, *this should be used with caution and care - you can expose your root library and more.*
 
-- It allows you to access your console from within Discord. It will post to Gist if it cannot fit the 2000 character limit. Eval will also do the same.
+- It allows you to access your console from within Discord. It will post to Gist if it cannot fit the 2000 character limit. Eval will also do the same. See the above eval info about setting the Gist stuff up, contact me if you need help - you get the drill 👌
 
 - I won't say much about this as mentioned above; if you need to ask then it's probably better/safer to avoid using the Exec/Eval features! :-)
 
@@ -162,12 +167,17 @@ You **must** edit the `config.json.example` file. Insert your bot token and chan
 
 ### Note To Selfhosters (API Tokens)
 
+> This can be safely ignored by selfhosters.
+
 - You'll notice some parts of the code which have to do with pushing the public bot stats [see here](https://discordbots.org/beta/bot/255110583072980992) [and here](https://bots.discord.pw/bots/255110583072980992) - Namely the 'guildCreate' and 'guildDelete' as well as the regular 'ready' state will post using the two functions `discordBotsOrg()` and ` discordBotsPw()`
+
 
 - If you have a token for these websites or wish to get one, you can - the spots where the Auth token is needed is left blank here ('') -- but please do not use the same username/avatar to avoid confusion!
 
 - The lack of a token in the code for the API portion can be safely ignored. It will simply fail to post the stats and catch that.
 
+
+*nit: ^ it's actually not exactly like this anymore but I'm too lazy to update these docs for axios - if you care, please contact me!*
 
 ## Getting a Bot Token and Invite Link
 		
@@ -258,10 +268,12 @@ You can lookup karma by simply typing the following:
 
 ### Blacklist / Misc.
 
-- By default, *anyone* can use Karma. This is how the vast majority of users end up using it, and it is also out of simplicity. It was also the idea to enable cross-guild Karma with a seamless user experience. As of v1.0.5, however, there is a **blacklist** feature which is per-guild - this requires a user with `Manage Role` permissions (at the minimum) to create a role called **NoKarma** (case-sensitive) and assign it to any user(s) - this will block them from being able to lookup Karma as well as add/subtract Karma. They will get a message reply back and the bot will react with a red-circle icon to indiciate that they should talk to a mod in the server. 
-
+- By default, *anyone* can use Karma. This is how the vast majority of users end up using it, and it is also out of simplicity. It was also the idea to enable cross-guild Karma with a seamless user experience. As of v1.0.5, however, there is a **blacklist** feature which is per-guild - this requires a user with `Manage Role` permissions (at the minimum) to create a role called **NoKarma** (case-sensitive) and assign it to any user(s) - this will block the user from adding/subtracting Karma. They will get a message reply back and the bot will react with a red-circle icon to indiciate that they should talk to a mod in the server. 
+They **will** be able to lookup Karma, so you can make, for example, an admin-only points system where mods have access to give Karma but users can only look up Karma. Makes a lot more sense this way and has been that way on the public bot for a while.
 
 - **We do have a `stats` command**, which can be accessed by typing `@KarmaBot stats` - all of this is on the help menu as well (in-guild, `@KarmaBot help`) Note that the bot does **not** accept user-commands through DM, except for `stats` :-) This shows some real-time stats about the server/bot.
+
+- If you ping the bot `@KarmaBot‘ with nothing else it'll respond with some how-to, since users often do that. (:
 
 
 
@@ -278,7 +290,7 @@ You can reach me `.vlexar#0001` (User ID: `243902693666455553`) pretty easily on
 
 ### License
 
-This project is under [The Unlicense](https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/LICENSE) and we give full freedom to anyone who wishes to use this little bot! You are not obligated to link back to this repo in any way.
+This project is under [The Unlicense](https://cdn.jsdelivr.net/gh/shikhir-arora/karma-simple@2.0.1/LICENSE) and we give full freedom to anyone who wishes to use this little bot! You are not obligated to link back to this repo in any way.
 
 
 [![Discord Bots](https://discordbots.org/api/widget/255110583072980992.svg)](https://discordbots.org/bot/255110583072980992)
