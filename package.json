@@ -3,7 +3,7 @@
   "version": "2.0.1",
   "description": "A simple, lightweight utility to award positive or negative Karma to any user/keyword. Adapted from IRC with a fresh approach.",
   "main": "karma.js",
-  "author": ".vlexar#0001 <shikhir@sarora.io>",
+  "author": ".vlexar#0001 <shikhir@giesela.io>",
   "license": "Unlicense",
   "keywords": [
     "discord",
@@ -48,7 +48,7 @@
     "zlib-sync": "^0.1.0"
   },
   "devDependencies": {
-    "eslint": "^5.8.0",
+    "eslint": "^5.9.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-node": "^8.0.0",
     "eslint-plugin-promise": "^4.0.1",
