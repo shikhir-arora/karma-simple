@@ -140,10 +140,10 @@ client.on('message', async (message) => {
         .addField(`**❯❯ Guilds:**`, `${client.guilds.size.toLocaleString()}`, false)
         .addField(`**❯❯ Users:**`, `${client.users.size.toLocaleString()}`, false)
         .addField(`**❯❯ Channels:**`, `${client.channels.size.toLocaleString()}`, false)
-        .addField(`**❯❯ WS Trace:**`, `${client.ws.connection._trace[0]}:${client.ws.connection._trace[1]}`, false)
+        .addField(`**❯❯ Shards:**`, `${client.ws.shards.size}`, false)
         .addField(`**❯❯ Uptime:**`, moment.duration(process.uptime(), 'seconds').format('dd:hh:mm:ss'), false)
         .addField(`**❯❯ CPU:**`, `${os.cpus().length}x ${os.cpus()[0].model}`, false)
-        .addField(`**❯❯ Gateway Ping:**`, `${client.ping.toFixed(5)} ms`, false)
+        .addField(`**❯❯ Gateway Ping:**`, `${client.ws.ping.toFixed(5)} ms`, false)
         .addField(`**❯❯ Load Average:**`, `${os.loadavg()[1]}`, false)
         .addField(`**❯❯ Memory Usage:**`, `${(process.memoryUsage().rss / 1048576).toFixed(2)}MB / ${(os.totalmem() / 1073741824).toFixed(2)}GB`, false)
         .addField(`**❯❯ System:**`, `${os.type()} - ${os.arch()} ${os.release()}`, false)
@@ -238,17 +238,6 @@ async function postDiscordStats () {
     }
   })
 
-  const discordPw = axios({
-    method: 'post',
-    url: `https://bots.discord.pw/api/bots/${client.user.id}/stats`,
-    headers: {
-      Authorization: ''
-    },
-    data: {
-      server_count: client.guilds.size
-    }
-  })
-
   const botlistSpace = axios({
     method: 'post',
     url: `https://botlist.space/api/bots/${client.user.id}`,
@@ -260,19 +249,8 @@ async function postDiscordStats () {
     }
   })
 
-  const discordServices = axios({
-    method: 'post',
-    url: `https://discord.services/api/bots/${client.user.id}`,
-    headers: {
-      Authorization: ''
-    },
-    data: {
-      server_count: client.guilds.size
-    }
-  })
-
-  const [dbres, dpwres, bspaceres, dservres] = await Promise.all([discordBots, discordPw, botlistSpace, discordServices]) // eslint-disable-line no-unused-vars
-  console.log(dbres.res, dpwres.res, bspaceres.res, dservres.res) // eslint-disable-line no-unused-vars
+  const [dbres, bspaceres] = await Promise.all([discordBots, botlistSpace]) // eslint-disable-line no-unused-vars
+  console.log(dbres.res, bspaceres.res) // eslint-disable-line no-unused-vars
 }
 
 client.on('ready', () => {
