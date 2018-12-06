@@ -8,6 +8,7 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/shikhir-arora/karma-simple/badge.svg?targetFile=package.json)](https://snyk.io/test/github/shikhir-arora/karma-simple?targetFile=package.json)
 [![Build Status](https://travis-ci.com/shikhir-arora/karma-simple.svg?branch=master)](https://travis-ci.com/shikhir-arora/karma-simple)
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/1091/badge)](https://bestpractices.coreinfrastructure.org/projects/1091)
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/shikhir-arora/karma-simple.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/shikhir-arora/karma-simple/context:javascript)
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/shikhir-arora/karma-simple/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/shikhir-arora/karma-simple/?branch=master)
 [![npm-build](https://img.shields.io/npm/v/karma-simple.svg)](https://npmjs.org/package/karma-simple)
