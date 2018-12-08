@@ -248,9 +248,20 @@ async function postDiscordStats () {
       server_count: client.guilds.size
     }
   })
+  
+  const botsgg = axios({
+    method: 'post',
+    url: `https://discord.bots.gg/api/v1/bots/${client.user.id}/stats`,
+    headers: {
+      Authorization: ''
+    },
+    data: {
+      server_count: client.guilds.size
+    }
+  })
 
-  const [dbres, bspaceres] = await Promise.all([discordBots, botlistSpace]) // eslint-disable-line no-unused-vars
-  console.log(dbres.res, bspaceres.res) // eslint-disable-line no-unused-vars
+  const [dbres, bspaceres, botsggres] = await Promise.all([discordBots, botlistSpace, botsgg]) // eslint-disable-line no-unused-vars
+  console.log(dbres.res, bspaceres.res, botsggres.res) // eslint-disable-line no-unused-vars
 }
 
 client.on('ready', () => {
