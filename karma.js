@@ -256,12 +256,11 @@ async function postDiscordStats () {
       Authorization: ''
     },
     data: {
-      server_count: client.guilds.size
+      guildCount: client.guilds.size
     }
   })
 
   const [dbres, bspaceres, botsggres] = await Promise.all([discordBots, botlistSpace, botsgg]) // eslint-disable-line no-unused-vars
-  console.log(dbres.res, bspaceres.res, botsggres.res) // eslint-disable-line no-unused-vars
 }
 
 client.on('ready', () => {

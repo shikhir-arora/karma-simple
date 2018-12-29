@@ -9,7 +9,7 @@ dependencies:
   moment-duration-format: 2.2.2
   snekgist: github.com/shikhir-arora/node-gist/16cfbfe982a474cce37c047843bbc5a0fd4abb57
 devDependencies:
-  eslint: 5.10.0
+  eslint: 5.11.1
   eslint-plugin-import: 2.14.0
   eslint-plugin-node: 8.0.0
   eslint-plugin-promise: 4.0.1
@@ -145,26 +145,6 @@ packages:
       node: '>= 0.4'
     resolution:
       integrity: sha1-GEtI9i2S10UrsxsyMWXH+L0CJm0=
-  /array-union/1.0.2:
-    dependencies:
-      array-uniq: 1.0.3
-    dev: true
-    engines:
-      node: '>=0.10.0'
-    resolution:
-      integrity: sha1-mjRBDk9OPaI96jdb5b5w8kd47Dk=
-  /array-uniq/1.0.3:
-    dev: true
-    engines:
-      node: '>=0.10.0'
-    resolution:
-      integrity: sha1-r2rId6Jcx/dOBYiUdThY39sk/bY=
-  /arrify/1.0.1:
-    dev: true
-    engines:
-      node: '>=0.10.0'
-    resolution:
-      integrity: sha1-iYUI2iIm84DfkEcoRWhJwVAaSw0=
   /astral-regex/1.0.0:
     dev: true
     engines:
@@ -262,6 +242,7 @@ packages:
     resolution:
       integrity: sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==
   /circular-json/0.3.3:
+    deprecated: 'CircularJSON is in maintenance only, flatted is its successor.'
     dev: true
     resolution:
       integrity: sha512-UZK3NBx2Mca+b5LsG7bY183pHWt5Y1xts4P3Pz7ENTwGVnJOUWbRb3ocjvX7hx9tq/yTAdclXm9sZ38gNuem4A==
@@ -309,7 +290,7 @@ packages:
     dependencies:
       nice-try: 1.0.5
       path-key: 2.0.1
-      semver: 5.5.1
+      semver: 5.6.0
       shebang-command: 1.2.0
       which: 1.3.1
     dev: true
@@ -370,20 +351,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-2kjwuGGonL7gWE1XU4Fv79+vVzpoQCl0V+boMwWtOQJV2AGDabCwez++nB1Nli/8BabAfZQ/UuHPlp6AymKdWw==
-  /del/2.2.2:
-    dependencies:
-      globby: 5.0.0
-      is-path-cwd: 1.0.0
-      is-path-in-cwd: 1.0.1
-      object-assign: 4.1.1
-      pify: 2.3.0
-      pinkie-promise: 2.0.1
-      rimraf: 2.6.2
-    dev: true
-    engines:
-      node: '>=0.10.0'
-    resolution:
-      integrity: sha1-wSyYHQZ4RshLyvhiz/kw2Qf/0ag=
   /delayed-stream/1.0.0:
     dev: false
     engines:
@@ -651,7 +618,7 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-qzm/XxIbxm/FHyH341ZrbnMUpe+5Bocte9xkmFMzPMjRaZMcXww+MpBptFvtU+79L362nqiLhekCxCxDPaUMBQ==
-  /eslint/5.10.0:
+  /eslint/5.11.1:
     dependencies:
       '@babel/code-frame': 7.0.0
       ajv: 6.6.2
@@ -695,7 +662,7 @@ packages:
       node: ^6.14.0 || ^8.10.0 || >=9.10.0
     hasBin: true
     resolution:
-      integrity: sha512-HpqzC+BHULKlnPwWae9MaVZ5AXJKpkxCVXQHrFaRw3hbDj26V/9ArYM4Rr/SQ8pi6qUPLXSSXC4RBJlyq2Z2OQ==
+      integrity: sha512-gOKhM8JwlFOc2acbOrkYR05NW8M6DCMSvfcJiBB5NDxRE1gv8kbvxKaC9u69e6ZGEMWXcswA/7eKR229cEIpvg==
   /eslint/5.4.0:
     dependencies:
       ajv: 6.5.3
@@ -838,7 +805,7 @@ packages:
       integrity: sha1-OrGi0qYsi/tDGgyUy3l6L84nyWI=
   /file-entry-cache/2.0.0:
     dependencies:
-      flat-cache: 1.3.0
+      flat-cache: 1.3.4
       object-assign: 4.1.1
     dev: true
     engines:
@@ -866,17 +833,17 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha1-RdG35QbHF93UgndaK3eSCjwMV6c=
-  /flat-cache/1.3.0:
+  /flat-cache/1.3.4:
     dependencies:
       circular-json: 0.3.3
-      del: 2.2.2
-      graceful-fs: 4.1.11
+      graceful-fs: 4.1.15
+      rimraf: 2.6.2
       write: 0.2.1
     dev: true
     engines:
       node: '>=0.10.0'
     resolution:
-      integrity: sha1-0wMLMrOBVPTjt+nHCfSQ9++XxIE=
+      integrity: sha512-VwyB3Lkgacfik2vhqR4uv2rvebqmDvFu4jlN/C1RzWoJEo8I7z4Q404oiqYCkq41mni8EzQnm95emU9seckwtg==
   /follow-redirects/1.5.8:
     dependencies:
       debug: 3.1.0
@@ -936,25 +903,16 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-5cJVtyXWH8PiJPVLZzzoIizXx944O4OmRro5MWKx5fT4MgcN7OfaMutPeaTdJCCURwbWdhhcCWcKIffPnmTzBg==
-  /globby/5.0.0:
-    dependencies:
-      array-union: 1.0.2
-      arrify: 1.0.1
-      glob: 7.1.3
-      object-assign: 4.1.1
-      pify: 2.3.0
-      pinkie-promise: 2.0.1
-    dev: true
-    engines:
-      node: '>=0.10.0'
-    resolution:
-      integrity: sha1-69hGZ8oNuzMLmbz8aOrCvFQ3Dg0=
   /graceful-fs/4.1.11:
     dev: true
     engines:
       node: '>=0.4.0'
     resolution:
       integrity: sha1-Dovf5NHduIVNZOBOp8AOKgJuVlg=
+  /graceful-fs/4.1.15:
+    dev: true
+    resolution:
+      integrity: sha512-6uHUhOPEBgQ24HM+r6b/QwWfZq+yiFcipKFrOFiBEnWdy5sdzYoi+pJeQaPI5qOLRFqWmAXUPQNsielzdLoecA==
   /has-ansi/2.0.0:
     dependencies:
       ansi-regex: 2.1.1
@@ -1104,28 +1062,6 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha1-o7MKXE8ZkYMWeqq5O+764937ZU8=
-  /is-path-cwd/1.0.0:
-    dev: true
-    engines:
-      node: '>=0.10.0'
-    resolution:
-      integrity: sha1-0iXsIxMuie3Tj9p2dHLmLmXxEG0=
-  /is-path-in-cwd/1.0.1:
-    dependencies:
-      is-path-inside: 1.0.1
-    dev: true
-    engines:
-      node: '>=0.10.0'
-    resolution:
-      integrity: sha512-FjV1RTW48E7CWM7eE/J2NJvAEEVektecDBVBE5Hh3nM1Jd0kvhHtX68Pr3xsDf857xt3Y4AkwVULK1Vku62aaQ==
-  /is-path-inside/1.0.1:
-    dependencies:
-      path-is-inside: 1.0.2
-    dev: true
-    engines:
-      node: '>=0.10.0'
-    resolution:
-      integrity: sha1-jvW33lBDej/cprToZe96pVy0gDY=
   /is-promise/2.1.0:
     dev: true
     resolution:
@@ -2030,7 +1966,7 @@ specifiers:
   discord.js: 'github:discordjs/discord.js'
   enmap: ^3.x.x
   enmap-mongo: ^2.0.2
-  eslint: ^5.10.0
+  eslint: ^5.11.1
   eslint-plugin-import: ^2.14.0
   eslint-plugin-node: ^8.0.0
   eslint-plugin-promise: ^4.0.1
