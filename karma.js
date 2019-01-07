@@ -1,4 +1,4 @@
-if (process.version.slice(1).split('.')[0] < 10) throw new Error(`Node must be v10+ - please upgrade to the latest version of Node!`)
+if (process.version.slice(1).split('.')[0] < 11) throw new Error(`Node must be v11+ - please upgrade to the latest version of Node!`)
 
 const Discord = require('discord.js')
 const axios = require('axios')

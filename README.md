@@ -43,14 +43,14 @@ The bot is built for Discord using [discord.js v12.0.0-dev](https://github.com/h
 
 ## Requirements:
 
-> Node version v10+ (to check your node version, you can type  `node --version` - to update Node, you can use [nvm](http://nvm.sh) and `nvm install latest` or your package manager (like `apt-get` or `yum`) to update. As of v2.0.0 (pre), Node v10 is strictly required with the latest always being ideal in production. The project **will throw an error if Node is below v10**
+> Node version v11+ (to check your node version, you can type  `node --version` - to update Node, you can use [nvm](http://nvm.sh) and `nvm install latest` or your package manager (like `apt-get` or `yum`) to update. Because we like to stay up-to-date with things, Node v11 is required with the latest always being ideal in production. The project **will throw an error if Node is below v11**
 
 > Git is also required.
 
 > MongoDB or any Enmap-capable v3.x.x database is required; more on this below. This is a requirement from v2.0.1 as we switched to Enmap with MongoDB as the provider. **Feel free to bug me about this if you need help:** `.vlexar#0001` on Discord.
 
 
-> `npm` manages the packages we need, which are found in `package.json` and are always kept up-to-date. This project uses discord.js v12.0-dev and requires **>=Node v10.x** or **Node v10.x** -- built with npm (currently at `6.x.x` at the time of this update)
+> `npm` manages the packages we need, which are found in `package.json` and are always kept up-to-date. This project uses discord.js v12.0-dev and requires **>=Node v11.x** or **Node v11.x** -- built with npm (currently at `6.x.x` at the time of this update)
 
 
  - The above which are handled by `npm` and/or with our [macOS/Linux installer script](https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/installer.sh) or [Windows installer script](https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/installer.bat).
@@ -280,7 +280,7 @@ They **will** be able to lookup Karma, so you can make, for example, an admin-on
 
 # Support
 
-You can reach me `.vlexar#0001` (User ID: `243902693666455553`) pretty easily on my Discord server: https://discord.io/ec or feel free to always open a GitHub issue: https://github.com/shikhir-arora/karma-simple/issues or open an issue/pull-request if need be.
+You can reach me `.vlexar#0001` (User ID: `243902693666455553`) pretty easily on my Discord server: https://invite.gg/ec or feel free to always open a GitHub issue: https://github.com/shikhir-arora/karma-simple/issues or open an issue/pull-request if need be.
 
 #### For users of the public KarmaBot - typing `@KarmaBot help` will bring up a quick and easy help menu with support/invite links and basic usage info, commands, blacklist info, etc.
 
