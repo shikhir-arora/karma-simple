@@ -16,7 +16,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/41ca5d457fcb42fe9a3d77e511a9acc0)](https://app.codacy.com/app/shikhir-arora/karma-simple?utm_source=github.com&utm_medium=referral&utm_content=shikhir-arora/karma-simple&utm_campaign=badger)
 
 [![GitHub issues](https://img.shields.io/github/issues/shikhir-arora/karma-simple.svg?style=flat-square)](https://github.com/shikhir-arora/karma-simple/issues)
-[![GitHub license](https://img.shields.io/badge/license-Unlicense-blue.svg?style=flat-square)](https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/shikhir-arora/karma-simple.svg?style=flat-square)](https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/LICENSE)
 
 
 
@@ -291,7 +291,7 @@ You can reach me `.vlexar#0001` (User ID: `243902693666455553`) pretty easily on
 
 ### License
 
-This project is under [The Unlicense](https://cdn.jsdelivr.net/gh/shikhir-arora/karma-simple@2.0.1/LICENSE) and we give full freedom to anyone who wishes to use this little bot! You are not obligated to link back to this repo in any way.
+This project is freely distributed under [The Creative Commons CC0 1.0 Universal](https://tldrlegal.com/license/creative-commons-cc0-1.0-universal) and we give full freedom to anyone who wishes to use this little bot! You are not obligated to link back to this repo in any way. This is a stronger worded, arguably more open than The Unlicense and this project has no restrictions (and no liability from myself) - this has not changed.
 
 
 [![Discord Bots](https://discordbots.org/api/widget/255110583072980992.svg)](https://discordbots.org/bot/255110583072980992)
