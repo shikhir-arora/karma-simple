@@ -14,7 +14,7 @@ const rl = new Ratelimiter()
 const client = new Discord.Client()
 const Enmap = require('enmap')
 const EnmapMongo = require('enmap-mongo')
-require('log-timestamp')(function () { return '[' + new Date() + '] %s' })
+require('log-timestamp')(function () { return '[' + new Date().toISOString() + '] %s' })
 
 client.karmaStore = new Enmap({ provider: new EnmapMongo({
   name: `karmaStore`,
@@ -240,7 +240,7 @@ async function postDiscordStats () {
 
   const botlistSpace = axios({
     method: 'post',
-    url: `https://botlist.space/api/bots/${client.user.id}`,
+    url: `https://api.botlist.space/v1/bots/${client.user.id}`,
     headers: {
       Authorization: ''
     },
