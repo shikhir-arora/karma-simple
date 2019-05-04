@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "ansi-colors": "^3.2.4",
-    "axios": "^0.19.0-beta.1",
+    "axios": "resure/axios#1791bed5fa029fdc8347a5e4960c4e2713d9a2a8",
     "discord.js": "discordjs/discord.js",
     "enmap": "^3.x.x",
     "enmap-mongo": "^2.0.2",
