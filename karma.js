@@ -259,9 +259,9 @@ async function postDiscordStats () {
       guildCount: client.guilds.size
     }
   })
-  
+
   // eslint-disable-next-line no-unused-vars
-  const [dbres, bspaceres, botsggres] = await Promise.all([discordBots, botlistSpace, botsgg]) // lgtm [js/unused-local-variable] 
+  const [dbres, bspaceres, botsggres] = await Promise.all([discordBots, botlistSpace, botsgg]) // lgtm [js/unused-local-variable]
 }
 
 client.on('ready', () => {
