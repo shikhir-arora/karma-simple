@@ -248,7 +248,7 @@ async function postDiscordStats () {
       server_count: client.guilds.size
     }
   })
-  
+
   const botsgg = axios({
     method: 'post',
     url: `https://discord.bots.gg/api/v1/bots/${client.user.id}/stats`,
