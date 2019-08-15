@@ -105,7 +105,7 @@ client.on('message', async (message) => {
     message.reply(`Hi there! Please type \`@KarmaBot help\` for help using this bot or \`@KarmaBot stats\` to get bot statistics.`)
     return message.react('\u2705')
   }
-  if (message.content.startsWith(`<@${client.user.id}>` + ` help`)) {
+  if ((message.content.startsWith(`<@!${client.user.id}>` + ` help`)) || message.content.startsWith(`<@${client.user.id}>` + ` help`)) {
     if (message.channel.type === 'dm') return
     try {
       const embed = new Discord.MessageEmbed()
@@ -130,7 +130,7 @@ client.on('message', async (message) => {
     }
   }
 
-  if (message.content.startsWith(`<@${client.user.id}>` + ` stats`)) {
+  if ((message.content.startsWith(`<@!${client.user.id}>` + ` stats`)) || message.content.startsWith(`<@${client.user.id}>` + ` stats`)) {
     try {
       const embed = new Discord.MessageEmbed()
         .setTitle(`KarmaBot Stats`)
