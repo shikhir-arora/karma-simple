@@ -8,8 +8,8 @@ notifications:
 before_install:
   - curl -L https://unpkg.com/@pnpm/self-installer | node
 install:
-  - pnpm install || travis_terminate 1
-  - pnpm install -g codecov || travis_terminate 1
+  - pnpm install --force || travis_terminate 1
+  - pnpm install -g --force codecov || travis_terminate 1
 script:
   - pnpm run eslint || travis_terminate 1
   - pnpm run standard || travis_terminate 1
