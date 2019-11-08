@@ -14,7 +14,7 @@ then
     echo ""
     echo "Git is installed on this system."
 else
-    echo ""    
+    echo ""
     echo "Git is not installed on this system. Please install Git."
     exit 1
 fi
@@ -24,7 +24,7 @@ then
     echo ""
     echo "Node.js is installed on this system."
 else
-    echo ""    
+    echo ""
     echo "Node.js is not installed on this system. Please install Node v10 or above."
     exit 1
 fi
@@ -46,10 +46,11 @@ echo ""
 echo "KarmaBot downloaded!"
 
 echo ""
-echo "Downloading KarmaBot dependencies with pnpm."
+echo "Downloading KarmaBot dependencies with yarn."
 cd $directory/$tempinstalldir/karma-simple || failed "Could not enter the karma-simple folder - please check permissions!"
-curl -L https://unpkg.com/@pnpm/self-installer | node
-pnpm install 
+export npm_config_build_from_source=true
+curl -o- -L https://yarnpkg.com/install.sh | bash
+yarn install
 
 cd "$directory"
 mv "$tempinstalldir"/karma-simple karma-simple
@@ -57,6 +58,6 @@ rm -r "$tempinstalldir"
 
 echo ""
 echo "Installation Complete. Please edit config.json with your variables!"
-# comment out as it's not fair to say this until the docs are actually updated someday™ 
+# comment out as it's not fair to say this until the docs are actually updated someday™
 # echo "To start the bot, use node karma.js or set up pm2/tmux to simplify things later - please see the README!"
 exit 0

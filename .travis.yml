@@ -6,16 +6,20 @@ notifications:
     on_success: always
     on_failure: always
 before_install:
-  - curl -L https://unpkg.com/@pnpm/self-installer | node
+  - curl -o- -L https://yarnpkg.com/install.sh | bash
+  - export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+cache:
+  yarn: true
 install:
-  - pnpm install --force || travis_terminate 1
-  - pnpm install -g --force codecov || travis_terminate 1
+  - export npm_config_build_from_source=true
+  - yarn install || travis_terminate 1
+  - yarn global add codecov
 script:
-  - pnpm run eslint || travis_terminate 1
-  - pnpm run standard || travis_terminate 1
+  - yarn run eslint || travis_terminate 1
+  - yarn run standard || travis_terminate 1
   - codecov || travis_terminate 1
 after_success:
-  - 'wget -qO- https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/installer.sh | bash'
+  - 'wget -qO- https://raw.githubusercontent.com/shikhir-arora/karma-simple/${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}/installer.sh | bash'
   - wget https://raw.githubusercontent.com/k3rn31p4nic/travis-ci-discord-webhook/master/send.sh
   - chmod +x send.sh
   - ./send.sh success $WEBHOOK_URL
@@ -23,5 +27,5 @@ after_failure:
   - wget https://raw.githubusercontent.com/k3rn31p4nic/travis-ci-discord-webhook/master/send.sh
   - chmod +x send.sh
   - ./send.sh failure $WEBHOOK_URL
-dist: trusty
+dist: xenial
 sudo: required
