@@ -15,7 +15,7 @@ cache:
 install:
   - export npm_config_build_from_source=true
   - yarn install || travis_terminate 1
-  - yarn install -g codecov || travis_terminate 1
+  - yarn global add codecov
 script:
   - yarn run eslint || travis_terminate 1
   - yarn run standard || travis_terminate 1
