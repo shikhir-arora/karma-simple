@@ -48,6 +48,7 @@ echo "KarmaBot downloaded!"
 echo ""
 echo "Downloading KarmaBot dependencies with yarn."
 cd $directory/$tempinstalldir/karma-simple || failed "Could not enter the karma-simple folder - please check permissions!"
+export npm_config_build_from_source=true
 curl -o- -L https://yarnpkg.com/install.sh | bash
 yarn install
 
