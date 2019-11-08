@@ -13,18 +13,14 @@ const Ratelimiter = require('./Ratelimiter.js')
 const rl = new Ratelimiter()
 const randomColor = require('randomcolor')
 const Enmap = require('enmap')
-const EnmapMongo = require('enmap-mongo')
 require('log-timestamp')(function () { return '[' + new Date().toISOString() + '] %s' })
 const EVENTS_LIST = ['TYPING_START', 'MESSAGE_DELETE', 'MESSAGE_UPDATE', 'PRESENCE_UPDATE', 'VOICE_STATE_UPDATE', 'VOICE_SERVER_UPDATE', 'USER_NOTE_UPDATE', 'CHANNEL_PINS_UPDATE']
 const client = new Discord.Client({ disabledEvents: EVENTS_LIST, messageCacheMaxSize: 100 })
 
-client.karmaStore = new Enmap({
-  provider: new EnmapMongo({
-    name: 'karmaStore',
-    dbName: 'enmap',
-    url: ''
-  })
-})
+client.karmaStore = new Enmap({ name: 'karmaStore', autoFetch: true, fetchAll: true, dataDir: './karmaStore', cloneLevel: 'deep' })(async function () {
+  await client.karmaStore.defer
+  console.log(c.red(client.karmaStore.size))
+}())
 
 client.on('message', async (message) => {
   if (message.author.bot) return
