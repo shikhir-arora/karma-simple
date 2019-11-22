@@ -13,14 +13,18 @@ const Ratelimiter = require('./Ratelimiter.js')
 const rl = new Ratelimiter()
 const randomColor = require('randomcolor')
 const Enmap = require('enmap')
-require('log-timestamp')(function () { return '[' + new Date().toISOString() + '] %s' })
+require('log-timestamp')('karmabot-git-3.0.0')
 const EVENTS_LIST = ['TYPING_START', 'MESSAGE_DELETE', 'MESSAGE_UPDATE', 'PRESENCE_UPDATE', 'VOICE_STATE_UPDATE', 'VOICE_SERVER_UPDATE', 'USER_NOTE_UPDATE', 'CHANNEL_PINS_UPDATE']
 const client = new Discord.Client({ disabledEvents: EVENTS_LIST, messageCacheMaxSize: 100 })
 
-client.karmaStore = new Enmap({ name: 'karmaStore', autoFetch: true, fetchAll: true, dataDir: './karmaStore', cloneLevel: 'deep' })(async function () {
+client.karmaStore = new Enmap({ name: 'karmaStore', autoFetch: true, fetchAll: true, dataDir: './karmaStore', cloneLevel: 'deep' })
+
+;(async () => {
   await client.karmaStore.defer
-  console.log(c.red(client.karmaStore.size))
-}())
+  console.log(c.red.bold('Enmap Init -' + client.karmaStore.size + ' keys loaded'))
+})().catch(err => {
+  console.error(c.bgRed.underline(err))
+})
 
 client.on('message', async (message) => {
   if (message.author.bot) return
@@ -179,7 +183,7 @@ client.on('message', async (message) => {
           .then(res => {
             const embed = new Discord.MessageEmbed()
               .setTitle('Eval output exceeds 2000 characters. View on Gist.')
-              .setURL(`${res.html.url}`)
+              .setURL(`${res.html_url}`)
               .setColor(randomColor())
               .setDescription(`Eval output exceeds 2000 characters. View Gist [here](${res.html_url}).`)
               .setFooter('Eval Output')
