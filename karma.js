@@ -82,7 +82,7 @@ client.on('message', async (message) => {
       let currentKarma = client.karmaStore.getProp(keyword, 'numKarma')
       if (type === 'minus') client.karmaStore.setProp(keyword, 'numKarma', --currentKarma)
       else if (type === 'plus') client.karmaStore.setProp(keyword, 'numKarma', ++currentKarma)
-      console.log(c.bgWhite(`[KARMA] ${c.cyan.bold(keyword)} ${c.red.bold.underline(type)}`))
+      console.log(`[KARMAOPS]: [USER ${c.green.bold(message.author.id)}] karma-op success: ${c.cyan.bold(keyword)} ${c.red.bold.underline(type)}`)
       try {
         await message.channel.send({
           embed: {
@@ -113,8 +113,8 @@ client.on('message', async (message) => {
     try {
       const embed = new Discord.MessageEmbed()
         .setTitle('KarmaBot Help & Information')
-        .setThumbnail(message.guild.iconURL)
-        .setURL('https://discord.io/ec')
+        .setThumbnail(message.guild.iconURL())
+        .setURL('https://discord.gg/dAtsJqE')
         .setColor(randomColor())
         .setDescription('**KarmaBot Help and Information (basic usage, invite URL, support)**')
         .addField('**❯❯ Add Karma (++):**', 'To **add or increase** karma, type *any* keyword (can be a username, emoji, or any string of text) followed by two plus symbols **++** For example, typing **keyword++** will increase the karma of keyword by one.', true)
@@ -124,7 +124,7 @@ client.on('message', async (message) => {
         .addField('**❯❯ Stats:**', 'For **KarmaBot Stats,** type `@KarmaBot stats` - fun stuff!', true)
         .addBlankField()
         .addField('**❯❯ Invite KarmaBot:**', '**To Invite KarmaBot**, [click here (requires Manage Server permissions)](https://bot.discord.io/karmabot).', true)
-        .addField('**❯❯ Support:**', '**For support, visit:** [our Discord server](https://discord.io/ec) or [GitHub](https://github.com/shikhir-arora/karma-simple/issues).', true)
+        .addField('**❯❯ Support:**', '**For support, visit:** [our Discord server](https://discord.gg/dAtsJqE) or [GitHub](https://github.com/shikhir-arora/karma-simple/issues).', true)
         .setFooter('Project by .vlexar#0001 | KarmaBot Help')
         .setTimestamp()
       await message.reply({ embed })
@@ -137,6 +137,7 @@ client.on('message', async (message) => {
     try {
       const embed = new Discord.MessageEmbed()
         .setTitle('KarmaBot Stats')
+        .setThumbnail(client.user.displayAvatarURL())
         .setURL('https://karmabot.vlexar.pw')
         .setColor(randomColor())
         .setDescription('**KarmaBot Stats/Info**')
@@ -151,6 +152,7 @@ client.on('message', async (message) => {
         .addField('**❯❯ Memory Usage:**', `${(process.memoryUsage().rss / 1048576).toFixed(2)}MB / ${(os.totalmem() / 1073741824).toFixed(2)}GB`, false)
         .addField('**❯❯ System:**', `${os.type()} - ${os.arch()} ${os.release()}`, false)
         .addField('**❯❯ Node Version:**', process.version, false)
+        .addField('**❯❯ Bot Version:**', '3.0.0', false)
         .addField('**❯❯ Discord.js:**', `v${Discord.version}`, false)
         .addField('**❯❯ GitHub:**', '[GitHub Repo](https://github.com/shikhir-arora/karma-simple).', true)
         .setFooter('Project by .vlexar#0001 | KarmaBot Stats')
@@ -265,23 +267,24 @@ async function postDiscordStats () {
 
   // eslint-disable-next-line no-unused-vars
   const [dbres, bspaceres, botsggres] = await Promise.all([discordBots, botlistSpace, botsgg]) // lgtm [js/unused-local-variable]
+  console.log(c.red.bold.italic('Stats posted to Discord bot-listing websites!'))
 }
 
 client.on('ready', () => {
-  console.log(c.bgWhite(`[READY] Connected as ${c.red.bold.underline(client.user.username)}#${c.cyan.bold(client.user.discriminator)} ${c.green.bold(client.user.id)}`))
+  console.log(`[READY] Connected as ${c.red.bold.underline(client.user.username)}#${c.cyan.bold(client.user.discriminator)} ${c.green.bold(client.user.id)}`)
   setInterval(() => client.user.setActivity('@KarmaBot help', { type: 'WATCHING' }), 90000)
 
   postDiscordStats()
 })
 
 client.on('guildCreate', (guild) => {
-  console.log(c.bgGreen(`New guild joined: ${c.blue.bold.underline(guild.name)} (id: ${c.yellow.italic(guild.id)}). This guild has ${c.green.underline(guild.memberCount)} members!`))
+  console.log(`New guild joined: ${c.blue.bold.underline(guild.name)} (id: ${c.yellow.italic(guild.id)}). This guild has ${c.green.underline(guild.memberCount)} members!`)
 
   postDiscordStats()
 })
 
 client.on('guildDelete', (guild) => {
-  console.log(c.bgWhite.underline(`I have been removed from: ${c.red.bold.underline(guild.name)} (id: ${c.yellow.bold(guild.id)})`))
+  console.log(`I have been removed from: ${c.red.bold.underline(guild.name)} (id: ${c.yellow.bold(guild.id)})`)
 
   postDiscordStats()
 })

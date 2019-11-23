@@ -17,7 +17,8 @@ git clone -b master --recursive --depth 1 --progress https://github.com/shikhir-
 IF %ERRORLEVEL% EQU 128 (GOTO :errorgit)
 TITLE Installing Node modules..
 ECHO.
-npm install >nul 2>&1
+npm install --build-from-source --force >nul 2>&1
+MKDIR "karmaStore"
 ECHO Modules installed..Cleaning up..
 ECHO.
 IF EXIST "%root%karma-simple\" (GOTO :removedirec) ELSE (GOTO :copydirec)
@@ -36,7 +37,7 @@ IF EXIST "%root%karma-simple\" (GOTO :removedirec) ELSE (GOTO :copydirec)
 	ECHO Press any key to exit.
 	PAUSE >nul 2>&1
 	CD /D "%root%"
-	GOTO :EOF    
+	GOTO :EOF
 :node
 	TITLE Error!
 	ECHO Node not found, please download Node v8 (the latest) here: https://nodejs.org/en/download/current/
