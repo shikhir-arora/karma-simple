@@ -49,7 +49,7 @@ The bot is built for Discord using [discord.js v12.0.0-dev](https://github.com/h
 
 > ~~MongoDB or any Enmap-capable v3.x.x database is required; more on this below. This is a requirement from v2.0.1 as we switched to Enmap with MongoDB as the provider. **Feel free to bug me about this if you need help:** `.vlexar#0001` on Discord.~~ **As of [version 3.0.0](https://github.com/shikhir-arora/karma-simple/releases/tag/3.0.0), karma-simple uses the latest Enmap version, which ships with `sqlite` as a required database provider. Therefore, you do not need to configure an external provider.**
 
-> `npm` or `yarn` (the lockfiles are kept in-sync on the git repo on every push) manages the packages we need, which are found in `package.json` and are always kept up-to-date. **This project uses discord.js v12.0.0-dev [https://github.com/discordjs/discord.js/blob/master/package.json](discord.js master branch)** and we require **>=Node v12.x** -- we assume you know how to install Node on your system.
+> `npm` or `yarn` (the lockfiles are kept in-sync on the git repo on every push) manages the packages we need, which are found in `package.json` and are always kept up-to-date. **This project uses discord.js v12.0.0-dev: [discord.js master branch](https://github.com/discordjs/discord.js/blob/master/package.json)** -- and we require **>=Node v12.x** -- we also safely assume you know how to install Node on your system. 👍
 
  - The above which are handled by `npm/yarn` and/or with our [macOS/Linux installer script](https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/installer.sh) or [Windows installer script](https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/installer.bat).
 
@@ -59,7 +59,7 @@ The bot is built for Discord using [discord.js v12.0.0-dev](https://github.com/h
 
 ## Install
 
-### macOS/Linux: Installer Script
+### macOS/Linux: Installer Script (though the "manual" way is still recommended below)
 
  ```wget -qO- https://raw.githubusercontent.com/shikhir-arora/karma-simple/master/installer.sh | bash```
 
@@ -67,19 +67,19 @@ The bot is built for Discord using [discord.js v12.0.0-dev](https://github.com/h
 
 > We will have *super seamless* update scripts - in-fact if you use the installer all one needs to do to update is `git pull` and we will have a way for the Botowner to do that in Discord shortly!
 
-> You will need a MongoDB URL setup. This in for Enmap. More on this below.
+~~> You will need a MongoDB URL setup. This in for Enmap. More on this below.~~ *No longer needed as of 3.0.0 - see below for more*
 
 ### Windows: Installer
 
-- Download `installer.bat` [link here](https://github.com/shikhir-arora/karma-simple/releases/download/v1.0.4/installer.bat) and **run/open with Administrator access**
+- Download `installer.bat` [link here](https://github.com/shikhir-arora/karma-simple/releases/download/3.0.0/installer.bat) and **run/open with Administrator access**
 
 - This should install the Node modules and KarmaBot files.
 
-- **Do not use this to update the bot, which can be done with a simple git pull as it will delete your old Karma files! Only use it for the initial/fresh install.** *(the install scripts are meant for ease of use; ideally you should use the `git` workflow and clone the repo, etc.)
+- **Do not use this to update the bot, which can be done with a simple git pull as it will delete your old Karma files! Only use it for the initial/fresh install. (the install scripts are meant for ease of use; ideally you should use the `git` workflow and clone the repo, etc. -- instructions are below)**
 
 - Git and Node are required; the script will error but there will be a link provided if Node/Git are not detected.
 
-- You will need a MongoDB URL setup. This in for Enmap. More on this below.
+~~- You will need a MongoDB URL setup. This in for Enmap. More on this below.~~ *No longer needed as of 3.0.0*
 
 
 While we are on the [npm](https://npmjs.org/package/karma-simple) directory and the bot can indeed can be installed via. npm in a single-pass: `npm install karma-simple` - which manages everything, you must be aware of where it installs, as *all* users need to configure `config.json` which links in the project. Our install-script makes sure this folder structure is kept intact by installing to a temporary directory and deleting it after. **Also, I can't guarantee npm will always be up-to-date as I don't push to npm unless there's some major release.** It was put there a loooong time ago. 🙃
@@ -127,7 +127,6 @@ client.karmaStore = new Enmap({ provider: new EnmapMongo({
 })
 })
 ```
-~~
 
 ~~This can be found at the top of the `karma.js` file. **Don't change anything but the URL!** MongoDB URL formats are usually in the form: `mongodb://user:password@IP:PORT/name` and we'll call ours `enmap` -- in our example (no, it's not a working database), we're using a Google Compute Cluster with Atlas, and that uses the newer drivers and supports DNS seedlisting. So, our URL looks a little different. In either case, you should simply edit the URL. Save this.~~
 
@@ -190,7 +189,7 @@ Again, contact me on Discord if you need help with this!
 
 ## Getting a Bot Token and Invite Link
 
-If you have done this before, then this should be pretty straightforward. If not, go visit https://discordapp.com/developers/applications/me/create to create an application. Name the application with something you want to name it and save it - then choose "generate a Bot user" afterwords and generate the token, client ID, etc.
+If you have done this before, then this should be pretty straightforward. If not, go visit https://discordapp.com/developers/applications/ to create an application - click the *("New Application")* button on the top right of the page. Name the application with something you want to name it and save it - then choose "generate a Bot user" afterwords and generate the token, client ID, etc.
 
 If you plan to give your bot to other servers, check the "Public Bot" when generating it, so others can use your invite link. Otherwise, it will only work if (you) - the person who created the bot token - invites the bot.
 
@@ -254,8 +253,6 @@ So, *assuming the prefix is >k here*, one can simply type:
 (where X can be positive or negative Karma count)
 
 - Searches ARE case sensitive, so giving karma to a keyword "test" is different from "Test" (to change this, see comment in `karma.js` and change `.trim();` to `.trim().toLowerCase();`)
-
-- These values are stored in the specified folder (default "karmafiles") as binary files containing the current int karma count (positive or negative).
 
 *You can also add karma for an emoticon, :emoticonname: ++/-- if you wish; this will work as well and is stored correctly. Can be useful for specific emoticons (such as custom ones in your server)*
 

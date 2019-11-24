@@ -21,7 +21,7 @@ client.karmaStore = new Enmap({ name: 'karmaStore', autoFetch: true, fetchAll: t
 
 ;(async () => {
   await client.karmaStore.defer
-  console.log(c.red.bold('Enmap Init -' + client.karmaStore.size + ' keys loaded'))
+  console.log(c.red.bold('Enmap Init: ' + client.karmaStore.size + ' keys loaded'))
 })().catch(err => {
   console.error(c.bgRed.underline(err))
 })
