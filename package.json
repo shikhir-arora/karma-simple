@@ -23,7 +23,7 @@
   },
   "homepage": "https://karmabot.vlexar.pw",
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=15.0.0"
   },
   "scripts": {
     "eslint": "eslint --fix karma.js Ratelimiter.js",
@@ -69,7 +69,6 @@
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
-    "eslint-plugin-standard": "^5.0.0",
     "standard": "^16.0.4"
   }
 }
