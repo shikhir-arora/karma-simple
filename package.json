@@ -27,7 +27,6 @@
   },
   "scripts": {
     "eslint": "eslint --fix karma.js Ratelimiter.js",
-    "standard": "standard --fix karma.js Ratelimter.js",
     "updeps": "ncu -t -u",
     "start": "node karma.js"
   },
