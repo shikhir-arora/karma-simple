@@ -189,7 +189,7 @@ client.on('messageCreate', async (message) => {
       if (stdout.length > 1800 || stderr.length > 1800) {
         await gist(`${stdout}\n\n${stderr}`)
           .then(res => {
-            const embed = new Discord.MessageEmbed()
+            const embed = new EmbedBuilder()
               .setTitle('Console output exceeds 2000 characters. View on Gist.')
               .setURL(`${res.html_url}`)
               .setColor(randomColor())
