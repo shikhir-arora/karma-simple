@@ -137,7 +137,7 @@ client.on('messageCreate', async (message) => {
       console.error(e)
     }
   }
-  /** TODO
+
   const clean = (text) => {
     if (typeof (text) === 'string') { return text.replace(/`/g, '`' + String.fromCharCode(8203)).replace(/@/g, '@' + String.fromCharCode(8203)) } else { return text }
   }
@@ -159,14 +159,14 @@ client.on('messageCreate', async (message) => {
       if (clean(evaled).length > 1800) {
         await gist(clean(evaled))
           .then(res => {
-            const embed = new Discord.MessageEmbed()
+            const embed = new EmbedBuilder()
               .setTitle('Eval output exceeds 2000 characters. View on Gist.')
               .setURL(`${res.html_url}`)
               .setColor(randomColor())
               .setDescription(`Eval output exceeds 2000 characters. View Gist [here](${res.html_url}).`)
-              .setFooter('Eval Output')
               .setTimestamp()
-            message.channel.send({ embed }).catch((e) => message.channel.send(e.message))
+              .setFooter('Eval Output')
+            message.channel.send({ embeds: [embed] }).catch((e) => message.channel.send(e.message))
           })
       } else {
         message.channel.send(clean(evaled), {
@@ -189,14 +189,14 @@ client.on('messageCreate', async (message) => {
       if (stdout.length > 1800 || stderr.length > 1800) {
         await gist(`${stdout}\n\n${stderr}`)
           .then(res => {
-            const embed = new Discord.MessageEmbed()
+            const embed = new EmbedBuilder()
               .setTitle('Console output exceeds 2000 characters. View on Gist.')
               .setURL(`${res.html_url}`)
               .setColor(randomColor())
               .setDescription(`Console output exceeds 2000 characters. View Gist [here](${res.html_url}).`)
-              .setFooter('Exec Output')
               .setTimestamp()
-            message.channel.send({ embed }).catch((e) => message.channel.send(e.message))
+              .setFooter('Exec Output')
+            message.channel.send({ embeds: [embed] }).catch((e) => message.channel.send(e.message))
           })
       } else {
         stdout && message.channel.send(`\`INFO:\`\n\n\`\`\`fix\n${stdout}\`\`\``)
@@ -204,7 +204,7 @@ client.on('messageCreate', async (message) => {
         if (!stderr && !stdout) { message.react('\u2705') }
       }
     })
-  } **/
+  } 
 })
 
 
