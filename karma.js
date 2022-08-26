@@ -1,6 +1,5 @@
-if (process.version.slice(1).split('.')[0] < 15) throw new Error('Node must be v17+ - please upgrade to the latest version of Node!')
+if (process.version.slice(1).split('.')[0] < 17) throw new Error('Node must be v17+ - please upgrade to the latest version of Node!')
 
-const axios = require('axios')
 const gist = require('snekgist')
 const exec = require('child_process').exec
 const os = require('os')
@@ -12,7 +11,7 @@ const Ratelimiter = require('./Ratelimiter.js')
 const rl = new Ratelimiter()
 const randomColor = require('randomcolor')
 const Enmap = require('enmap')
-require('log-timestamp')('karmabot-git-3.0.0')
+require('log-timestamp')('karmabot-git-4.0.0')
 const { EmbedBuilder } = require('discord.js')
 const { Client, GatewayIntentBits } = require('discord.js')
 
@@ -20,8 +19,6 @@ const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.GuildPresences,
-    GatewayIntentBits.GuildMembers,
     GatewayIntentBits.GuildMessageReactions,
     GatewayIntentBits.MessageContent
   ],
@@ -87,7 +84,7 @@ client.on('messageCreate', async (message) => {
       const embed = new EmbedBuilder()
         .setTitle('KarmaBot Help & Information')
         .setThumbnail(message.guild.iconURL())
-        .setURL('https://discord.gg/dAtsJqE')
+        .setURL('https://discord.gg/dUkPxzv6em')
         .setColor(randomColor())
         .setDescription('**KarmaBot Help and Information (basic usage, invite URL, support)**')
         .addFields(
@@ -96,11 +93,10 @@ client.on('messageCreate', async (message) => {
             { name:'**❯❯ Lookup Karma (>k):**', value: 'To **lookup** karma, type **>k** followed by the keyword to lookup. For example, typing **>k keyword** will return the karma of keyword. This is shared across all guilds using KarmaBot.', inline: true },
             { name:'**❯❯ Blacklist (Per Guild):**', value: 'To **blacklist** a user from being able to add or subtract Karma in a guild, create the role **NoKarma** and assign it to the users you wish to blacklist. Users can still lookup Karma, so this can act as a way for admins/mods to, for example, award points to users without the users all being able to add/remove Karma. By default this bot will take commands from any user, but messages [are internally rate-limited for spam protection](https://cdn.rawgit.com/shikhir-arora/karma-simple/3848016d/Ratelimiter.js).', inline: true },
             { name:'**❯❯ Stats:**', value: 'For **KarmaBot Stats,** type `@KarmaBot stats` - fun stuff!', inline: true },
-            { name:'**❯❯ Invite KarmaBot:**', value: '**To Invite KarmaBot**, [click here (requires Manage Server permissions)](https://bot.discord.io/karmabot).', inline: true },
-            { name:'**❯❯ Support:**', value: '**For support, visit:** [our Discord server](https://discord.gg/dAtsJqE) or [GitHub](https://github.com/shikhir-arora/karma-simple/issues).', inline: true },
+            { name:'**❯❯ Support:**', value: '**For support, visit:** [our Discord server](https://discord.gg/dUkPxzv6em) or [GitHub](https://github.com/shikhir-arora/karma-simple/issues).', inline: true },
         )
         .setTimestamp()
-        .setFooter({ text: 'Project by .vlexar#0001 | KarmaBot Help' })
+        .setFooter({ text: 'Project by vlexar#0001 | KarmaBot Help' })
       await message.reply({ embeds: [embed] })
     } catch (e) {
       console.error(e)
@@ -112,7 +108,7 @@ client.on('messageCreate', async (message) => {
       const embed = new EmbedBuilder()
         .setTitle('KarmaBot Stats')
         .setThumbnail(client.user.displayAvatarURL())
-        .setURL('https://karmabot.vlexar.pw')
+        .setURL('https://discord.gg/dUkPxzv6em')
         .setColor(randomColor())
         .setDescription('**KarmaBot Stats/Info**')
         .addFields(
@@ -131,7 +127,7 @@ client.on('messageCreate', async (message) => {
             { name: '**❯❯ GitHub:**', value: '[GitHub Repo](https://github.com/shikhir-arora/karma-simple).', inline: true },
         )
         .setTimestamp()
-        .setFooter({ text: 'Project by .vlexar#0001 | KarmaBot Stats'})
+        .setFooter({ text: 'Project by vlexar#0001 | KarmaBot Stats'})
       await message.reply({ embeds: [embed] })
     } catch (e) {
       console.error(e)
@@ -165,7 +161,7 @@ client.on('messageCreate', async (message) => {
               .setColor(randomColor())
               .setDescription(`Eval output exceeds 2000 characters. View Gist [here](${res.html_url}).`)
               .setTimestamp()
-              .setFooter('Eval Output')
+              .setFooter({ text: 'Eval Output'})
             message.channel.send({ embeds: [embed] }).catch((e) => message.channel.send(e.message))
           })
       } else {
@@ -195,7 +191,7 @@ client.on('messageCreate', async (message) => {
               .setColor(randomColor())
               .setDescription(`Console output exceeds 2000 characters. View Gist [here](${res.html_url}).`)
               .setTimestamp()
-              .setFooter('Exec Output')
+              .setFooter({ text: 'Exec Output'})
             message.channel.send({ embeds: [embed] }).catch((e) => message.channel.send(e.message))
           })
       } else {
@@ -210,7 +206,7 @@ client.on('messageCreate', async (message) => {
 
 client.on('ready', () => {
   console.log(`[READY] Connected as ${c.red.bold.underline(client.user.username)}#${c.cyan.bold(client.user.discriminator)} ${c.green.bold(client.user.id)}`)
-  setInterval(() => client.user.setActivity('@KarmaBot help', { type: 'WATCHING' }), 90000)
+  setInterval(() => client.user.setActivity('@KarmaBot help', { type: ActivityType.Watching }), 90000)
 
 })
 
