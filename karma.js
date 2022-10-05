@@ -12,8 +12,7 @@ const rl = new Ratelimiter()
 const randomColor = require('randomcolor')
 const Enmap = require('enmap')
 require('log-timestamp')('karmabot-git-4.0.0')
-const { EmbedBuilder } = require('discord.js')
-const { Client, GatewayIntentBits } = require('discord.js')
+const { Client, GatewayIntentBits, EmbedBuilder } = require('discord.js')
 
 const client = new Client({
   intents: [
@@ -243,3 +242,4 @@ process.on('uncaughtException', (err) => {
 })
 
 client.login(config.token)
+

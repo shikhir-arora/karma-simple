@@ -285,7 +285,7 @@ They **will** be able to lookup Karma, so you can make, for example, an admin-on
 
 # Support
 
-You can reach me `.vlexar#0001` (User ID: `243902693666455553`) pretty easily on my Discord server: [invite](https://discord.gg/dAtsJqE) or feel free to always open a GitHub issue: https://github.com/shikhir-arora/karma-simple/issues or open an issue/pull-request if need be.
+You can reach me `vlexar#0001` (User ID: `243902693666455553`) pretty easily on my Discord server: [invite](https://discord.gg/dAtsJqE) or feel free to always open a GitHub issue: https://github.com/shikhir-arora/karma-simple/issues or open an issue/pull-request if need be.
 
 #### For users of the public KarmaBot - typing `@KarmaBot help` will bring up a quick and easy help menu with support/invite links and basic usage info, commands, blacklist info, etc.
 
